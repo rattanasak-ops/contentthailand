@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar } from "lucide-react";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
@@ -34,8 +35,12 @@ export default function NewsPage() {
             const title = lang === "th" ? item.titleTh : (item.titleEn || item.titleTh);
             return (
               <Link key={item.id} href={`/news/${item.slug}`} className="group flex gap-4 bg-navy/40 rounded-xl border border-white/5 p-4 hover:border-pink/20 transition-all">
-                <div className="w-24 h-24 flex-shrink-0 rounded-lg bg-gradient-to-br from-purple/20 to-midnight flex items-center justify-center">
-                  <span className="text-white/10 font-display text-3xl font-bold">{title.charAt(0)}</span>
+                <div className="w-24 h-24 flex-shrink-0 rounded-lg bg-gradient-to-br from-purple/20 to-midnight flex items-center justify-center overflow-hidden relative">
+                  {item.coverUrl ? (
+                    <Image src={item.coverUrl} alt={title} fill className="object-cover" sizes="96px" />
+                  ) : (
+                    <span className="text-white/10 font-display text-3xl font-bold">{title.charAt(0)}</span>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-thai font-semibold text-white group-hover:text-pink transition-colors line-clamp-2 mb-1">{title}</h3>

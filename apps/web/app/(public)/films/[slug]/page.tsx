@@ -90,27 +90,25 @@ export default function FilmDetailPage() {
   return (
     <div className="min-h-screen bg-midnight">
       {/* Cinematic Hero Backdrop */}
-      <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
+      <div className="relative h-[30vh] md:h-[40vh] overflow-hidden">
         {film.posterUrl ? (
           <>
             <Image
               src={film.posterUrl}
               alt={title}
               fill
-              className="object-cover blur-2xl scale-110 opacity-30"
+              className="object-cover blur-xl scale-125 opacity-40"
               priority
             />
-            <div className="absolute inset-0 bg-midnight/60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-midnight/40 via-midnight/60 to-midnight" />
           </>
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-purple/40 via-midnight to-midnight" />
         )}
-        {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-midnight to-transparent" />
       </div>
 
       {/* Content area - overlapping hero */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-40 md:-mt-52 z-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 md:-mt-44 z-10">
         {/* Breadcrumb */}
         <div className="mb-6">
           <Breadcrumb items={breadcrumbs} />
@@ -228,10 +226,14 @@ export default function FilmDetailPage() {
                   href={`/persons/${person!.slug}`}
                   className="group text-center"
                 >
-                  <div className="w-full aspect-square rounded-xl bg-gradient-to-br from-purple/20 to-navy border border-white/5 group-hover:border-pink/30 transition-colors flex items-center justify-center overflow-hidden mb-2">
-                    <span className="text-white/15 font-display text-3xl font-bold group-hover:text-white/25 transition-colors">
-                      {person!.nameTh.charAt(0)}
-                    </span>
+                  <div className="w-full aspect-square rounded-xl bg-gradient-to-br from-purple/20 to-navy border border-white/5 group-hover:border-pink/30 transition-colors flex items-center justify-center overflow-hidden mb-2 relative">
+                    {person!.photoUrl ? (
+                      <Image src={person!.photoUrl} alt={person!.nameTh} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 50vw, 16vw" />
+                    ) : (
+                      <span className="text-white/15 font-display text-3xl font-bold group-hover:text-white/25 transition-colors">
+                        {person!.nameTh.charAt(0)}
+                      </span>
+                    )}
                   </div>
                   <h3 className="font-thai text-sm text-white truncate group-hover:text-pink transition-colors">
                     {lang === "th" ? person!.nameTh : person!.nameEn}

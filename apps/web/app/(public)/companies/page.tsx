@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Building2, Globe } from "lucide-react";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
@@ -40,8 +41,12 @@ export default function CompaniesPage() {
             const tl = typeLabels[c.type] || { th: c.type, en: c.type };
             return (
               <Link key={c.id} href={`/companies/${c.slug}`} className="group bg-navy/60 rounded-xl border border-white/5 p-6 hover:border-orange/30 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange/20 to-midnight border border-white/5 flex items-center justify-center mb-4">
-                  <Building2 className="w-6 h-6 text-orange/60" />
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange/20 to-midnight border border-white/5 flex items-center justify-center mb-4 overflow-hidden relative">
+                  {c.logoUrl ? (
+                    <Image src={c.logoUrl} alt={name} fill className="object-contain p-2" sizes="56px" />
+                  ) : (
+                    <Building2 className="w-6 h-6 text-orange/60" />
+                  )}
                 </div>
                 <h3 className="font-thai font-semibold text-white group-hover:text-orange transition-colors mb-1">{name}</h3>
                 <p className="text-white/40 text-xs font-body mb-3">{lang === "th" ? c.nameEn : c.nameTh}</p>

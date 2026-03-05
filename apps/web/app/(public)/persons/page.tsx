@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -48,8 +49,12 @@ export default function PersonsPage() {
             const name = lang === "th" ? p.nameTh : p.nameEn;
             return (
               <Link key={p.id} href={`/persons/${p.slug}`} className="group text-center">
-                <div className="aspect-square rounded-xl bg-gradient-to-br from-purple/20 to-navy border border-white/5 group-hover:border-pink/30 transition-colors flex items-center justify-center overflow-hidden mb-2">
-                  <span className="text-white/15 font-display text-4xl font-bold group-hover:text-white/25 transition-colors">{name.charAt(0)}</span>
+                <div className="aspect-square rounded-xl bg-gradient-to-br from-purple/20 to-navy border border-white/5 group-hover:border-pink/30 transition-colors flex items-center justify-center overflow-hidden mb-2 relative">
+                  {p.photoUrl ? (
+                    <Image src={p.photoUrl} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw" />
+                  ) : (
+                    <span className="text-white/15 font-display text-4xl font-bold group-hover:text-white/25 transition-colors">{name.charAt(0)}</span>
+                  )}
                 </div>
                 <h3 className="font-thai text-sm text-white truncate group-hover:text-pink transition-colors">{name}</h3>
                 <p className="text-white/30 text-xs font-thai">{p.roles.map((r) => r === "director" ? (lang === "th" ? "ผู้กำกับ" : "Director") : r === "actor" ? (lang === "th" ? "นักแสดง" : "Actor") : r === "producer" ? (lang === "th" ? "โปรดิวเซอร์" : "Producer") : r).join(", ")}</p>
