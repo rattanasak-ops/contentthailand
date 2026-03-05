@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { Clock, Calendar, Building2, Share2, Facebook, LinkIcon } from "lucide-react";
 import { FilmStrip } from "@/components/layout/FilmStrip";
@@ -21,32 +22,14 @@ const mockCrewMap: Record<number, { personId: number; role: string }[]> = {
     { personId: 9, role: "actor" },
     { personId: 13, role: "actor" },
   ],
-  3: [ // Nang Nak
-    { personId: 1, role: "director" },
-  ],
-  4: [ // Ong Bak
+  3: [ // Ong Bak
     { personId: 4, role: "director" },
     { personId: 8, role: "actor" },
   ],
-  5: [ // Shutter
-    { personId: 7, role: "director" },
-    { personId: 11, role: "actor" },
-  ],
-  7: [ // Tom Yum Goong
-    { personId: 4, role: "director" },
-    { personId: 8, role: "actor" },
-  ],
-  8: [ // Uncle Boonmee
+  4: [ // Uncle Boonmee
     { personId: 3, role: "director" },
   ],
-  16: [ // Love of Siam
-    { personId: 9, role: "actor" },
-  ],
-  26: [ // Chocolate
-    { personId: 4, role: "director" },
-    { personId: 12, role: "actor" },
-  ],
-  30: [ // How to Make Millions
+  5: [ // How to Make Millions
     { personId: 25, role: "director" },
     { personId: 26, role: "actor" },
   ],
@@ -108,13 +91,20 @@ export default function FilmDetailPage() {
     <div className="min-h-screen bg-midnight">
       {/* Cinematic Hero Backdrop */}
       <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
-        {/* Backdrop gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple/40 via-midnight to-midnight" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-white/[0.03] font-display text-[200px] font-bold select-none">
-            {title.charAt(0)}
-          </span>
-        </div>
+        {film.posterUrl ? (
+          <>
+            <Image
+              src={film.posterUrl}
+              alt={title}
+              fill
+              className="object-cover blur-2xl scale-110 opacity-30"
+              priority
+            />
+            <div className="absolute inset-0 bg-midnight/60" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-purple/40 via-midnight to-midnight" />
+        )}
         {/* Bottom gradient fade */}
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-midnight to-transparent" />
       </div>
@@ -129,10 +119,23 @@ export default function FilmDetailPage() {
         <div className="flex flex-col md:flex-row gap-8">
           {/* Poster */}
           <div className="flex-shrink-0 w-[200px] md:w-[280px] mx-auto md:mx-0">
-            <div className="aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-purple/40 to-navy border-2 border-white/10 shadow-2xl flex items-center justify-center">
-              <span className="text-white/15 font-display text-7xl font-bold">
-                {title.charAt(0)}
-              </span>
+            <div className="aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-purple/40 to-navy border-2 border-white/10 shadow-2xl relative">
+              {film.posterUrl ? (
+                <Image
+                  src={film.posterUrl}
+                  alt={title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 200px, 280px"
+                  priority
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-white/15 font-display text-7xl font-bold">
+                    {title.charAt(0)}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 

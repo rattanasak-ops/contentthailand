@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" fill="none">
+  <!-- Ministry Emblem (simplified stylized version) -->
+  <g transform="translate(10, 5)">
+    <!-- Crown/Spire top -->
+    <path d="M35 8L40 0L45 8L42 8L42 15L38 15L38 8Z" fill="#8B6914"/>
+    <!-- Tiered roof -->
+    <path d="M25 20L40 12L55 20L52 22L28 22Z" fill="#C49A2A"/>
+    <path d="M28 22L40 17L52 22L50 24L30 24Z" fill="#A07D1C"/>
+    <!-- Temple body -->
+    <rect x="30" y="24" width="20" height="30" rx="2" fill="#1B3A6B"/>
+    <rect x="34" y="28" width="12" height="22" rx="1" fill="#C49A2A"/>
+    <!-- Base -->
+    <path d="M22 54L58 54L56 62L24 62Z" fill="#C49A2A"/>
+    <rect x="20" y="62" width="40" height="4" rx="1" fill="#8B6914"/>
+    <!-- Decorative elements -->
+    <circle cx="40" cy="36" r="4" fill="#1B3A6B"/>
+    <path d="M20 54L25 45L28 54Z" fill="#C49A2A" opacity="0.7"/>
+    <path d="M60 54L55 45L52 54Z" fill="#C49A2A" opacity="0.7"/>
+    <!-- Wreath left -->
+    <path d="M18 68C12 60 10 48 15 38C13 50 14 60 18 68Z" fill="#2D7A3A" opacity="0.8"/>
+    <path d="M22 70C14 62 10 50 14 38C14 52 16 62 22 70Z" fill="#3A9448" opacity="0.6"/>
+    <!-- Wreath right -->
+    <path d="M62 68C68 60 70 48 65 38C67 50 66 60 62 68Z" fill="#2D7A3A" opacity="0.8"/>
+    <path d="M58 70C66 62 70 50 66 38C66 52 64 62 58 70Z" fill="#3A9448" opacity="0.6"/>
+    <!-- Base ribbon -->
+    <path d="M15 70L65 70L60 75L20 75Z" fill="#C49A2A"/>
+  </g>
+
+  <!-- Thai Text -->
+  <text x="95" y="40" font-family="'Noto Sans Thai', sans-serif" font-size="22" font-weight="600" fill="#702874">&#xE01;&#xE23;&#xE30;&#xE17;&#xE23;&#xE27;&#xE07;&#xE27;&#xE31;&#xE12;&#xE19;&#xE18;&#xE23;&#xE23;&#xE21;</text>
+  <!-- English Text -->
+  <text x="95" y="65" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="500" fill="#702874">Ministry of Culture</text>
+</svg>

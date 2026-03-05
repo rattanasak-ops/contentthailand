@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { Film } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -20,11 +21,21 @@ export function FilmCardGrid({ film }: FilmCardGridProps) {
     >
       {/* Poster */}
       <div className="aspect-[2/3] bg-gradient-to-br from-purple/30 to-midnight relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-white/15 font-display text-5xl font-bold">
-            {title.charAt(0)}
-          </span>
-        </div>
+        {film.posterUrl ? (
+          <Image
+            src={film.posterUrl}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 50vw, 20vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white/15 font-display text-5xl font-bold">
+              {title.charAt(0)}
+            </span>
+          </div>
+        )}
 
         {/* Year badge */}
         <div className="absolute top-2 right-2 px-2 py-0.5 bg-amber/90 text-midnight text-xs font-bold rounded-md">

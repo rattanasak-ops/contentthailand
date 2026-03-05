@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { Grid3x3, List } from "lucide-react";
 import { FilmCardGrid } from "@/components/films/FilmCardGrid";
 import { FilmStrip } from "@/components/layout/FilmStrip";
@@ -259,10 +260,14 @@ function FilmListItem({ film, lang }: { film: (typeof films)[0]; lang: string })
       className="group flex gap-4 bg-navy/60 rounded-xl border border-white/5 p-3 hover:border-pink/30 transition-all"
     >
       {/* Poster mini */}
-      <div className="w-16 h-24 flex-shrink-0 rounded-lg bg-gradient-to-br from-purple/30 to-midnight flex items-center justify-center overflow-hidden">
-        <span className="text-white/15 font-display text-2xl font-bold">
-          {title.charAt(0)}
-        </span>
+      <div className="w-16 h-24 flex-shrink-0 rounded-lg bg-gradient-to-br from-purple/30 to-midnight overflow-hidden relative">
+        {film.posterUrl ? (
+          <Image src={film.posterUrl} alt={title} fill className="object-cover" sizes="64px" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white/15 font-display text-2xl font-bold">{title.charAt(0)}</span>
+          </div>
+        )}
       </div>
 
       {/* Info */}

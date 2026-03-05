@@ -304,6 +304,24 @@ nginx     → Proxy      :80 / :443
 
 ---
 
+## 🖼️ LOGO & UI READABILITY RULES
+
+- **อย่าใส่ text ใน SVG** ที่จะ scale ลงเล็ก — ใช้ HTML text แทนเสมอ
+- **ก่อนทำ UI component** ให้คิดก่อนว่า: ที่ขนาดจริงบนหน้าจอ (navbar = 40-48px height) อ่านออกไหม?
+- **อ่านออกก่อน สวยทีหลัง** — ทำให้ใช้งานได้ก่อน แล้วค่อยเพิ่ม hover effect
+- **อย่า over-engineer effect** จนลืม readability — ถ้าตัวอักษร < 11px บนหน้าจอ = อ่านไม่ออก
+- **Logo files:**
+  - `/public/logos/content-thailand-icon.svg` — flame icon only (no text)
+  - `/public/logos/ministry-emblem.svg` — emblem icon only (no text)
+  - Text ข้างๆ logo render เป็น HTML/JSX เสมอ
+
+## 🚀 DEPLOYMENT
+
+- **VPS:** 103.142.150.185 (user: linux-nat)
+- **Server path:** `/demo/contentthailand`
+- **GitHub:** https://github.com/rattanasak-ops/contentthailand
+- **Deploy flow:** push → SSH → git pull → docker compose up
+
 ## 🚫 NEVER
 
 - Use `npm` or `yarn` — pnpm ONLY
@@ -315,3 +333,5 @@ nginx     → Proxy      :80 / :443
 - Commit `.env` files
 - Reference AWS services — use G-Cloud or Docker equivalents
 - Build outside the current phase scope without asking
+- Put readable text inside SVG files that will be scaled down
+- Create UI elements smaller than 11px text on screen

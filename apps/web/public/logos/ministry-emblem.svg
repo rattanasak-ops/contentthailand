@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 90" fill="none">
+  <!-- Simplified Ministry Emblem - readable at small sizes -->
+  <!-- Crown spire -->
+  <path d="M40 0L46 12L44 12L44 18L36 18L36 12L34 12Z" fill="#C49A2A"/>
+  <!-- Tiered roof 1 -->
+  <path d="M24 22L40 14L56 22Z" fill="#D4AA3A"/>
+  <path d="M27 24L40 18L53 24Z" fill="#B8922A"/>
+  <!-- Tiered roof 2 -->
+  <path d="M20 30L40 22L60 30Z" fill="#D4AA3A"/>
+  <path d="M23 32L40 26L57 32Z" fill="#B8922A"/>
+  <!-- Temple body -->
+  <rect x="28" y="32" width="24" height="28" rx="1" fill="#1B3A6B"/>
+  <!-- Temple window/door -->
+  <rect x="33" y="36" width="14" height="20" rx="1" fill="#C49A2A"/>
+  <rect x="36" y="38" width="8" height="14" rx="0.5" fill="#1B3A6B"/>
+  <!-- Arch top -->
+  <path d="M36 38C36 34 44 34 44 38" fill="#C49A2A"/>
+  <!-- Base platform -->
+  <path d="M18 60L62 60L58 66L22 66Z" fill="#C49A2A"/>
+  <rect x="16" y="66" width="48" height="4" rx="1" fill="#B8922A"/>
+  <!-- Side decorations -->
+  <path d="M18 60L24 48L28 60Z" fill="#D4AA3A" opacity="0.7"/>
+  <path d="M62 60L56 48L52 60Z" fill="#D4AA3A" opacity="0.7"/>
+  <!-- Garland left -->
+  <path d="M14 74C8 64 6 50 12 36C10 52 12 64 16 74Z" fill="#2D8A3A" opacity="0.7"/>
+  <path d="M18 76C10 66 6 52 10 36C10 54 14 66 20 76Z" fill="#3AA048" opacity="0.5"/>
+  <!-- Garland right -->
+  <path d="M66 74C72 64 74 50 68 36C70 52 68 64 64 74Z" fill="#2D8A3A" opacity="0.7"/>
+  <path d="M62 76C70 66 74 52 70 36C70 54 66 66 60 76Z" fill="#3AA048" opacity="0.5"/>
+  <!-- Base ribbon -->
+  <path d="M12 76L68 76L64 82L16 82Z" fill="#C49A2A"/>
+  <rect x="10" y="82" width="60" height="4" rx="1" fill="#B8922A"/>
+</svg>

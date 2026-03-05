@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Tv, Building2 } from "lucide-react";
 import { FilmStrip } from "@/components/layout/FilmStrip";
@@ -42,10 +43,14 @@ export default function SeriesDetailPage() {
   return (
     <div className="min-h-screen bg-midnight">
       <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange/20 via-midnight to-midnight" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-white/[0.03] font-display text-[180px] font-bold select-none">{title.charAt(0)}</span>
-        </div>
+        {show.coverUrl ? (
+          <>
+            <Image src={show.coverUrl} alt={title} fill className="object-cover blur-2xl scale-110 opacity-30" priority />
+            <div className="absolute inset-0 bg-midnight/60" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-orange/20 via-midnight to-midnight" />
+        )}
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-midnight to-transparent" />
       </div>
 
@@ -54,8 +59,14 @@ export default function SeriesDetailPage() {
 
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex-shrink-0 w-[240px] md:w-[320px] mx-auto md:mx-0">
-            <div className="aspect-video rounded-xl bg-gradient-to-br from-orange/20 to-navy border-2 border-white/10 shadow-2xl flex items-center justify-center">
-              <span className="text-white/15 font-display text-6xl font-bold">{title.charAt(0)}</span>
+            <div className="aspect-video rounded-xl bg-gradient-to-br from-orange/20 to-navy border-2 border-white/10 shadow-2xl relative overflow-hidden">
+              {show.coverUrl ? (
+                <Image src={show.coverUrl} alt={title} fill className="object-cover" sizes="(max-width: 768px) 240px, 320px" priority />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-white/15 font-display text-6xl font-bold">{title.charAt(0)}</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -92,8 +103,14 @@ export default function SeriesDetailPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
               {related.map((s) => (
                 <Link key={s.id} href={`/series/${s.slug}`} className="group bg-navy/60 rounded-xl border border-white/5 overflow-hidden hover:border-orange/30 transition-all">
-                  <div className="aspect-video bg-gradient-to-br from-purple/20 to-midnight flex items-center justify-center">
-                    <span className="text-white/10 font-display text-3xl font-bold">{(lang === "th" ? s.titleTh : s.titleEn).charAt(0)}</span>
+                  <div className="aspect-video bg-gradient-to-br from-purple/20 to-midnight relative overflow-hidden">
+                    {s.coverUrl ? (
+                      <Image src={s.coverUrl} alt={lang === "th" ? s.titleTh : s.titleEn} fill className="object-cover" sizes="25vw" />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-white/10 font-display text-3xl font-bold">{(lang === "th" ? s.titleTh : s.titleEn).charAt(0)}</span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-3">
                     <h3 className="font-thai font-semibold text-sm text-white truncate group-hover:text-orange transition-colors">{lang === "th" ? s.titleTh : s.titleEn}</h3>

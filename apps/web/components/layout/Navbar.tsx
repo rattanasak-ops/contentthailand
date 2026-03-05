@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import { SearchBar } from "@/components/shared/SearchBar";
+import { LogoGroup } from "./LogoGroup";
 
 const navItems = [
   { href: "/", labelTh: "หน้าหลัก", labelEn: "Home" },
@@ -27,14 +28,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange to-pink flex items-center justify-center">
-              <span className="text-white font-bold text-sm">C</span>
-            </div>
-            <span className="font-display text-lg text-white tracking-wide hidden sm:block">
-              CONTENT <span className="text-pink">THAILAND</span>
-            </span>
-          </Link>
+          <LogoGroup variant="navbar" />
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1">

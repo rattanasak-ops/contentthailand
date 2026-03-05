@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import type { News } from "@/types";
@@ -17,13 +18,17 @@ function NewsCard({ item }: { item: News }) {
       href={`/news/${item.slug}`}
       className="group bg-navy/60 rounded-xl border border-white/5 overflow-hidden hover:border-purple/30 transition-all duration-300"
     >
-      {/* Cover placeholder */}
-      <div className="aspect-[16/9] bg-gradient-to-br from-purple/20 to-midnight relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-white/10 font-display text-5xl font-bold">
-            {title.charAt(0)}
-          </span>
-        </div>
+      {/* Cover */}
+      <div className="aspect-[16/9] bg-gradient-to-br from-purple/20 to-midnight relative overflow-hidden">
+        {item.coverUrl ? (
+          <Image src={item.coverUrl} alt={title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white/10 font-display text-5xl font-bold">
+              {title.charAt(0)}
+            </span>
+          </div>
+        )}
         {/* Tags */}
         <div className="absolute bottom-2 left-2 flex gap-1">
           {item.tags.slice(0, 2).map((tag) => (

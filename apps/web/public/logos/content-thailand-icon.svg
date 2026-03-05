@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110" fill="none">
+  <!-- Flame/Bird Icon Only -->
+  <g transform="translate(5, 5)">
+    <!-- Outer purple-pink curve (the C shape) -->
+    <path d="M40 95C15 85 0 60 5 35C10 12 30 0 55 5C40 12 30 28 28 45C26 65 32 80 40 95Z" fill="#702874"/>
+    <!-- Pink middle flame -->
+    <path d="M55 5C63 0 73 0 80 8C73 22 68 36 70 52C72 66 58 82 40 95C52 75 55 55 52 38C50 22 52 12 55 5Z" fill="#EC1C72"/>
+    <!-- Orange flame -->
+    <path d="M70 52C68 36 73 22 80 8C88 16 92 30 88 46C85 60 75 76 58 90C70 78 74 65 70 52Z" fill="#F76532"/>
+    <!-- Yellow/amber inner flame -->
+    <path d="M88 46C92 30 88 18 84 12C93 22 96 36 93 50C90 64 80 78 65 88C80 72 86 60 88 46Z" fill="#F6A51B"/>
+  </g>
+</svg>

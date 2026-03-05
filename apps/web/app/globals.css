@@ -69,6 +69,13 @@
     background-image: linear-gradient(135deg, #F76532, #F6A51B);
   }
 
+  /* Logo sparkle particles */
+  @keyframes sparkle {
+    0% { opacity: 0; transform: translateY(0) scale(0); }
+    30% { opacity: 1; transform: translateY(-8px) scale(1); }
+    100% { opacity: 0; transform: translateY(-24px) scale(0); }
+  }
+
   /* Gradient backgrounds */
   .bg-gradient-primary {
     background-image: linear-gradient(135deg, #14133D 0%, #702874 50%, #EC1C72 100%);

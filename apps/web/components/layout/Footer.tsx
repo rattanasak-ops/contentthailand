@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FilmStrip } from "./FilmStrip";
+import { LogoGroup } from "./LogoGroup";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -13,18 +14,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange to-pink flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
-              <span className="font-display text-lg text-white">
-                CONTENT <span className="text-pink">THAILAND</span>
-              </span>
+            <div className="mb-4">
+              <LogoGroup variant="footer" />
             </div>
             <p className="text-white/50 text-sm font-body leading-relaxed">
               {t(
-                "ฐานข้อมูลกลางภาพยนตร์และวีดิทัศน์แห่งชาติ กองภาพยนตร์และวีดิทัศน์ กรมส่งเสริมวัฒนธรรม",
-                "National Film & Video Database, Bureau of Film & Video, Department of Cultural Promotion"
+                "กองภาพยนตร์และวีดิทัศน์ กรมส่งเสริมวัฒนธรรม กระทรวงวัฒนธรรม",
+                "Bureau of Film & Video, Department of Cultural Promotion, Ministry of Culture"
               )}
             </p>
           </div>

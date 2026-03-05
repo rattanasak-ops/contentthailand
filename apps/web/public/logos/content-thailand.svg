@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" fill="none">
+  <!-- Flame/Bird Icon -->
+  <g transform="translate(0, 5)">
+    <!-- Outer purple-pink curve (the C shape) -->
+    <path d="M45 95C20 85 5 65 8 42C11 20 30 5 52 8C40 15 32 28 30 44C28 62 35 78 45 95Z" fill="#702874"/>
+    <!-- Pink middle flame -->
+    <path d="M52 8C60 2 70 0 78 5C72 18 68 32 70 48C72 62 60 80 45 95C55 75 55 55 52 38C50 25 52 14 52 8Z" fill="#EC1C72"/>
+    <!-- Orange flame -->
+    <path d="M70 48C68 32 72 18 78 5C85 12 88 25 86 40C84 55 75 72 58 88C68 75 73 62 70 48Z" fill="#F76532"/>
+    <!-- Yellow/amber inner flame -->
+    <path d="M86 40C88 25 85 15 82 10C90 18 94 30 92 44C90 58 80 72 65 82C78 68 85 55 86 40Z" fill="#F6A51B"/>
+  </g>
+
+  <!-- CONTENT Text -->
+  <text x="105" y="52" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="3" fill="#4A4A4A">CONTENT</text>
+  <!-- THAILAND Text -->
+  <text x="105" y="82" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="3" fill="#702874">THAILAND</text>
+</svg>

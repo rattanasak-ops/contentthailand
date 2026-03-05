@@ -11,4 +11,8 @@ export const genres: Genre[] = [
   { id: 8, slug: "documentary", nameTh: "สารคดี", nameEn: "Documentary" },
   { id: 9, slug: "animation", nameTh: "แอนิเมชัน", nameEn: "Animation" },
   { id: 10, slug: "family", nameTh: "ครอบครัว", nameEn: "Family" },
+  { id: 11, slug: "fantasy", nameTh: "แฟนตาซี", nameEn: "Fantasy" },
+  { id: 12, slug: "historical", nameTh: "อิงประวัติศาสตร์", nameEn: "Historical" },
+  { id: 13, slug: "sci-fi", nameTh: "ไซไฟ", nameEn: "Sci-Fi" },
+  { id: 14, slug: "experimental", nameTh: "ทดลอง", nameEn: "Experimental" },
 ];

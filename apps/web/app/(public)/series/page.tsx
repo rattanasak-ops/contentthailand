@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
@@ -69,12 +70,16 @@ export default function SeriesPage() {
             const synopsis = lang === "th" ? s.synopsisTh : s.synopsisEn;
             return (
               <Link key={s.id} href={`/series/${s.slug}`} className="group bg-navy/60 rounded-xl border border-white/5 overflow-hidden hover:border-orange/30 transition-all duration-300">
-                <div className="aspect-video bg-gradient-to-br from-purple/20 to-midnight relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white/10 font-display text-4xl font-bold">{title.charAt(0)}</span>
-                  </div>
-                  {s.channel && <div className="absolute top-2 left-2 px-2 py-0.5 bg-navy/80 text-white/70 text-[10px] rounded font-thai backdrop-blur-sm">{s.channel}</div>}
-                  <div className="absolute top-2 right-2 px-2 py-0.5 bg-amber/90 text-midnight text-xs font-bold rounded-md">{s.year}</div>
+                <div className="aspect-video bg-gradient-to-br from-purple/20 to-midnight relative overflow-hidden">
+                  {s.coverUrl ? (
+                    <Image src={s.coverUrl} alt={title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-white/10 font-display text-4xl font-bold">{title.charAt(0)}</span>
+                    </div>
+                  )}
+                  {s.channel && <div className="absolute top-2 left-2 px-2 py-0.5 bg-navy/80 text-white/70 text-[10px] rounded font-thai backdrop-blur-sm z-10">{s.channel}</div>}
+                  <div className="absolute top-2 right-2 px-2 py-0.5 bg-amber/90 text-midnight text-xs font-bold rounded-md z-10">{s.year}</div>
                 </div>
                 <div className="p-4">
                   <h3 className="font-thai font-semibold text-sm text-white truncate group-hover:text-orange transition-colors">{title}</h3>
