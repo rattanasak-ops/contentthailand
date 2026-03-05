@@ -1,0 +1,222 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----- FILMS -----
+model Film {
+  id          Int        @id @default(autoincrement())
+  slug        String     @unique
+  titleTh     String
+  titleEn     String
+  year        Int
+  duration    Int?
+  synopsisTh  String?    @db.Text
+  synopsisEn  String?    @db.Text
+  posterUrl   String?
+  backdropUrl String?
+  trailerUrl  String?
+  imdbId      String?
+  status      String     @default("published")
+  viewCount   Int        @default(0)
+
+  company     Company?   @relation(fields: [companyId], references: [id])
+  companyId   Int?
+  genres      Genre[]    @relation("FilmGenres")
+  crew        FilmCrew[]
+  awards      Award[]
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([year])
+  @@index([status])
+}
+
+// ----- TV SERIES -----
+model TvSeries {
+  id          Int          @id @default(autoincrement())
+  slug        String       @unique
+  titleTh     String
+  titleEn     String
+  year        Int
+  endYear     Int?
+  episodes    Int?
+  channel     String?
+  synopsisTh  String?      @db.Text
+  synopsisEn  String?      @db.Text
+  coverUrl    String?
+  backdropUrl String?
+  trailerUrl  String?
+  status      String       @default("published")
+  viewCount   Int          @default(0)
+
+  company     Company?     @relation(fields: [companyId], references: [id])
+  companyId   Int?
+  genres      Genre[]      @relation("SeriesGenres")
+  crew        SeriesCrew[]
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([year])
+  @@index([channel])
+}
+
+// ----- PERSONS -----
+model Person {
+  id            Int          @id @default(autoincrement())
+  slug          String       @unique
+  nameTh        String
+  nameEn        String
+  roles         String[]
+  biographyTh   String?      @db.Text
+  biographyEn   String?      @db.Text
+  photoUrl      String?
+  birthYear     Int?
+  birthplace    String?
+  nationality   String       @default("Thai")
+  websiteUrl    String?
+  imdbUrl       String?
+
+  filmCrew      FilmCrew[]
+  seriesCrew    SeriesCrew[]
+  awards        Award[]
+
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([nameTh])
+  @@index([nameEn])
+}
+
+// ----- COMPANIES -----
+model Company {
+  id          Int        @id @default(autoincrement())
+  slug        String     @unique
+  nameTh      String
+  nameEn      String
+  type        String
+  logoUrl     String?
+  website     String?
+  description String?    @db.Text
+  founded     Int?
+
+  films       Film[]
+  series      TvSeries[]
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// ----- GENRES -----
+model Genre {
+  id      Int        @id @default(autoincrement())
+  slug    String     @unique
+  nameTh  String
+  nameEn  String
+
+  films   Film[]     @relation("FilmGenres")
+  series  TvSeries[] @relation("SeriesGenres")
+}
+
+// ----- FILM CREW -----
+model FilmCrew {
+  film      Film    @relation(fields: [filmId], references: [id], onDelete: Cascade)
+  filmId    Int
+  person    Person  @relation(fields: [personId], references: [id])
+  personId  Int
+  role      String
+
+  @@id([filmId, personId, role])
+  @@index([personId])
+}
+
+// ----- SERIES CREW -----
+model SeriesCrew {
+  series    TvSeries @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  seriesId  Int
+  person    Person   @relation(fields: [personId], references: [id])
+  personId  Int
+  role      String
+
+  @@id([seriesId, personId, role])
+  @@index([personId])
+}
+
+// ----- AWARDS -----
+model Award {
+  id        Int      @id @default(autoincrement())
+  name      String
+  category  String?
+  year      Int
+  festival  String?
+  isWinner  Boolean  @default(true)
+
+  film      Film?    @relation(fields: [filmId], references: [id])
+  filmId    Int?
+  person    Person?  @relation(fields: [personId], references: [id])
+  personId  Int?
+
+  createdAt DateTime @default(now())
+
+  @@index([year])
+  @@index([filmId])
+  @@index([personId])
+}
+
+// ----- NEWS -----
+model News {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  titleTh     String
+  titleEn     String?
+  contentTh   String    @db.Text
+  contentEn   String?   @db.Text
+  excerptTh   String?
+  coverUrl    String?
+  tags        String[]
+  status      String    @default("published")
+  viewCount   Int       @default(0)
+  publishedAt DateTime  @default(now())
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([publishedAt])
+  @@index([status])
+}
+
+// ----- SEARCH LOG (TOR 4.13) -----
+model SearchLog {
+  id        Int      @id @default(autoincrement())
+  query     String
+  results   Int
+  userId    String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([query])
+}
+
+// ----- ACTIVITY LOG (TOR 4.13) -----
+model ActivityLog {
+  id         Int      @id @default(autoincrement())
+  userId     String
+  userName   String
+  action     String
+  entity     String
+  entityId   Int?
+  entityName String?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([userId])
+}

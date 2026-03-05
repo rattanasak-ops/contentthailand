@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ContentThailand Dark Theme — Official CI Colors */
+  :root {
+    --background: 244 53% 15%;        /* #14133D midnight */
+    --foreground: 0 0% 97%;            /* #F8F7F4 */
+    --card: 243 47% 21%;               /* #1C1B4E navy */
+    --card-foreground: 0 0% 97%;
+    --popover: 243 47% 21%;
+    --popover-foreground: 0 0% 97%;
+    --primary: 336 84% 46%;            /* #EC1C72 pink */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 296 49% 31%;          /* #702874 purple */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 243 42% 26%;              /* #252466 navy-hover */
+    --muted-foreground: 220 16% 56%;   /* #718096 */
+    --accent: 17 93% 58%;              /* #F76532 orange */
+    --accent-foreground: 244 53% 15%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 243 42% 20%;
+    --input: 243 42% 20%;
+    --ring: 336 84% 46%;               /* pink ring */
+    --chart-1: 336 84% 46%;            /* pink */
+    --chart-2: 296 49% 31%;            /* purple */
+    --chart-3: 17 93% 58%;             /* orange */
+    --chart-4: 40 93% 53%;             /* amber */
+    --chart-5: 142 50% 28%;            /* success green */
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-midnight text-foreground font-body;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Film grain noise overlay */
+  .film-grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Gradient text utility */
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #702874, #EC1C72);
+  }
+
+  .text-gradient-secondary {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #F76532, #F6A51B);
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    background-image: linear-gradient(135deg, #14133D 0%, #702874 50%, #EC1C72 100%);
+  }
+
+  .bg-gradient-secondary {
+    background-image: linear-gradient(135deg, #F76532 0%, #F6A51B 100%);
+  }
+
+  .bg-gradient-accent {
+    background-image: linear-gradient(135deg, #702874 0%, #EC1C72 100%);
+  }
+}
