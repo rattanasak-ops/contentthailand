@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Simplified flame icon for favicon -->
+  <!-- Outer purple curve -->
+  <path d="M13 30C4 26 0 18 2 10C4 3 10 0 18 2C13 5 10 10 9 15C8 21 10 26 13 30Z" fill="#702874"/>
+  <!-- Pink middle flame -->
+  <path d="M18 2C20 0 24 0 26 3C24 8 22 12 23 17C24 22 19 27 13 30C17 24 18 18 17 12C16 7 17 4 18 2Z" fill="#EC1C72"/>
+  <!-- Orange flame -->
+  <path d="M23 17C22 12 24 8 26 3C29 6 30 10 29 15C28 20 24 25 19 29C23 25 24 21 23 17Z" fill="#F76532"/>
+  <!-- Yellow inner flame -->
+  <path d="M29 15C30 10 29 6 27 4C30 8 31 12 30 16C29 21 26 25 21 29C26 24 28 20 29 15Z" fill="#F6A51B"/>
+</svg>

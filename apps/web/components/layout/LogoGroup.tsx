@@ -38,7 +38,7 @@ export function LogoGroup({ variant = "navbar" }: LogoGroupProps) {
               isHero ? "text-xl" : "text-base"
             }`}
           >
-            <span className="text-white transition-colors duration-300 group-hover/ct:text-orange">
+            <span className="text-[var(--ct-text-primary)] transition-colors duration-300 group-hover/ct:text-orange">
               CONTENT
             </span>{" "}
             <span className="text-pink transition-colors duration-300 group-hover/ct:text-pink-light">
@@ -48,7 +48,7 @@ export function LogoGroup({ variant = "navbar" }: LogoGroupProps) {
           {/* Underline sweep */}
           <div className="h-[1.5px] w-0 bg-gradient-to-r from-orange via-pink to-purple transition-all duration-700 ease-out group-hover/ct:w-full" />
           {(isFooter || isHero) && (
-            <span className="text-white/40 text-[10px] mt-0.5 transition-colors duration-500 group-hover/ct:text-white/60">
+            <span className="text-[var(--ct-text-muted)] text-[10px] mt-0.5 transition-colors duration-500 group-hover/ct:text-[var(--ct-text-secondary)]">
               {t(
                 "ฐานข้อมูลภาพยนตร์และวีดิทัศน์แห่งชาติ",
                 "National Film & Video Database"
@@ -60,7 +60,7 @@ export function LogoGroup({ variant = "navbar" }: LogoGroupProps) {
 
       {/* === Divider === */}
       {isNavbar && (
-        <div className="hidden sm:block h-10 w-px bg-white/15" />
+        <div className="hidden sm:block h-10 w-px bg-[var(--ct-border)]" />
       )}
 
       {/* === Ministry of Culture === */}
@@ -84,7 +84,7 @@ export function LogoGroup({ variant = "navbar" }: LogoGroupProps) {
             <span className="text-purple-light font-thai text-[13px] font-semibold transition-colors duration-300 group-hover/moc:text-pink">
               กระทรวงวัฒนธรรม
             </span>
-            <span className="text-white/50 text-[11px] transition-colors duration-300 group-hover/moc:text-white/70">
+            <span className="text-[var(--ct-text-muted)] text-[11px] transition-colors duration-300 group-hover/moc:text-[var(--ct-text-secondary)]">
               Ministry of Culture
             </span>
           </div>

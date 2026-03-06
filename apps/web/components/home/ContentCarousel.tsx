@@ -37,7 +37,7 @@ export function ContentCarousel({
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <FilmStrip color={color} size="md">
-          <h2 className="font-thai font-bold text-xl md:text-2xl text-white">
+          <h2 className="font-thai font-bold text-xl md:text-2xl text-[var(--ct-text-primary)]">
             {lang === "th" ? titleTh : titleEn}
           </h2>
         </FilmStrip>
@@ -53,13 +53,13 @@ export function ContentCarousel({
           )}
           <button
             onClick={() => scroll("left")}
-            className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors"
+            className="p-1.5 rounded-lg bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-surface)] text-[var(--ct-text-muted)] hover:text-[var(--ct-text-primary)] transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors"
+            className="p-1.5 rounded-lg bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-surface)] text-[var(--ct-text-muted)] hover:text-[var(--ct-text-primary)] transition-colors"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

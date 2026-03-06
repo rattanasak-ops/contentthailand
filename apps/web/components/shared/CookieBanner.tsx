@@ -26,10 +26,10 @@ export function CookieBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
-      <div className="max-w-4xl mx-auto bg-navy border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl shadow-black/40">
+      <div className="max-w-4xl mx-auto bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] rounded-2xl p-4 sm:p-5 shadow-[var(--ct-shadow)]">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <Cookie className="w-6 h-6 text-amber flex-shrink-0 hidden sm:block" />
-          <p className="text-white/60 font-thai text-sm flex-1">
+          <p className="text-[var(--ct-text-secondary)] font-thai text-sm flex-1">
             เราใช้คุกกี้เพื่อพัฒนาประสบการณ์การใช้งานของคุณ โดยการใช้เว็บไซต์นี้ต่อ คุณยอมรับ{" "}
             <a href="/privacy" className="text-amber hover:underline">นโยบายความเป็นส่วนตัว</a> ของเรา
           </p>
@@ -43,7 +43,7 @@ export function CookieBanner() {
             <Button
               variant="outline"
               onClick={decline}
-              className="flex-1 sm:flex-none border-white/10 text-white/50 hover:text-white font-thai text-sm"
+              className="flex-1 sm:flex-none border-[var(--ct-border)] text-[var(--ct-text-muted)] hover:text-[var(--ct-text-primary)] font-thai text-sm"
             >
               ปฏิเสธ
             </Button>

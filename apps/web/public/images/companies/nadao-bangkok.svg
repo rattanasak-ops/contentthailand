@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#212121"/>
+      <stop offset="100%" style="stop-color:#424242"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="20" fill="url(#bg)"/>
+  <text x="100" y="85" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="bold" fill="white" dominant-baseline="middle">NADAO</text>
+  <text x="100" y="120" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#FFD700" opacity="0.9">BANGKOK</text>
+  <line x1="60" y1="140" x2="140" y2="140" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+</svg>

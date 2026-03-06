@@ -16,15 +16,15 @@ function NewsCard({ item }: { item: News }) {
   return (
     <Link
       href={`/news/${item.slug}`}
-      className="group bg-navy/60 rounded-xl border border-white/5 overflow-hidden hover:border-purple/30 transition-all duration-300"
+      className="group bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] overflow-hidden hover:border-purple/30 transition-all duration-300"
     >
       {/* Cover */}
-      <div className="aspect-[16/9] bg-gradient-to-br from-purple/20 to-midnight relative overflow-hidden">
+      <div className="aspect-[16/9] bg-gradient-to-br from-purple/20 to-[var(--ct-bg-page)] relative overflow-hidden">
         {item.coverUrl ? (
           <Image src={item.coverUrl} alt={title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-white/10 font-display text-5xl font-bold">
+            <span className="text-[var(--ct-text-faint)] font-display text-5xl font-bold">
               {title.charAt(0)}
             </span>
           </div>
@@ -34,7 +34,7 @@ function NewsCard({ item }: { item: News }) {
           {item.tags.slice(0, 2).map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 bg-purple/80 text-white text-[10px] rounded font-thai"
+              className="px-2 py-0.5 bg-purple/80 text-[var(--ct-text-primary)] text-[10px] rounded font-thai"
             >
               {tag}
             </span>
@@ -44,15 +44,15 @@ function NewsCard({ item }: { item: News }) {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="font-thai font-semibold text-sm text-white line-clamp-2 group-hover:text-pink transition-colors mb-2">
+        <h3 className="font-thai font-semibold text-sm text-[var(--ct-text-primary)] line-clamp-2 group-hover:text-pink transition-colors mb-2">
           {title}
         </h3>
         {excerpt && (
-          <p className="text-white/40 text-xs font-body line-clamp-2 mb-3">
+          <p className="text-[var(--ct-text-muted)] text-xs font-body line-clamp-2 mb-3">
             {excerpt}
           </p>
         )}
-        <div className="flex items-center gap-1.5 text-white/30 text-xs">
+        <div className="flex items-center gap-1.5 text-[var(--ct-text-faint)] text-xs">
           <Calendar className="w-3 h-3" />
           <span className="font-thai">
             {formatThaiDate(item.publishedAt)}
@@ -71,11 +71,11 @@ export function NewsSection({ items }: NewsSectionProps) {
   const { lang } = useLanguage();
 
   return (
-    <section className="py-20 bg-midnight">
+    <section className="py-20 bg-[var(--ct-bg-page)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <FilmStrip color="pink" size="md">
-            <h2 className="font-thai font-bold text-xl md:text-2xl text-white">
+            <h2 className="font-thai font-bold text-xl md:text-2xl text-[var(--ct-text-primary)]">
               {lang === "th" ? "ข่าวสารล่าสุด" : "Latest News"}
             </h2>
           </FilmStrip>

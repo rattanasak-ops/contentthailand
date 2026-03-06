@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#b71c1c"/>
+      <stop offset="50%" style="stop-color:#c62828"/>
+      <stop offset="100%" style="stop-color:#880e4f"/>
+    </linearGradient>
+    <linearGradient id="ov" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#000;stop-opacity:0.6"/>
+      <stop offset="60%" style="stop-color:#000;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#ov)"/>
+  <g transform="translate(400,190)" text-anchor="middle">
+    <text font-family="sans-serif" font-size="40" font-weight="bold" fill="white">SOFT POWER</text>
+    <text font-family="sans-serif" font-size="24" fill="#FF8A80" dy="45">Thai Film Creative Economy</text>
+    <text font-family="sans-serif" font-size="40" fill="white" opacity="0.1" dy="50">+50%</text>
+    <text font-family="sans-serif" font-size="16" fill="white" opacity="0.5" dy="30">February 2025</text>
+  </g>
+</svg>

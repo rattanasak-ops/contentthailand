@@ -1,0 +1,71 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { persons } from "@/lib/mock-data/persons";
+import { ChevronRight } from "lucide-react";
+
+const featured = persons.slice(0, 8);
+
+export function FeaturedPersons() {
+  const { lang } = useLanguage();
+
+  return (
+    <section className="py-16 bg-[#0E0D2A] relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/3 w-[400px] h-[300px] pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(246,165,27,0.03) 0%, transparent 70%)" }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white font-thai">
+              {lang === "th" ? "บุคลากรเด่น" : "Featured Personnel"}
+            </h2>
+            <p className="text-white/40 text-sm mt-1 font-thai">
+              {lang === "th" ? "ผู้กำกับและนักแสดงชั้นนำของวงการภาพยนตร์ไทย" : "Leading directors and actors in Thai cinema"}
+            </p>
+          </div>
+          <Link href="/persons" className="group flex items-center gap-1 text-[#F6A51B] hover:text-[#F6A51B]/80 text-sm font-thai transition-colors">
+            {lang === "th" ? "ดูทั้งหมด" : "View All"}
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+        </div>
+
+        {/* Person Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-5">
+          {featured.map((person, i) => (
+            <motion.div
+              key={person.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: i * 0.05, duration: 0.4 }}
+            >
+              <Link href={`/persons/${person.slug}`} className="group block text-center">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-white/10 group-hover:ring-[#F6A51B]/50 transition-all duration-300">
+                  <Image
+                    src={person.photoUrl || "/images/placeholder-person.jpg"}
+                    alt={person.nameEn}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="96px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <h3 className="text-white text-xs md:text-sm font-thai font-medium leading-tight group-hover:text-[#F6A51B] transition-colors line-clamp-1">
+                  {lang === "th" ? person.nameTh : person.nameEn}
+                </h3>
+                <p className="text-white/40 text-[10px] md:text-xs mt-0.5 font-thai capitalize">
+                  {person.roles[0] === "director" ? (lang === "th" ? "ผู้กำกับ" : "Director") : (lang === "th" ? "นักแสดง" : "Actor")}
+                </p>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

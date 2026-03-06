@@ -115,7 +115,7 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
     <div ref={containerRef} className="relative w-full">
       {/* Input */}
       <div className="relative">
-        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 text-white/40 ${isHero ? "w-5 h-5" : "w-4 h-4"}`} />
+        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ct-text-muted)] ${isHero ? "w-5 h-5" : "w-4 h-4"}`} />
         {loading && (
           <Loader2 className={`absolute right-3 top-1/2 -translate-y-1/2 text-pink animate-spin ${isHero ? "w-5 h-5" : "w-4 h-4"}`} />
         )}
@@ -127,7 +127,7 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
           onFocus={() => results && results.total > 0 && setOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder={lang === "th" ? "ค้นหาภาพยนตร์ ละคร บุคลากร..." : "Search films, series, people..."}
-          className={`w-full bg-navy/60 backdrop-blur-sm border border-white/10 text-white placeholder:text-white/40 font-body focus:outline-none focus:border-pink/50 focus:ring-2 focus:ring-pink/20 transition-all ${
+          className={`w-full bg-[var(--ct-bg-elevated)] backdrop-blur-sm border border-[var(--ct-border)] text-[var(--ct-text-primary)] placeholder:text-[var(--ct-text-muted)] font-body focus:outline-none focus:border-pink/50 focus:ring-2 focus:ring-pink/20 transition-all ${
             isHero
               ? "pl-12 pr-12 py-4 text-base rounded-xl"
               : "pl-9 pr-9 py-2 text-sm rounded-lg"
@@ -137,10 +137,10 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
 
       {/* Dropdown */}
       {open && results && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-navy border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[400px] overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] rounded-xl shadow-[var(--ct-shadow)] overflow-hidden z-50 max-h-[400px] overflow-y-auto">
           {results.total === 0 ? (
             <div className="px-4 py-8 text-center">
-              <p className="text-white/40 font-thai text-sm">
+              <p className="text-[var(--ct-text-muted)] font-thai text-sm">
                 {lang === "th"
                   ? `ไม่พบ '${query}' — ลองค้นหาด้วยคำอื่น`
                   : `No results for '${query}' — try a different term`}
@@ -246,7 +246,7 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
                   setOpen(false);
                   onClose?.();
                 }}
-                className="w-full px-4 py-3 text-center text-sm font-thai text-pink hover:bg-white/5 transition-colors border-t border-white/5"
+                className="w-full px-4 py-3 text-center text-sm font-thai text-pink hover:bg-[var(--ct-bg-hover)] transition-colors border-t border-[var(--ct-border)]"
               >
                 {lang === "th"
                   ? `ดูผลทั้งหมด ${results.total} รายการ →`
@@ -271,9 +271,9 @@ function ResultGroup({
 }) {
   return (
     <div>
-      <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.02] border-b border-white/5">
+      <div className="flex items-center gap-2 px-4 py-2 bg-[var(--ct-bg-hover)] border-b border-[var(--ct-border)]">
         <span className="text-pink">{icon}</span>
-        <span className="text-white/40 text-xs font-thai font-semibold uppercase tracking-wider">
+        <span className="text-[var(--ct-text-muted)] text-xs font-thai font-semibold uppercase tracking-wider">
           {label}
         </span>
       </div>
@@ -296,15 +296,15 @@ function ResultItem({
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-4 py-2.5 flex items-center justify-between hover:bg-white/5 transition-colors ${
-        active ? "bg-white/5" : ""
+      className={`w-full text-left px-4 py-2.5 flex items-center justify-between hover:bg-[var(--ct-bg-hover)] transition-colors ${
+        active ? "bg-[var(--ct-bg-hover)]" : ""
       }`}
     >
       <span
-        className="text-sm text-white font-thai truncate [&_mark]:bg-transparent [&_mark]:text-amber [&_mark]:font-bold"
+        className="text-sm text-[var(--ct-text-primary)] font-thai truncate [&_mark]:bg-transparent [&_mark]:text-amber [&_mark]:font-bold"
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      {sub && <span className="text-white/30 text-xs font-body ml-2 flex-shrink-0">{sub}</span>}
+      {sub && <span className="text-[var(--ct-text-faint)] text-xs font-body ml-2 flex-shrink-0">{sub}</span>}
     </button>
   );
 }

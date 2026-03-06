@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#8B6914"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="ov" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#000;stop-opacity:0.6"/>
+      <stop offset="50%" style="stop-color:#000;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#ov)"/>
+  <g transform="translate(400,200)" text-anchor="middle">
+    <text font-family="sans-serif" font-size="36" font-weight="bold" fill="#FFD700">Suphannahong Awards</text>
+    <text font-family="sans-serif" font-size="60" fill="white" opacity="0.2" dy="-50">32nd</text>
+    <text font-family="sans-serif" font-size="24" fill="white" opacity="0.8" dy="45">32nd Annual Ceremony</text>
+    <text font-family="sans-serif" font-size="16" fill="#FFD700" opacity="0.5" dy="35">March 2025</text>
+  </g>
+</svg>

@@ -44,17 +44,17 @@ export default function ApplyPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-midnight pt-8 pb-20">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
         <div className="mb-10">
           <FilmStrip color="orange" size="lg">
-            <h1 className="font-thai font-bold text-2xl md:text-3xl text-white">
+            <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
               {lang === "th" ? "สมัครมาตรการส่งเสริม" : "Apply for Incentive Programs"}
             </h1>
           </FilmStrip>
-          <p className="text-white/50 text-sm font-thai mt-3 ml-1 max-w-2xl">
+          <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1 max-w-2xl">
             {lang === "th"
               ? "กระทรวงวัฒนธรรมเปิดรับสมัครมาตรการส่งเสริมสำหรับผู้ผลิตภาพยนตร์และดิจิทัลคอนเทนต์ต่างชาติ เลือกมาตรการที่เหมาะสมและกรอกใบสมัครออนไลน์"
               : "The Ministry of Culture offers incentive programs for foreign film and digital content producers. Select the appropriate program and submit your application online."}
@@ -71,7 +71,7 @@ export default function ApplyPage() {
             return (
               <div
                 key={prog.slug}
-                className={`bg-navy/40 rounded-2xl border border-white/5 overflow-hidden hover:border-${prog.color}/30 transition-all`}
+                className={`bg-[var(--ct-bg-elevated)] rounded-2xl border border-[var(--ct-border)] overflow-hidden hover:border-${prog.color}/30 transition-all`}
               >
                 <div className="p-6 md:p-8">
                   <div className="flex items-start gap-4 mb-4">
@@ -79,8 +79,8 @@ export default function ApplyPage() {
                       <Icon className={`w-6 h-6 text-${prog.color}`} />
                     </div>
                     <div className="flex-1">
-                      <h2 className="font-thai font-bold text-lg text-white mb-2">{title}</h2>
-                      <p className="text-white/50 text-sm font-body leading-relaxed">{desc}</p>
+                      <h2 className="font-thai font-bold text-lg text-[var(--ct-text-primary)] mb-2">{title}</h2>
+                      <p className="text-[var(--ct-text-muted)] text-sm font-body leading-relaxed">{desc}</p>
                     </div>
                   </div>
 
@@ -88,7 +88,7 @@ export default function ApplyPage() {
                     {benefits.map((b, i) => (
                       <div key={i} className="flex items-center gap-2">
                         <CheckCircle2 className={`w-4 h-4 text-${prog.color}/60 flex-shrink-0`} />
-                        <span className="text-white/60 text-sm font-thai">{b}</span>
+                        <span className="text-[var(--ct-text-secondary)] text-sm font-thai">{b}</span>
                       </div>
                     ))}
                   </div>

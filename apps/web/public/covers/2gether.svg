@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a1a6b"/>
+      <stop offset="50%" style="stop-color:#e91e8c"/>
+      <stop offset="100%" style="stop-color:#ff6b9d"/>
+    </linearGradient>
+    <linearGradient id="overlay" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#000;stop-opacity:0.5"/>
+      <stop offset="60%" style="stop-color:#000;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#overlay)"/>
+  <g transform="translate(400,160)" text-anchor="middle">
+    <text font-family="sans-serif" font-size="72" font-weight="bold" fill="white" letter-spacing="4">
+      <tspan x="0" dy="0">2gether</tspan>
+    </text>
+    <text font-family="sans-serif" font-size="26" fill="white" opacity="0.85">
+      <tspan x="0" dy="50">The Series</tspan>
+    </text>
+    <text font-family="sans-serif" font-size="22" fill="white" opacity="0.6">
+      <tspan x="0" dy="50">2020 | 13 Episodes | GMM 25</tspan>
+    </text>
+    <text font-family="sans-serif" font-size="18" fill="white" opacity="0.4">
+      <tspan x="0" dy="35">Romance Comedy</tspan>
+    </text>
+  </g>
+  <path d="M370 80 Q400 50 430 80 Q460 110 400 150 Q340 110 370 80Z" fill="white" opacity="0.1"/>
+</svg>

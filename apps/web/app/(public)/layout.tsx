@@ -2,6 +2,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/shared/CookieBanner";
+import { AccessibilityWidget } from "@/components/shared/AccessibilityWidget";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 export default function PublicLayout({
   children,
@@ -10,10 +12,13 @@ export default function PublicLayout({
 }) {
   return (
     <LanguageProvider>
-      <Navbar />
-      <main className="min-h-screen">{children}</main>
-      <Footer />
-      <CookieBanner />
+      <SmoothScroll>
+        <Navbar />
+        <main id="main-content" className="min-h-screen">{children}</main>
+        <Footer />
+        <CookieBanner />
+        <AccessibilityWidget />
+      </SmoothScroll>
     </LanguageProvider>
   );
 }

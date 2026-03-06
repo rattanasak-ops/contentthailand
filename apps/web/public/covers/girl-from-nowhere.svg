@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a0a"/>
+      <stop offset="50%" style="stop-color:#4a0e0e"/>
+      <stop offset="100%" style="stop-color:#0d0d0d"/>
+    </linearGradient>
+    <linearGradient id="overlay" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#000;stop-opacity:0.6"/>
+      <stop offset="60%" style="stop-color:#000;stop-opacity:0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="40%">
+      <stop offset="0%" style="stop-color:#ff3333;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#000;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#glow)"/>
+  <rect width="800" height="450" fill="url(#overlay)"/>
+  <g transform="translate(400,170)" text-anchor="middle">
+    <text font-family="sans-serif" font-size="52" font-weight="bold" fill="#FF4444" letter-spacing="3">
+      <tspan x="0" dy="0">GIRL FROM</tspan>
+      <tspan x="0" dy="60">NOWHERE</tspan>
+    </text>
+    <text font-family="sans-serif" font-size="24" fill="white" opacity="0.7">
+      <tspan x="0" dy="55">2018-2021 | 21 Episodes | GMM 25 / Netflix</tspan>
+    </text>
+  </g>
+  <line x1="200" y1="340" x2="600" y2="340" stroke="#FF4444" stroke-width="1" opacity="0.3"/>
+  <circle cx="400" cy="100" r="3" fill="#FF4444" opacity="0.6"/>
+  <circle cx="380" cy="85" r="2" fill="#FF4444" opacity="0.3"/>
+  <circle cx="420" cy="90" r="2" fill="#FF4444" opacity="0.4"/>
+</svg>

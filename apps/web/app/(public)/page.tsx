@@ -6,6 +6,12 @@ import { ContentCarousel } from "@/components/home/ContentCarousel";
 import { FilmCard } from "@/components/home/FilmCard";
 import { SeriesCard } from "@/components/home/SeriesCard";
 import { NewsSection } from "@/components/home/NewsSection";
+import { FeaturedPersons } from "@/components/home/FeaturedPersons";
+import { FeaturedCompanies } from "@/components/home/FeaturedCompanies";
+import { IndustrySnapshot } from "@/components/home/IndustrySnapshot";
+import { CTAIncentive } from "@/components/home/CTAIncentive";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
+import { GradientDivider } from "@/components/motion/gradient-divider";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { films } from "@/lib/mock-data/films";
 import { series } from "@/lib/mock-data/series";
@@ -29,59 +35,99 @@ export default function HomePage() {
       {/* WOW #2 — Animated Stats Counter */}
       <StatsCounter />
 
+      <GradientDivider variant="pink" />
+
       {/* Latest Films Carousel */}
-      <section className="py-16 bg-navy-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ContentCarousel
-            titleTh="ภาพยนตร์ล่าสุด"
-            titleEn="Latest Films"
-            color="pink"
-            lang={lang}
-            viewAllHref="/films"
-          >
-            {latestFilms.map((film) => (
-              <FilmCard key={film.id} film={film} />
-            ))}
-          </ContentCarousel>
-        </div>
-      </section>
+      <ScrollReveal direction="up" delay={0.1}>
+        <section className="py-16 bg-[var(--ct-bg-elevated)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ContentCarousel
+              titleTh="ภาพยนตร์ล่าสุด"
+              titleEn="Latest Films"
+              color="pink"
+              lang={lang}
+              viewAllHref="/films"
+            >
+              {latestFilms.map((film) => (
+                <FilmCard key={film.id} film={film} />
+              ))}
+            </ContentCarousel>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <GradientDivider variant="orange" />
 
       {/* Popular Films Carousel */}
-      <section className="py-16 bg-midnight">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ContentCarousel
-            titleTh="ภาพยนตร์ยอดนิยม"
-            titleEn="Popular Films"
-            color="orange"
-            lang={lang}
-            viewAllHref="/films"
-          >
-            {popularFilms.map((film) => (
-              <FilmCard key={film.id} film={film} />
-            ))}
-          </ContentCarousel>
-        </div>
-      </section>
+      <ScrollReveal direction="up" delay={0.1}>
+        <section className="py-16 bg-[var(--ct-bg-page)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ContentCarousel
+              titleTh="ภาพยนตร์ยอดนิยม"
+              titleEn="Popular Films"
+              color="orange"
+              lang={lang}
+              viewAllHref="/films"
+            >
+              {popularFilms.map((film) => (
+                <FilmCard key={film.id} film={film} />
+              ))}
+            </ContentCarousel>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <GradientDivider variant="amber" />
 
       {/* Series Carousel */}
-      <section className="py-16 bg-navy-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ContentCarousel
-            titleTh="ละครโทรทัศน์ล่าสุด"
-            titleEn="Latest TV Series"
-            color="orange"
-            lang={lang}
-            viewAllHref="/series"
-          >
-            {latestSeries.map((s) => (
-              <SeriesCard key={s.id} series={s} />
-            ))}
-          </ContentCarousel>
-        </div>
-      </section>
+      <ScrollReveal direction="up" delay={0.1}>
+        <section className="py-16 bg-[var(--ct-bg-elevated)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ContentCarousel
+              titleTh="ละครโทรทัศน์ล่าสุด"
+              titleEn="Latest TV Series"
+              color="orange"
+              lang={lang}
+              viewAllHref="/series"
+            >
+              {latestSeries.map((s) => (
+                <SeriesCard key={s.id} series={s} />
+              ))}
+            </ContentCarousel>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <GradientDivider variant="purple" />
+
+      {/* Industry Snapshot Dashboard Preview — TOR 4.4.11 */}
+      <ScrollReveal direction="up" delay={0.1}>
+        <IndustrySnapshot />
+      </ScrollReveal>
+
+      <GradientDivider variant="amber" />
+
+      {/* Featured Persons — TOR 4.4.4 */}
+      <ScrollReveal direction="up" delay={0.1}>
+        <FeaturedPersons />
+      </ScrollReveal>
+
+      <GradientDivider variant="pink" />
+
+      {/* Featured Companies — TOR 4.4.5 */}
+      <ScrollReveal direction="up" delay={0.1}>
+        <FeaturedCompanies />
+      </ScrollReveal>
+
+      <GradientDivider variant="orange" />
 
       {/* Latest News */}
-      <NewsSection items={latestNews} />
+      <ScrollReveal direction="up" delay={0.1}>
+        <NewsSection items={latestNews} />
+      </ScrollReveal>
+
+      {/* CTA — Film Incentive Application TOR 4.4.8 */}
+      <CTAIncentive />
     </div>
   );
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6F00"/>
+      <stop offset="100%" style="stop-color:#E65100"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="20" fill="url(#bg)"/>
+  <text x="100" y="90" text-anchor="middle" font-family="sans-serif" font-size="38" font-weight="bold" fill="white" dominant-baseline="middle">WP</text>
+  <text x="100" y="130" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" opacity="0.9">WORKPOINT</text>
+  <text x="100" y="150" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white" opacity="0.6">ENTERTAINMENT</text>
+</svg>

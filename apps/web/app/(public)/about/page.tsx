@@ -28,27 +28,27 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-midnight pt-8 pb-20">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
         <div className="mb-10">
           <FilmStrip color="pink" size="lg">
-            <h1 className="font-thai font-bold text-2xl md:text-3xl text-white">
+            <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
               {lang === "th" ? "เกี่ยวกับ ContentThailand" : "About ContentThailand"}
             </h1>
           </FilmStrip>
         </div>
 
         {/* Intro */}
-        <div className="bg-navy/40 rounded-2xl border border-white/5 p-8 mb-10">
+        <div className="bg-[var(--ct-bg-elevated)] rounded-2xl border border-[var(--ct-border)] p-8 mb-10">
           <div className="flex items-center gap-3 mb-4">
             <Film className="w-6 h-6 text-pink" />
-            <h2 className="font-thai font-bold text-xl text-white">
+            <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)]">
               {lang === "th" ? "ฐานข้อมูลกลางภาพยนตร์และวีดิทัศน์แห่งชาติ" : "Thailand National Film & Video Database"}
             </h2>
           </div>
-          <p className="text-white/60 font-body leading-relaxed">
+          <p className="text-[var(--ct-text-secondary)] font-body leading-relaxed">
             {lang === "th"
               ? "ContentThailand เป็นระบบฐานข้อมูลกลางภาพยนตร์และวีดิทัศน์แห่งชาติ พัฒนาโดยกองภาพยนตร์และวีดิทัศน์ กรมส่งเสริมวัฒนธรรม กระทรวงวัฒนธรรม เพื่อรวบรวม จัดเก็บ และเผยแพร่ข้อมูลภาพยนตร์และวีดิทัศน์ของประเทศไทยอย่างเป็นระบบ ครอบคลุมทั้งภาพยนตร์ ละครโทรทัศน์ บุคลากรในวงการ และบริษัทผู้ผลิต"
               : "ContentThailand is the national film and video database system developed by the Film and Video Division, Department of Cultural Promotion, Ministry of Culture. It systematically collects, stores, and publishes data about Thai films, TV series, industry personnel, and production companies."}
@@ -57,23 +57,23 @@ export default function AboutPage() {
 
         {/* Vision & Mission */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          <div className="bg-navy/40 rounded-xl border border-white/5 p-6">
+          <div className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6">
             <div className="flex items-center gap-2 mb-3">
               <Eye className="w-5 h-5 text-amber" />
-              <h3 className="font-thai font-bold text-white">{lang === "th" ? "วิสัยทัศน์" : "Vision"}</h3>
+              <h3 className="font-thai font-bold text-[var(--ct-text-primary)]">{lang === "th" ? "วิสัยทัศน์" : "Vision"}</h3>
             </div>
-            <p className="text-white/50 font-body text-sm leading-relaxed">
+            <p className="text-[var(--ct-text-muted)] font-body text-sm leading-relaxed">
               {lang === "th"
                 ? "เป็นศูนย์กลางข้อมูลภาพยนตร์และวีดิทัศน์ที่ครบถ้วน น่าเชื่อถือ และเข้าถึงได้ง่ายที่สุดในประเทศไทย เพื่อส่งเสริมอุตสาหกรรมบันเทิงไทยสู่ระดับสากล"
                 : "To be the most comprehensive, trusted, and accessible film and video data center in Thailand, promoting the Thai entertainment industry internationally."}
             </p>
           </div>
-          <div className="bg-navy/40 rounded-xl border border-white/5 p-6">
+          <div className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6">
             <div className="flex items-center gap-2 mb-3">
               <Target className="w-5 h-5 text-orange" />
-              <h3 className="font-thai font-bold text-white">{lang === "th" ? "พันธกิจ" : "Mission"}</h3>
+              <h3 className="font-thai font-bold text-[var(--ct-text-primary)]">{lang === "th" ? "พันธกิจ" : "Mission"}</h3>
             </div>
-            <ul className="text-white/50 font-body text-sm leading-relaxed space-y-2">
+            <ul className="text-[var(--ct-text-muted)] font-body text-sm leading-relaxed space-y-2">
               <li>{lang === "th" ? "• รวบรวมและจัดเก็บข้อมูลภาพยนตร์และวีดิทัศน์อย่างเป็นระบบ" : "• Systematically collect and store film and video data"}</li>
               <li>{lang === "th" ? "• เผยแพร่ข้อมูลสู่สาธารณะเพื่อการศึกษาและวิจัย" : "• Publish data for education and research"}</li>
               <li>{lang === "th" ? "• สนับสนุนการพัฒนาอุตสาหกรรมภาพยนตร์ไทย" : "• Support Thai film industry development"}</li>
@@ -89,9 +89,9 @@ export default function AboutPage() {
             { value: "5,888+", label: lang === "th" ? "บุคลากร" : "Personnel" },
             { value: "1.25M", label: lang === "th" ? "ผู้เข้าชม" : "Visitors" },
           ].map((s) => (
-            <div key={s.label} className="bg-navy/40 rounded-xl border border-white/5 p-4 text-center">
+            <div key={s.label} className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-4 text-center">
               <p className="font-display text-2xl text-amber font-bold">{s.value}</p>
-              <p className="text-white/40 text-xs font-thai mt-1">{s.label}</p>
+              <p className="text-[var(--ct-text-muted)] text-xs font-thai mt-1">{s.label}</p>
             </div>
           ))}
         </div>
@@ -99,9 +99,9 @@ export default function AboutPage() {
         {/* Timeline */}
         <div className="mb-10">
           <FilmStrip color="purple" size="md">
-            <h2 className="font-thai font-bold text-xl text-white">{lang === "th" ? "ประวัติความเป็นมา" : "History"}</h2>
+            <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)]">{lang === "th" ? "ประวัติความเป็นมา" : "History"}</h2>
           </FilmStrip>
-          <div className="mt-6 space-y-6 relative before:absolute before:left-4 before:top-0 before:bottom-0 before:w-px before:bg-white/10">
+          <div className="mt-6 space-y-6 relative before:absolute before:left-4 before:top-0 before:bottom-0 before:w-px before:bg-[var(--ct-bg-hover)]">
             {timeline.map((t) => (
               <div key={t.year} className="flex gap-4 pl-4">
                 <div className="w-8 h-8 rounded-full bg-purple/20 border border-purple/30 flex items-center justify-center flex-shrink-0 -ml-4 z-10">
@@ -109,8 +109,8 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className="text-amber font-mono text-sm font-bold mb-0.5">{t.year}</p>
-                  <p className="text-white font-thai font-semibold text-sm">{t.title}</p>
-                  <p className="text-white/40 font-body text-xs mt-1">{t.desc}</p>
+                  <p className="text-[var(--ct-text-primary)] font-thai font-semibold text-sm">{t.title}</p>
+                  <p className="text-[var(--ct-text-muted)] font-body text-xs mt-1">{t.desc}</p>
                 </div>
               </div>
             ))}
@@ -120,20 +120,20 @@ export default function AboutPage() {
         {/* Team */}
         <div>
           <FilmStrip color="orange" size="md">
-            <h2 className="font-thai font-bold text-xl text-white flex items-center gap-2">
+            <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)] flex items-center gap-2">
               <Users className="w-5 h-5 text-orange" />
               {lang === "th" ? "ทีมงาน" : "Team"}
             </h2>
           </FilmStrip>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
             {teamMembers.map((m) => (
-              <div key={m.name} className="bg-navy/40 rounded-xl border border-white/5 p-4 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple/30 to-navy flex items-center justify-center flex-shrink-0">
-                  <span className="text-white/30 font-display font-bold">{m.name.charAt(0)}</span>
+              <div key={m.name} className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple/30 to-[var(--ct-bg-elevated)] flex items-center justify-center flex-shrink-0">
+                  <span className="text-[var(--ct-text-faint)] font-display font-bold">{m.name.charAt(0)}</span>
                 </div>
                 <div>
-                  <p className="text-white font-thai text-sm font-semibold">{m.name}</p>
-                  <p className="text-white/40 font-thai text-xs">{m.role}</p>
+                  <p className="text-[var(--ct-text-primary)] font-thai text-sm font-semibold">{m.name}</p>
+                  <p className="text-[var(--ct-text-muted)] font-thai text-xs">{m.role}</p>
                 </div>
               </div>
             ))}
