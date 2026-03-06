@@ -1,6 +1,7 @@
 "use client";
 
-import { BarChart3, TrendingUp, Film, Tv, Users, Building2, Eye } from "lucide-react";
+import { useState } from "react";
+import { BarChart3, TrendingUp, Film, Tv, Users, Building2, Eye, Download, Copy, Check } from "lucide-react";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -210,6 +211,106 @@ export default function StatisticsPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Export & Citation — Persona #3 (Researcher WOW) */}
+        <ExportCitation lang={lang} />
+      </div>
+    </div>
+  );
+}
+
+function ExportCitation({ lang }: { lang: string }) {
+  const [copied, setCopied] = useState(false);
+  const today = new Date().toISOString().split("T")[0];
+
+  const citationAPA = `กองภาพยนตร์และวีดิทัศน์, กรมส่งเสริมวัฒนธรรม. (${new Date().getFullYear()}). สถิติอุตสาหกรรมภาพยนตร์และวีดิทัศน์แห่งชาติ. ContentThailand. สืบค้นเมื่อ ${today}, จาก https://contentthailand.com/statistics`;
+  const citationAPAen = `Film Division, Department of Cultural Promotion. (${new Date().getFullYear()}). National Film and Video Industry Statistics. ContentThailand. Retrieved ${today}, from https://contentthailand.com/statistics`;
+
+  const citation = lang === "th" ? citationAPA : citationAPAen;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(citation);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleExport = (format: string) => {
+    const msg = lang === "th"
+      ? `กำลังเตรียมไฟล์ ${format}... (Demo mode)`
+      : `Preparing ${format} file... (Demo mode)`;
+    alert(msg);
+  };
+
+  return (
+    <div className="mb-10">
+      <FilmStrip color="orange" size="md">
+        <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)] flex items-center gap-2">
+          <Download className="w-5 h-5 text-amber" />
+          {lang === "th" ? "ส่งออกข้อมูลและอ้างอิง" : "Export & Citation"}
+        </h2>
+      </FilmStrip>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        {/* Export Buttons */}
+        <div className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6">
+          <h3 className="font-thai font-semibold text-[var(--ct-text-primary)] text-sm mb-4">
+            {lang === "th" ? "ดาวน์โหลดข้อมูล" : "Download Data"}
+          </h3>
+          <p className="text-[var(--ct-text-muted)] text-xs font-thai mb-4">
+            {lang === "th"
+              ? "ดาวน์โหลดข้อมูลสถิติอุตสาหกรรมภาพยนตร์สำหรับการวิจัยและวิเคราะห์"
+              : "Download industry statistics data for research and analysis"}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => handleExport("Excel")}
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#217346]/10 text-[#217346] rounded-lg text-sm font-thai font-semibold hover:bg-[#217346]/20 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Excel (.xlsx)
+            </button>
+            <button
+              onClick={() => handleExport("CSV")}
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-amber/10 text-amber rounded-lg text-sm font-thai font-semibold hover:bg-amber/20 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              CSV
+            </button>
+            <button
+              onClick={() => handleExport("PDF")}
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-pink/10 text-pink rounded-lg text-sm font-thai font-semibold hover:bg-pink/20 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              PDF
+            </button>
+          </div>
+        </div>
+
+        {/* Citation Format */}
+        <div className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6">
+          <h3 className="font-thai font-semibold text-[var(--ct-text-primary)] text-sm mb-2">
+            {lang === "th" ? "อ้างอิงข้อมูล (APA 7th)" : "Citation (APA 7th)"}
+          </h3>
+          <p className="text-[var(--ct-text-muted)] text-xs font-thai mb-3">
+            {lang === "th"
+              ? "คัดลอกรูปแบบอ้างอิงสำหรับใช้ในงานวิจัยและเอกสารวิชาการ"
+              : "Copy citation format for use in research papers and academic documents"}
+          </p>
+          <div className="bg-[var(--ct-bg-page)] rounded-lg p-3 mb-3 border border-[var(--ct-border)]">
+            <p className="text-[var(--ct-text-secondary)] text-xs font-body leading-relaxed break-words">
+              {citation}
+            </p>
+          </div>
+          <button
+            onClick={handleCopy}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-purple/10 text-purple-light rounded-lg text-sm font-thai font-semibold hover:bg-purple/20 transition-colors"
+          >
+            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            {copied
+              ? (lang === "th" ? "คัดลอกแล้ว!" : "Copied!")
+              : (lang === "th" ? "คัดลอก Citation" : "Copy Citation")}
+          </button>
         </div>
       </div>
     </div>

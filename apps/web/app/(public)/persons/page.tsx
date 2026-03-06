@@ -45,11 +45,11 @@ export default function PersonsPage() {
           <div className="mb-8 flex items-start justify-between gap-4">
             <div>
               <FilmStrip color="pink" size="lg">
-                <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
+                <h1 className="font-thai font-bold text-2xl md:text-3xl text-white">
                   {lang === "th" ? "บุคลากรในวงการภาพยนตร์" : "Film Industry Personnel"}
                 </h1>
               </FilmStrip>
-              <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
+              <p className="text-white/50 text-sm font-thai mt-3 ml-1">
                 {filtered.length} {lang === "th" ? "คน" : "people"}
               </p>
             </div>
@@ -100,7 +100,7 @@ export default function PersonsPage() {
                 ))}
               </StaggerChildren>
             ) : (
-              <div className="rounded-xl overflow-hidden border border-[var(--ct-border)]">
+              <div className="rounded-xl overflow-hidden border border-white/10 bg-[#1C1B4E]/40">
                 {filtered.map((p, i) => (
                   <PersonListItem key={p.id} p={p} lang={lang} index={i} />
                 ))}
@@ -144,7 +144,7 @@ function PersonCardGrid({ p, lang }: { p: (typeof persons)[0]; lang: string }) {
         hover:-translate-y-2"
     >
       {/* Avatar */}
-      <div className="relative aspect-square rounded-xl bg-gradient-to-br from-[#702874]/20 to-[var(--ct-bg-page)] border border-[var(--ct-border)] group-hover:border-[#F6A51B]/30 transition-all duration-300 overflow-hidden mb-3 group-hover:shadow-[0_15px_40px_rgba(246,165,27,0.1)]">
+      <div className="relative aspect-square rounded-xl bg-gradient-to-br from-[#F6A51B]/10 to-[#1C1B4E] border border-white/10 group-hover:border-[#F6A51B]/40 transition-all duration-300 overflow-hidden mb-3 group-hover:shadow-[0_15px_40px_rgba(246,165,27,0.15)]">
         {/* Mouse glow */}
         <motion.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
@@ -160,8 +160,8 @@ function PersonCardGrid({ p, lang }: { p: (typeof persons)[0]; lang: string }) {
         {/* Bottom gradient overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[var(--ct-bg-page)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
-      <h3 className="font-thai text-sm text-[var(--ct-text-primary)] truncate group-hover:text-[#F6A51B] transition-colors">{name}</h3>
-      <p className="text-[var(--ct-text-faint)] text-xs font-thai mt-0.5">
+      <h3 className="font-thai text-sm text-white truncate group-hover:text-[#F6A51B] transition-colors">{name}</h3>
+      <p className="text-white/40 text-xs font-thai mt-0.5">
         {p.roles.map((r) => lang === "th" ? (roleLabels[r]?.th || r) : (roleLabels[r]?.en || r)).join(", ")}
       </p>
     </Link>
@@ -173,7 +173,7 @@ function PersonCardPoster({ p, lang }: { p: (typeof persons)[0]; lang: string })
   return (
     <Link
       href={`/persons/${p.slug}`}
-      className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] hover:-translate-y-1 hover:border-[#F6A51B]/30 hover:shadow-[0_10px_40px_rgba(246,165,27,0.1)] transition-all duration-300"
+      className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-[#1C1B4E]/60 border border-white/10 hover:-translate-y-1 hover:border-[#F6A51B]/40 hover:shadow-[0_10px_40px_rgba(246,165,27,0.15)] transition-all duration-300"
     >
       {p.photoUrl ? (
         <Image src={p.photoUrl} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="150px" />
@@ -183,8 +183,8 @@ function PersonCardPoster({ p, lang }: { p: (typeof persons)[0]; lang: string })
         </div>
       )}
       <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-[var(--ct-bg-page)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-        <p className="text-[var(--ct-text-primary)] text-[10px] font-thai font-semibold truncate">{name}</p>
-        <p className="text-[#F6A51B] text-[9px]">{p.roles.map((r) => lang === "th" ? (roleLabels[r]?.th || r) : (roleLabels[r]?.en || r)).join(", ")}</p>
+        <p className="text-white text-[10px] font-thai font-semibold truncate">{name}</p>
+        <p className="text-[#F6A51B] text-[9px] font-bold">{p.roles.map((r) => lang === "th" ? (roleLabels[r]?.th || r) : (roleLabels[r]?.en || r)).join(", ")}</p>
       </div>
     </Link>
   );
@@ -201,9 +201,9 @@ function PersonListItem({ p, lang, index }: { p: (typeof persons)[0]; lang: stri
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.03, duration: 0.3 }}
-      className="group flex gap-4 p-4 md:p-5 hover:bg-[var(--ct-bg-hover)] border-b border-[var(--ct-border)] last:border-0 transition-colors"
+      className="group flex gap-4 p-4 md:p-5 hover:bg-white/[0.03] border-b border-white/[0.06] last:border-0 transition-colors"
     >
-      <div className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full bg-gradient-to-br from-[#702874]/20 to-[var(--ct-bg-page)] overflow-hidden relative group-hover:shadow-[0_0_20px_rgba(246,165,27,0.1)] transition-shadow border border-[var(--ct-border)] group-hover:border-[#F6A51B]/30">
+      <div className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full bg-gradient-to-br from-[#F6A51B]/10 to-[#1C1B4E] overflow-hidden relative group-hover:shadow-[0_0_20px_rgba(246,165,27,0.15)] transition-shadow border border-white/10 group-hover:border-[#F6A51B]/40">
         {p.photoUrl ? (
           <Image src={p.photoUrl} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="64px" />
         ) : (
@@ -213,17 +213,17 @@ function PersonListItem({ p, lang, index }: { p: (typeof persons)[0]; lang: stri
         )}
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
-        <h3 className="font-thai font-bold text-base text-[var(--ct-text-primary)] group-hover:text-[#F6A51B] transition-colors">{name}</h3>
-        <p className="text-[var(--ct-text-faint)] text-sm font-body">{altName}</p>
+        <h3 className="font-thai font-bold text-base text-white group-hover:text-[#F6A51B] transition-colors">{name}</h3>
+        <p className="text-white/50 text-sm font-body">{altName}</p>
         <div className="flex flex-wrap items-center gap-2 mt-1.5">
           {p.roles.map((r) => (
-            <span key={r} className="px-2 py-0.5 bg-[#F6A51B]/15 text-[#F6A51B] text-[10px] rounded-md font-thai border border-[#F6A51B]/10">
+            <span key={r} className="px-2 py-0.5 bg-[#F6A51B]/20 text-[#F6A51B] text-[10px] rounded-md font-thai border border-[#F6A51B]/15">
               {lang === "th" ? (roleLabels[r]?.th || r) : (roleLabels[r]?.en || r)}
             </span>
           ))}
-          {p.birthYear && <span className="text-[var(--ct-text-faint)] text-[10px] font-mono">{p.birthYear}</span>}
+          {p.birthYear && <span className="text-white/40 text-[10px] font-mono">{p.birthYear}</span>}
         </div>
-        {bio && <p className="text-[var(--ct-text-faint)] text-xs font-body line-clamp-1 mt-1.5 leading-relaxed">{bio}</p>}
+        {bio && <p className="text-white/40 text-xs font-body line-clamp-1 mt-1.5 leading-relaxed">{bio}</p>}
       </div>
     </motion.a>
   );

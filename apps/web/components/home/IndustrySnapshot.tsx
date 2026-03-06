@@ -19,15 +19,12 @@ export function IndustrySnapshot() {
   const { lang } = useLanguage();
 
   return (
-    <section className="py-16 bg-[#0E0D2A] relative overflow-hidden">
+    <section className="py-16 relative overflow-hidden" style={{ backgroundColor: "color-mix(in srgb, var(--ct-bg-page), black 8%)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Chart Area - 3 cols */}
           <div className="lg:col-span-3">
-            <div className="rounded-2xl overflow-hidden" style={{
-              background: "linear-gradient(135deg, rgba(28,27,78,0.6) 0%, rgba(14,13,42,0.8) 100%)",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }}>
+            <div className="rounded-2xl overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)]">
               <div className="p-6 md:p-8">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
@@ -35,10 +32,10 @@ export function IndustrySnapshot() {
                       <BarChart3 className="w-5 h-5 text-[#EC1C72]" />
                     </div>
                     <div>
-                      <h3 className="text-white font-bold font-thai">
+                      <h3 className="text-[var(--ct-text-primary)] font-bold font-thai">
                         {lang === "th" ? "ภาพรวมอุตสาหกรรม" : "Industry Overview"}
                       </h3>
-                      <p className="text-white/40 text-xs font-thai">
+                      <p className="text-[var(--ct-text-faint)] text-xs font-thai">
                         {lang === "th" ? "จำนวนผลงานใหม่รายปี" : "New content by year"}
                       </p>
                     </div>
@@ -60,7 +57,7 @@ export function IndustrySnapshot() {
                       transition={{ delay: i * 0.1, duration: 0.4 }}
                       className="flex items-center gap-4"
                     >
-                      <span className="text-white/60 text-sm font-mono w-10 shrink-0">
+                      <span className="text-[var(--ct-text-muted)] text-sm font-mono w-10 shrink-0">
                         {lang === "th" ? d.year : d.yearEn}
                       </span>
                       <div className="flex-1 flex flex-col gap-1.5">
@@ -72,7 +69,7 @@ export function IndustrySnapshot() {
                           }}>
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10" />
                           </div>
-                          <span className="text-white/60 text-xs font-mono">{d.films}</span>
+                          <span className="text-[var(--ct-text-muted)] text-xs font-mono">{d.films}</span>
                         </div>
                         {/* Series bar */}
                         <div className="flex items-center gap-2">
@@ -82,7 +79,7 @@ export function IndustrySnapshot() {
                           }}>
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10" />
                           </div>
-                          <span className="text-white/60 text-xs font-mono">{d.series}</span>
+                          <span className="text-[var(--ct-text-muted)] text-xs font-mono">{d.series}</span>
                         </div>
                       </div>
                     </motion.div>
@@ -90,16 +87,16 @@ export function IndustrySnapshot() {
                 </div>
 
                 {/* Legend */}
-                <div className="flex items-center gap-6 mt-6 pt-4 border-t border-white/5">
+                <div className="flex items-center gap-6 mt-6 pt-4 border-t border-[var(--ct-border)]">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-sm bg-[#EC1C72]" />
-                    <span className="text-white/50 text-xs font-thai">
+                    <span className="text-[var(--ct-text-muted)] text-xs font-thai">
                       {lang === "th" ? "ภาพยนตร์" : "Films"}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-sm bg-[#F76532]" />
-                    <span className="text-white/50 text-xs font-thai">
+                    <span className="text-[var(--ct-text-muted)] text-xs font-thai">
                       {lang === "th" ? "ละครโทรทัศน์" : "TV Series"}
                     </span>
                   </div>
@@ -115,10 +112,7 @@ export function IndustrySnapshot() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-2xl p-6" style={{
-                background: "linear-gradient(135deg, rgba(236,28,114,0.08) 0%, rgba(28,27,78,0.6) 100%)",
-                border: "1px solid rgba(236,28,114,0.15)",
-              }}
+              className="rounded-2xl p-6 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)]"
             >
               <div className="flex items-center gap-2 mb-3">
                 <TrendingUp className="w-5 h-5 text-[#EC1C72]" />
@@ -126,7 +120,7 @@ export function IndustrySnapshot() {
                   {lang === "th" ? "เติบโต +42%" : "+42% Growth"}
                 </span>
               </div>
-              <p className="text-white/70 text-sm font-thai leading-relaxed">
+              <p className="text-[var(--ct-text-secondary)] text-sm font-thai leading-relaxed">
                 {lang === "th"
                   ? "จำนวนภาพยนตร์ไทยที่ผลิตในปี 2567 เพิ่มขึ้น 42% เมื่อเทียบกับปี 2565 สะท้อนการเติบโตของอุตสาหกรรม"
                   : "Thai film production in 2024 increased 42% compared to 2022, reflecting industry growth"}
@@ -139,10 +133,7 @@ export function IndustrySnapshot() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="rounded-2xl p-6" style={{
-                background: "linear-gradient(135deg, rgba(246,165,27,0.08) 0%, rgba(28,27,78,0.6) 100%)",
-                border: "1px solid rgba(246,165,27,0.15)",
-              }}
+              className="rounded-2xl p-6 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)]"
             >
               <div className="flex items-center gap-2 mb-3">
                 <Download className="w-5 h-5 text-[#F6A51B]" />
@@ -150,7 +141,7 @@ export function IndustrySnapshot() {
                   {lang === "th" ? "ส่งออกข้อมูล" : "Export Data"}
                 </span>
               </div>
-              <p className="text-white/70 text-sm font-thai leading-relaxed mb-4">
+              <p className="text-[var(--ct-text-secondary)] text-sm font-thai leading-relaxed mb-4">
                 {lang === "th"
                   ? "ดาวน์โหลดข้อมูลสถิติอุตสาหกรรมภาพยนตร์ในรูปแบบ Excel หรือ PDF สำหรับการวิจัยและวิเคราะห์"
                   : "Download industry statistics in Excel or PDF for research and analysis"}
@@ -171,15 +162,12 @@ export function IndustrySnapshot() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="rounded-2xl p-6 flex-1" style={{
-                background: "linear-gradient(135deg, rgba(112,40,116,0.08) 0%, rgba(28,27,78,0.6) 100%)",
-                border: "1px solid rgba(112,40,116,0.15)",
-              }}
+              className="rounded-2xl p-6 flex-1 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)]"
             >
-              <h4 className="text-white font-bold text-sm font-thai mb-3">
+              <h4 className="text-[var(--ct-text-primary)] font-bold text-sm font-thai mb-3">
                 {lang === "th" ? "ข้อมูลเด่น" : "Key Insights"}
               </h4>
-              <ul className="space-y-2 text-white/60 text-sm font-thai">
+              <ul className="space-y-2 text-[var(--ct-text-muted)] text-sm font-thai">
                 <li className="flex items-start gap-2">
                   <span className="text-[#702874] mt-1">&#9679;</span>
                   {lang === "th" ? "ประเภทหนังยอดนิยม: ดราม่า (32%)" : "Top genre: Drama (32%)"}

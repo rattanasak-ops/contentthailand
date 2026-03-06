@@ -98,11 +98,11 @@
 
 | Persona | Need | ฟีเจอร์ที่ตอบโจทย์ | Status |
 |---------|------|-------------------|--------|
-| #1 ข้าราชการ (นักวิจัย) | ข้อมูลสถิติ, Export | Statistics Dashboard, Excel/PDF export, Library | ✅ |
-| #2 นักแสดง/บุคลากร | แก้ไขข้อมูลตัวเอง | "Request Update" button ในหน้า Person Detail | ✅ เพิ่มแล้ว |
-| #3 บริษัทผลิต | ค้นหาบุคลากร/ข้อมูลอุตสาหกรรม | Search, Company Detail, Industry Snapshot | ✅ |
-| #4 นักศึกษา/Gen Z | เนื้อหาสนุก, แชร์ได้ | DNA Quiz Campaign, Share Card, Social Share buttons | ✅ |
-| #5 นักลงทุนต่างชาติ | English, สิทธิประโยชน์ | Bilingual TH/EN, Film Incentive page | ✅ |
+| #1 ผู้กำกับ (ผู้ประกอบการ) | Fast Search, Company Profile, Statistics | Search, Company Detail, IndustrySnapshot | ✅ |
+| #2 ดาราหน้าใหม่ (บุคลากร) | Profile สวย, Share, Request Update | Person Detail + Share buttons + "แจ้งแก้ไขข้อมูล" | ✅ |
+| #3 นักวิจัย (นักวิชาการ) | Dashboard, Export CSV, Citation | Statistics + **Export (Excel/CSV/PDF)** + **APA 7th Citation** | ✅ |
+| #4 เยาวชน Gen Z | Fun Facts, Visual, Share | Film Detail + **Fun Facts section** + Share buttons | ✅ |
+| #5 Foreign Producer | English, Incentive Calculator | Bilingual + **Incentive Calculator** + Apply form | ✅ |
 
 ---
 
@@ -166,27 +166,42 @@
 | `app/(public)/campaigns/page.tsx` | ~500 | Campaign preview (DNA Quiz, Grand Opening, Youth Challenge) |
 | `app/(public)/about/benchmark/page.tsx` | ~300 | Benchmark comparison table vs global competitors |
 
+### Files Modified (Session 2 — Persona completion)
+
+| File | Change | Description |
+|------|--------|-------------|
+| `app/(public)/films/[slug]/page.tsx` | +Fun Facts section | "รู้หรือไม่?" สำหรับ Persona #4 (เยาวชน) |
+| `app/(public)/film-incentive/page.tsx` | +Incentive Calculator | Interactive calculator สำหรับ Persona #5 (Foreign Producer) |
+| `app/(public)/statistics/page.tsx` | +Export & Citation | Export (Excel/CSV/PDF) + APA 7th Citation สำหรับ Persona #3 (นักวิจัย) |
+
+### New Documents
+
+| File | Description |
+|------|-------------|
+| `Docs/TEAM-ROLES.md` | Team Roles — 8 ตำแหน่ง พร้อม JD, JS, Experience, Skills |
+
 ---
 
 ## 8. สรุปสิ่งที่ควรทำก่อน Present
 
-### ✅ Done
-- Homepage ครบทุก section ตาม TOR + sitemap
-- ทุกหน้า TOR ครบ 11+ หน้า
-- Admin Dashboard 8 หน้า
-- Campaign preview 3 campaigns
-- Benchmark comparison page
-- Persona alignment verified
-- Bilingual, WCAG, Responsive ทุกหน้า
+### ✅ Done (ครบ 100% ตาม Prompt ทั้ง 6 งาน)
+1. **TOR GAP Analysis** — Homepage ครบทุก section, ทุกหน้า TOR ครบ 11+, Admin Dashboard 8 หน้า
+2. **Campaign Preview** — 3 campaigns บนหน้า `/campaigns` (DNA Quiz, Grand Opening, Youth Challenge)
+3. **Benchmark Comparison** — ตารางเปรียบเทียบ 7 มิติ vs 6 คู่แข่งระดับโลก
+4. **Persona Alignment** — ทุก Persona (5/5) มีฟีเจอร์ที่ตอบโจทย์ครบ WOW Moment ทุกข้อ
+5. **slide.md Audit** — ตรวจทุก section ครบ, Design Specs / Front-end / Back-end / Security
+6. **Team Roles** — 8 ตำแหน่ง (10 คน) พร้อม JD, JS, Experience, Skills + Act As report
 
 ### 📋 แนะนำเพิ่มเติม (Optional)
 1. **Prepare talking points** สำหรับแต่ละ section ใน presentation
 2. **Test on mobile device** ก่อน demo จริง
 3. **Verify images load** — ภาพ mock data ใน `/public/images/`
-4. **Practice navigation flow** — Hero → Films → Person Detail → Filmography → Back
-5. **Prepare offline backup** — ถ้า internet มีปัญหา ให้รัน local dev server
+4. **Practice navigation flow** — Hero → Films → Fun Facts → Share → Person Detail → Filmography
+5. **Demo Incentive Calculator** — ลาก slider ให้กรรมการดู real-time calculation
+6. **Demo Export & Citation** — กดปุ่ม Copy Citation ให้กรรมการเห็น
 
 ---
 
-*Generated: 2026-03-06*
+*Updated: 2026-03-06*
 *All changes compiled successfully (TypeScript ✅)*
+*Prompt completion: 6/6 tasks (100%)*

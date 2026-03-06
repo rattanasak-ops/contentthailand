@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Loader2, Film, Tv, User, Building2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -19,6 +20,19 @@ interface SearchBarProps {
   onClose?: () => void;
 }
 
+const placeholdersTh = [
+  "ค้นหาภาพยนตร์ไทย...",
+  "ค้นหาละครโทรทัศน์...",
+  "ค้นหาผู้กำกับ นักแสดง...",
+  "ค้นหาบริษัทผลิตภาพยนตร์...",
+];
+const placeholdersEn = [
+  "Search Thai films...",
+  "Search TV series...",
+  "Search directors, actors...",
+  "Search production companies...",
+];
+
 export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
   const { lang } = useLanguage();
   const router = useRouter();
@@ -27,9 +41,32 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [focused, setFocused] = useState(false);
+  const [placeholderIdx, setPlaceholderIdx] = useState(0);
   const debouncedQuery = useDebounce(query, 300);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Cycle placeholder text
+  useEffect(() => {
+    if (query) return;
+    const interval = setInterval(() => {
+      setPlaceholderIdx((i) => (i + 1) % placeholdersTh.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [query]);
+
+  // Cmd+K shortcut
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
 
   // Fetch results
   useEffect(() => {
@@ -110,152 +147,201 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
   };
 
   const isHero = variant === "hero";
+  const currentPlaceholder = lang === "th" ? placeholdersTh[placeholderIdx] : placeholdersEn[placeholderIdx];
 
   return (
     <div ref={containerRef} className="relative w-full">
       {/* Input */}
-      <div className="relative">
-        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ct-text-muted)] ${isHero ? "w-5 h-5" : "w-4 h-4"}`} />
-        {loading && (
-          <Loader2 className={`absolute right-3 top-1/2 -translate-y-1/2 text-pink animate-spin ${isHero ? "w-5 h-5" : "w-4 h-4"}`} />
+      <motion.div
+        className="relative"
+        animate={focused && isHero ? { scale: 1.02 } : { scale: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      >
+        {/* Glow ring on focus */}
+        <AnimatePresence>
+          {focused && isHero && (
+            <motion.div
+              className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-pink via-purple to-orange opacity-30 blur-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.25 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          )}
+        </AnimatePresence>
+
+        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ct-text-muted)] z-10 ${isHero ? "w-5 h-5" : "w-4 h-4"}`} />
+        {loading ? (
+          <Loader2 className={`absolute right-3 top-1/2 -translate-y-1/2 text-pink animate-spin z-10 ${isHero ? "w-5 h-5" : "w-4 h-4"}`} />
+        ) : (
+          !query && !focused && isHero && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex items-center gap-1">
+              <kbd className="px-1.5 py-0.5 rounded bg-[var(--ct-bg-surface)] border border-[var(--ct-border)] text-[var(--ct-text-faint)] text-[10px] font-mono">
+                {typeof navigator !== "undefined" && /Mac/.test(navigator.userAgent) ? "\u2318" : "Ctrl"}
+              </kbd>
+              <kbd className="px-1.5 py-0.5 rounded bg-[var(--ct-bg-surface)] border border-[var(--ct-border)] text-[var(--ct-text-faint)] text-[10px] font-mono">
+                K
+              </kbd>
+            </div>
+          )
         )}
         <input
           ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => results && results.total > 0 && setOpen(true)}
+          onFocus={() => {
+            setFocused(true);
+            if (results && results.total > 0) setOpen(true);
+          }}
+          onBlur={() => setFocused(false)}
           onKeyDown={handleKeyDown}
-          placeholder={lang === "th" ? "ค้นหาภาพยนตร์ ละคร บุคลากร..." : "Search films, series, people..."}
-          className={`w-full bg-[var(--ct-bg-elevated)] backdrop-blur-sm border border-[var(--ct-border)] text-[var(--ct-text-primary)] placeholder:text-[var(--ct-text-muted)] font-body focus:outline-none focus:border-pink/50 focus:ring-2 focus:ring-pink/20 transition-all ${
+          placeholder={currentPlaceholder}
+          className={`relative w-full bg-[var(--ct-bg-elevated)] backdrop-blur-sm border text-[var(--ct-text-primary)] placeholder:text-[var(--ct-text-muted)] font-body focus:outline-none transition-all duration-300 ${
+            focused
+              ? "border-pink/50 ring-2 ring-pink/20 shadow-[0_0_20px_rgba(236,28,114,0.15)]"
+              : "border-[var(--ct-border)]"
+          } ${
             isHero
               ? "pl-12 pr-12 py-4 text-base rounded-xl"
               : "pl-9 pr-9 py-2 text-sm rounded-lg"
           }`}
         />
-      </div>
+      </motion.div>
 
       {/* Dropdown */}
-      {open && results && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] rounded-xl shadow-[var(--ct-shadow)] overflow-hidden z-50 max-h-[400px] overflow-y-auto">
-          {results.total === 0 ? (
-            <div className="px-4 py-8 text-center">
-              <p className="text-[var(--ct-text-muted)] font-thai text-sm">
-                {lang === "th"
-                  ? `ไม่พบ '${query}' — ลองค้นหาด้วยคำอื่น`
-                  : `No results for '${query}' — try a different term`}
-              </p>
-            </div>
-          ) : (
-            <>
-              {/* Films */}
-              {results.films.length > 0 && (
-                <ResultGroup
-                  icon={<Film className="w-3.5 h-3.5" />}
-                  label={lang === "th" ? "ภาพยนตร์" : "Films"}
-                >
-                  {results.films.slice(0, 3).map((f, i) => {
-                    const globalIdx = i;
-                    return (
-                      <ResultItem
-                        key={f.id}
-                        active={activeIndex === globalIdx}
-                        onClick={() => goToResult(`/films/${f.slug}`)}
-                        html={lang === "th" ? f._highlightTh : f._highlightEn}
-                        sub={`${f.year}`}
-                      />
-                    );
-                  })}
-                </ResultGroup>
-              )}
+      <AnimatePresence>
+        {open && results && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute top-full left-0 right-0 mt-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] rounded-xl shadow-[var(--ct-shadow)] overflow-hidden z-50 max-h-[400px] overflow-y-auto"
+          >
+            {results.total === 0 ? (
+              <div className="px-4 py-8 text-center">
+                <p className="text-[var(--ct-text-muted)] font-thai text-sm">
+                  {lang === "th"
+                    ? `ไม่พบ '${query}' — ลองค้นหาด้วยคำอื่น`
+                    : `No results for '${query}' — try a different term`}
+                </p>
+              </div>
+            ) : (
+              <>
+                {/* Films */}
+                {results.films.length > 0 && (
+                  <ResultGroup
+                    icon={<Film className="w-3.5 h-3.5" />}
+                    label={lang === "th" ? "ภาพยนตร์" : "Films"}
+                  >
+                    {results.films.slice(0, 3).map((f, i) => {
+                      const globalIdx = i;
+                      return (
+                        <ResultItem
+                          key={f.id}
+                          active={activeIndex === globalIdx}
+                          onClick={() => goToResult(`/films/${f.slug}`)}
+                          html={lang === "th" ? f._highlightTh : f._highlightEn}
+                          sub={`${f.year}`}
+                          index={i}
+                        />
+                      );
+                    })}
+                  </ResultGroup>
+                )}
 
-              {/* Series */}
-              {results.series.length > 0 && (
-                <ResultGroup
-                  icon={<Tv className="w-3.5 h-3.5" />}
-                  label={lang === "th" ? "ละครโทรทัศน์" : "TV Series"}
-                >
-                  {results.series.slice(0, 3).map((s, i) => {
-                    const globalIdx = results.films.slice(0, 3).length + i;
-                    return (
-                      <ResultItem
-                        key={s.id}
-                        active={activeIndex === globalIdx}
-                        onClick={() => goToResult(`/series/${s.slug}`)}
-                        html={lang === "th" ? s._highlightTh : s._highlightEn}
-                        sub={`${s.year}`}
-                      />
-                    );
-                  })}
-                </ResultGroup>
-              )}
+                {/* Series */}
+                {results.series.length > 0 && (
+                  <ResultGroup
+                    icon={<Tv className="w-3.5 h-3.5" />}
+                    label={lang === "th" ? "ละครโทรทัศน์" : "TV Series"}
+                  >
+                    {results.series.slice(0, 3).map((s, i) => {
+                      const globalIdx = results.films.slice(0, 3).length + i;
+                      return (
+                        <ResultItem
+                          key={s.id}
+                          active={activeIndex === globalIdx}
+                          onClick={() => goToResult(`/series/${s.slug}`)}
+                          html={lang === "th" ? s._highlightTh : s._highlightEn}
+                          sub={`${s.year}`}
+                          index={i}
+                        />
+                      );
+                    })}
+                  </ResultGroup>
+                )}
 
-              {/* Persons */}
-              {results.persons.length > 0 && (
-                <ResultGroup
-                  icon={<User className="w-3.5 h-3.5" />}
-                  label={lang === "th" ? "บุคลากร" : "Personnel"}
-                >
-                  {results.persons.slice(0, 3).map((p, i) => {
-                    const globalIdx =
-                      results.films.slice(0, 3).length +
-                      results.series.slice(0, 3).length +
-                      i;
-                    return (
-                      <ResultItem
-                        key={p.id}
-                        active={activeIndex === globalIdx}
-                        onClick={() => goToResult(`/persons/${p.slug}`)}
-                        html={lang === "th" ? p._highlightTh : p._highlightEn}
-                        sub={p.roles.join(", ")}
-                      />
-                    );
-                  })}
-                </ResultGroup>
-              )}
+                {/* Persons */}
+                {results.persons.length > 0 && (
+                  <ResultGroup
+                    icon={<User className="w-3.5 h-3.5" />}
+                    label={lang === "th" ? "บุคลากร" : "Personnel"}
+                  >
+                    {results.persons.slice(0, 3).map((p, i) => {
+                      const globalIdx =
+                        results.films.slice(0, 3).length +
+                        results.series.slice(0, 3).length +
+                        i;
+                      return (
+                        <ResultItem
+                          key={p.id}
+                          active={activeIndex === globalIdx}
+                          onClick={() => goToResult(`/persons/${p.slug}`)}
+                          html={lang === "th" ? p._highlightTh : p._highlightEn}
+                          sub={p.roles.join(", ")}
+                          index={i}
+                        />
+                      );
+                    })}
+                  </ResultGroup>
+                )}
 
-              {/* Companies */}
-              {results.companies.length > 0 && (
-                <ResultGroup
-                  icon={<Building2 className="w-3.5 h-3.5" />}
-                  label={lang === "th" ? "บริษัท" : "Companies"}
-                >
-                  {results.companies.slice(0, 2).map((c, i) => {
-                    const globalIdx =
-                      results.films.slice(0, 3).length +
-                      results.series.slice(0, 3).length +
-                      results.persons.slice(0, 3).length +
-                      i;
-                    return (
-                      <ResultItem
-                        key={c.id}
-                        active={activeIndex === globalIdx}
-                        onClick={() => goToResult(`/companies/${c.slug}`)}
-                        html={lang === "th" ? c._highlightTh : c._highlightEn}
-                        sub=""
-                      />
-                    );
-                  })}
-                </ResultGroup>
-              )}
+                {/* Companies */}
+                {results.companies.length > 0 && (
+                  <ResultGroup
+                    icon={<Building2 className="w-3.5 h-3.5" />}
+                    label={lang === "th" ? "บริษัท" : "Companies"}
+                  >
+                    {results.companies.slice(0, 2).map((c, i) => {
+                      const globalIdx =
+                        results.films.slice(0, 3).length +
+                        results.series.slice(0, 3).length +
+                        results.persons.slice(0, 3).length +
+                        i;
+                      return (
+                        <ResultItem
+                          key={c.id}
+                          active={activeIndex === globalIdx}
+                          onClick={() => goToResult(`/companies/${c.slug}`)}
+                          html={lang === "th" ? c._highlightTh : c._highlightEn}
+                          sub=""
+                          index={i}
+                        />
+                      );
+                    })}
+                  </ResultGroup>
+                )}
 
-              {/* Footer */}
-              <button
-                onClick={() => {
-                  router.push(`/search?q=${encodeURIComponent(query)}`);
-                  setOpen(false);
-                  onClose?.();
-                }}
-                className="w-full px-4 py-3 text-center text-sm font-thai text-pink hover:bg-[var(--ct-bg-hover)] transition-colors border-t border-[var(--ct-border)]"
-              >
-                {lang === "th"
-                  ? `ดูผลทั้งหมด ${results.total} รายการ →`
-                  : `View all ${results.total} results →`}
-              </button>
-            </>
-          )}
-        </div>
-      )}
+                {/* Footer */}
+                <button
+                  onClick={() => {
+                    router.push(`/search?q=${encodeURIComponent(query)}`);
+                    setOpen(false);
+                    onClose?.();
+                  }}
+                  className="w-full px-4 py-3 text-center text-sm font-thai text-pink hover:bg-[var(--ct-bg-hover)] transition-colors border-t border-[var(--ct-border)]"
+                >
+                  {lang === "th"
+                    ? `ดูผลทั้งหมด ${results.total} รายการ \u2192`
+                    : `View all ${results.total} results \u2192`}
+                </button>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -287,14 +373,19 @@ function ResultItem({
   onClick,
   html,
   sub,
+  index,
 }: {
   active: boolean;
   onClick: () => void;
   html: string;
   sub: string;
+  index: number;
 }) {
   return (
-    <button
+    <motion.button
+      initial={{ opacity: 0, x: -8 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.04, duration: 0.2 }}
       onClick={onClick}
       className={`w-full text-left px-4 py-2.5 flex items-center justify-between hover:bg-[var(--ct-bg-hover)] transition-colors ${
         active ? "bg-[var(--ct-bg-hover)]" : ""
@@ -305,6 +396,6 @@ function ResultItem({
         dangerouslySetInnerHTML={{ __html: html }}
       />
       {sub && <span className="text-[var(--ct-text-faint)] text-xs font-body ml-2 flex-shrink-0">{sub}</span>}
-    </button>
+    </motion.button>
   );
 }

@@ -89,6 +89,7 @@ const navItems: NavItem[] = [
     children: [
       { href: "/about", labelTh: "เกี่ยวกับเรา", labelEn: "About Us" },
       { href: "/about/mission", labelTh: "พันธกิจ วิสัยทัศน์", labelEn: "Mission & Vision" },
+      { href: "/about/partners", labelTh: "หน่วยงานพันธมิตร", labelEn: "Partners" },
       { href: "/contact", labelTh: "ติดต่อเรา", labelEn: "Contact Us" },
       { href: "/about/location", labelTh: "แผนที่ / ที่ตั้ง", labelEn: "Location" },
     ],

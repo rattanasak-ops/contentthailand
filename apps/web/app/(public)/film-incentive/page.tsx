@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Film, Award, FileText, CheckCircle2, ArrowRight, DollarSign, Globe, Users, ClipboardList } from "lucide-react";
+import { useState } from "react";
+import { Film, Award, FileText, CheckCircle2, ArrowRight, DollarSign, Globe, Users, ClipboardList, Calculator } from "lucide-react";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -39,6 +40,117 @@ const steps = {
     { step: 6, title: "Claim Benefits", desc: "Submit expense evidence to claim the tax incentive" },
   ],
 };
+
+function IncentiveCalculator({ lang }: { lang: string }) {
+  const [budget, setBudget] = useState(10000000);
+  const [thaiSpend, setThaiSpend] = useState(70);
+  const [hasThaiCrew, setHasThaiCrew] = useState(true);
+  const [hasThaiLocation, setHasThaiLocation] = useState(true);
+
+  const qualifyingSpend = budget * (thaiSpend / 100);
+  const baseRate = 15;
+  const crewBonus = hasThaiCrew ? 5 : 0;
+  const locationBonus = hasThaiLocation ? 5 : 0;
+  const totalRate = Math.min(baseRate + crewBonus + locationBonus + (qualifyingSpend > 50000000 ? 5 : 0), 30);
+  const rebateAmount = qualifyingSpend * (totalRate / 100);
+
+  const formatCurrency = (val: number) =>
+    new Intl.NumberFormat(lang === "th" ? "th-TH" : "en-US", {
+      style: "currency",
+      currency: "THB",
+      maximumFractionDigits: 0,
+    }).format(val);
+
+  return (
+    <div className="mb-10">
+      <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)] mb-6 flex items-center gap-2">
+        <Calculator className="w-5 h-5 text-amber" />
+        {lang === "th" ? "คำนวณสิทธิประโยชน์" : "Incentive Calculator"}
+      </h2>
+      <div className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Inputs */}
+          <div className="space-y-5">
+            <div>
+              <label className="text-[var(--ct-text-secondary)] font-thai text-sm mb-2 block">
+                {lang === "th" ? "งบผลิตทั้งหมด (บาท)" : "Total Production Budget (THB)"}
+              </label>
+              <input
+                type="range"
+                min={1000000}
+                max={200000000}
+                step={1000000}
+                value={budget}
+                onChange={(e) => setBudget(Number(e.target.value))}
+                className="w-full accent-pink"
+              />
+              <p className="text-amber font-mono font-bold text-lg mt-1">{formatCurrency(budget)}</p>
+            </div>
+            <div>
+              <label className="text-[var(--ct-text-secondary)] font-thai text-sm mb-2 block">
+                {lang === "th" ? `ค่าใช้จ่ายในไทย (${thaiSpend}%)` : `Thailand Spend (${thaiSpend}%)`}
+              </label>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                step={5}
+                value={thaiSpend}
+                onChange={(e) => setThaiSpend(Number(e.target.value))}
+                className="w-full accent-orange"
+              />
+              <p className="text-[var(--ct-text-muted)] font-mono text-sm mt-1">
+                {lang === "th" ? "ค่าใช้จ่ายที่เกิดในไทย:" : "Qualifying spend:"} {formatCurrency(qualifyingSpend)}
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={hasThaiCrew}
+                  onChange={(e) => setHasThaiCrew(e.target.checked)}
+                  className="w-4 h-4 rounded border-[var(--ct-border)] accent-pink"
+                />
+                <span className="text-[var(--ct-text-secondary)] font-thai text-sm">
+                  {lang === "th" ? "ใช้ทีมงานไทย (+5%)" : "Thai crew employed (+5%)"}
+                </span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={hasThaiLocation}
+                  onChange={(e) => setHasThaiLocation(e.target.checked)}
+                  className="w-4 h-4 rounded border-[var(--ct-border)] accent-pink"
+                />
+                <span className="text-[var(--ct-text-secondary)] font-thai text-sm">
+                  {lang === "th" ? "ถ่ายทำโลเคชั่นไทย (+5%)" : "Thai location filming (+5%)"}
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {/* Result */}
+          <div className="bg-gradient-to-br from-amber/5 to-pink/5 rounded-xl border border-amber/10 p-6 flex flex-col items-center justify-center text-center">
+            <p className="text-[var(--ct-text-muted)] font-thai text-sm mb-2">
+              {lang === "th" ? "อัตราคืนภาษีโดยประมาณ" : "Estimated Cash Rebate Rate"}
+            </p>
+            <p className="text-amber font-display text-5xl font-bold mb-1">{totalRate}%</p>
+            <div className="w-16 h-px bg-[var(--ct-border)] my-3" />
+            <p className="text-[var(--ct-text-muted)] font-thai text-sm mb-1">
+              {lang === "th" ? "จำนวนเงินคืนโดยประมาณ" : "Estimated Rebate Amount"}
+            </p>
+            <p className="text-pink font-display text-3xl font-bold">{formatCurrency(rebateAmount)}</p>
+            <p className="text-[var(--ct-text-faint)] font-thai text-xs mt-4 max-w-xs">
+              {lang === "th"
+                ? "* ตัวเลขนี้เป็นการประมาณเบื้องต้น ผลลัพธ์จริงขึ้นอยู่กับเงื่อนไขและการพิจารณาของคณะกรรมการ"
+                : "* This is a preliminary estimate. Actual results depend on committee review and eligibility criteria."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function FilmIncentivePage() {
   const { lang } = useLanguage();
@@ -93,6 +205,9 @@ export default function FilmIncentivePage() {
             })}
           </div>
         </div>
+
+        {/* Incentive Calculator — Persona #5 (Foreign Producer WOW) */}
+        <IncentiveCalculator lang={lang} />
 
         {/* Application Steps */}
         <div className="mb-10">

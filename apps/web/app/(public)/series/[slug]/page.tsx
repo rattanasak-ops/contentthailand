@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Tv, Building2, Eye, Facebook, Share2, MessageCircle, Link as LinkCopy } from "lucide-react";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
@@ -43,14 +44,15 @@ export default function SeriesDetailPage() {
 
   return (
     <div className="min-h-screen bg-[var(--ct-bg-page)]">
-      <div className="relative h-[35vh] md:h-[45vh] overflow-hidden">
+      <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         {show.coverUrl ? (
           <>
             <div className="absolute inset-0 scale-110">
-              <Image src={show.coverUrl} alt={title} fill className="object-cover opacity-30" style={{ filter: "blur(40px) saturate(1.3)" }} priority />
+              <Image src={show.coverUrl} alt={title} fill className="object-cover opacity-40" style={{ filter: "blur(30px) saturate(1.5)" }} priority />
             </div>
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(247, 101, 50, 0.08) 0%, transparent 70%)" }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)] via-[var(--ct-bg-page)] to-[var(--ct-bg-page)]" />
+            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(247, 101, 50, 0.12) 0%, transparent 70%)" }} />
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)]/60 via-transparent to-[var(--ct-bg-page)]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ct-bg-page)]/80 via-transparent to-[var(--ct-bg-page)]/80" />
           </>
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-orange/20 via-[var(--ct-bg-page)] to-[var(--ct-bg-page)]" />
@@ -62,8 +64,13 @@ export default function SeriesDetailPage() {
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="flex-shrink-0 w-[240px] md:w-[320px] mx-auto md:mx-0">
-            <div className="aspect-video rounded-xl bg-gradient-to-br from-orange/20 to-[var(--ct-bg-elevated)] border-2 border-[var(--ct-border)] shadow-2xl relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex-shrink-0 w-[240px] md:w-[320px] mx-auto md:mx-0"
+          >
+            <div className="aspect-video rounded-xl bg-gradient-to-br from-orange/20 to-[var(--ct-bg-elevated)] border-2 border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
               {show.coverUrl ? (
                 <Image src={show.coverUrl} alt={title} fill className="object-cover" sizes="(max-width: 768px) 240px, 320px" priority />
               ) : (
@@ -72,10 +79,15 @@ export default function SeriesDetailPage() {
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex-1 min-w-0">
-            <h1 className="font-display text-3xl md:text-4xl text-[var(--ct-text-primary)] font-bold mb-2">{title}</h1>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex-1 min-w-0"
+          >
+            <h1 className="font-display text-3xl md:text-4xl text-white font-bold mb-2">{title}</h1>
             <p className="text-[var(--ct-text-muted)] font-body text-lg mb-6">{subtitle}</p>
 
             <div className="flex flex-wrap gap-2 mb-6">
@@ -112,7 +124,7 @@ export default function SeriesDetailPage() {
                 <button onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(lang === "th" ? "คัดลอกลิงก์แล้ว" : "Link copied!"); }} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-amber/20 hover:text-amber rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><LinkCopy className="w-4 h-4" /></button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {related.length > 0 && (

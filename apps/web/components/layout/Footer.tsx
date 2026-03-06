@@ -217,7 +217,7 @@ export function Footer() {
               {[
                 { href: "/about", label: t("เกี่ยวกับเรา", "About Us") },
                 { href: "/about/mission", label: t("พันธกิจองค์กร", "Mission") },
-                { href: "/contact", label: t("ติดต่อเรา", "Contact Us") },
+                { href: "/about/partners", label: t("หน่วยงานพันธมิตร", "Partners") },
                 { href: "/about/location", label: t("แผนที่ / ที่ตั้ง", "Location / Map") },
               ].map((item) => (
                 <li key={item.href}>
@@ -231,6 +231,36 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+          </motion.div>
+
+          {/* ติดต่อ / Contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <h3 className="text-[var(--ct-text-primary)] font-thai font-semibold mb-3 text-sm">{t("ติดต่อเรา", "Contact")}</h3>
+            <ul className="space-y-2">
+              {[
+                { href: "/contact", label: t("ติดต่อเรา", "Contact Us") },
+                { href: "/apply", label: t("สมัครมาตรการ", "Apply") },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="group text-[var(--ct-text-muted)] hover:text-[var(--ct-text-primary)] text-sm transition-colors font-body inline-flex items-center gap-2"
+                  >
+                    <span className="w-0 h-px group-hover:w-3 transition-all duration-300" style={{ background: theme.accent }} />
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4 text-[var(--ct-text-faint)] text-xs font-body space-y-1">
+              <p>14 {t("ถนนเทียมร่วมมิตร แขวงห้วยขวาง", "Thiam Ruam Mit Rd, Huai Khwang")}</p>
+              <p>{t("กรุงเทพฯ 10310", "Bangkok 10310")}</p>
+              <p>info@contentthailand.com</p>
+            </div>
           </motion.div>
         </div>
 

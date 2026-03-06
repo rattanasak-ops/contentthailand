@@ -47,7 +47,7 @@ export default function NewsDetailPage() {
             {item.tags.map((tag) => <span key={tag} className="px-2 py-0.5 bg-purple/20 text-purple-light text-xs rounded font-thai">{tag}</span>)}
           </div>
 
-          <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)] mb-4 leading-tight">{title}</h1>
+          <h1 className="font-thai font-bold text-2xl md:text-3xl text-white mb-4 leading-tight">{title}</h1>
 
           <div className="flex items-center gap-4 text-[var(--ct-text-muted)] text-sm font-thai mb-8">
             <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" />{formatThaiDate(item.publishedAt)}</span>

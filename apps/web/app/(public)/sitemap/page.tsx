@@ -39,6 +39,7 @@ const sitemapSections = {
       links: [
         { label: "เกี่ยวกับเรา", href: "/about" },
         { label: "พันธกิจองค์กร", href: "/about/mission" },
+        { label: "หน่วยงานพันธมิตร", href: "/about/partners" },
         { label: "ติดต่อเรา", href: "/contact" },
         { label: "แผนที่ / ที่ตั้ง", href: "/about/location" },
       ],
@@ -88,6 +89,7 @@ const sitemapSections = {
       links: [
         { label: "About Us", href: "/about" },
         { label: "Mission", href: "/about/mission" },
+        { label: "Partners", href: "/about/partners" },
         { label: "Contact Us", href: "/contact" },
         { label: "Location / Map", href: "/about/location" },
       ],

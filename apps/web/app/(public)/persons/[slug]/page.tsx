@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Calendar, Facebook, Share2, MessageCircle, Link as LinkCopy, Mail, Film } from "lucide-react";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -39,23 +40,49 @@ export default function PersonDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+      {/* Cinematic hero backdrop */}
+      <div className="relative h-[25vh] md:h-[35vh] overflow-hidden">
+        {person.photoUrl ? (
+          <>
+            <div className="absolute inset-0 scale-110">
+              <Image src={person.photoUrl} alt={name} fill className="object-cover opacity-25" style={{ filter: "blur(40px) saturate(1.2)" }} />
+            </div>
+            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(246, 165, 27, 0.1) 0%, transparent 70%)" }} />
+          </>
+        ) : (
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(246, 165, 27, 0.06) 0%, transparent 70%)" }} />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)]/60 via-transparent to-[var(--ct-bg-page)]" />
+        <div className="absolute inset-0 film-grain" />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 md:-mt-32 relative z-10 pb-20">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="flex-shrink-0 w-[200px] mx-auto md:mx-0">
-            <div className="aspect-square rounded-xl bg-gradient-to-br from-purple/30 to-[var(--ct-bg-elevated)] border-2 border-[var(--ct-border)] flex items-center justify-center overflow-hidden relative">
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex-shrink-0 w-[200px] mx-auto md:mx-0"
+          >
+            <div className="aspect-square rounded-2xl bg-gradient-to-br from-amber/20 to-[var(--ct-bg-elevated)] border-2 border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex items-center justify-center overflow-hidden relative ring-2 ring-amber/10">
               {person.photoUrl ? (
                 <Image src={person.photoUrl} alt={name} fill className="object-cover" sizes="200px" />
               ) : (
                 <span className="text-[var(--ct-text-faint)] font-display text-7xl font-bold">{name.charAt(0)}</span>
               )}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex-1 min-w-0">
-            <h1 className="font-display text-3xl md:text-4xl text-[var(--ct-text-primary)] font-bold mb-1">{name}</h1>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex-1 min-w-0"
+          >
+            <h1 className="font-display text-3xl md:text-4xl text-white font-bold mb-1">{name}</h1>
             <p className="text-[var(--ct-text-muted)] font-body text-lg mb-4">{altName}</p>
 
             <div className="flex flex-wrap gap-2 mb-6">
@@ -99,7 +126,7 @@ export default function PersonDetailPage() {
                 {lang === "th" ? "แจ้งแก้ไขข้อมูล" : "Request Update"}
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Filmography Section */}

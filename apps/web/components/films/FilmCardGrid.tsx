@@ -17,10 +17,13 @@ export function FilmCardGrid({ film }: FilmCardGridProps) {
   return (
     <Link
       href={`/films/${film.slug}`}
-      className="group relative rounded-xl overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] transition-all duration-300 hover:scale-[1.02] hover:border-pink/40 hover:shadow-[0_0_30px_rgba(236,28,114,0.15)]"
+      className="group relative rounded-xl overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] transition-all duration-300 hover:scale-[1.02] hover:border-[#EC1C72]/40 hover:shadow-[0_0_30px_rgba(236,28,114,0.2)]"
     >
+      {/* Top edge light */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--ct-border)] to-transparent group-hover:via-[#EC1C72]/40 transition-all duration-300 z-10" />
+
       {/* Poster */}
-      <div className="aspect-[2/3] relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, rgba(112,40,116,0.3), var(--ct-bg-page))' }}>
+      <div className="aspect-[2/3] relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, rgba(236,28,114,0.1), var(--ct-bg-surface))' }}>
         {film.posterUrl ? (
           <Image
             src={film.posterUrl}
@@ -47,8 +50,7 @@ export function FilmCardGrid({ film }: FilmCardGridProps) {
           {film.genres.slice(0, 2).map((genre) => (
             <span
               key={genre.slug}
-              className="px-1.5 py-0.5 bg-[var(--ct-bg-page)] text-[var(--ct-text-secondary)] text-[10px] rounded font-thai backdrop-blur-sm"
-              style={{ backgroundColor: 'color-mix(in srgb, var(--ct-bg-page) 80%, transparent)' }}
+              className="px-1.5 py-0.5 bg-[#EC1C72]/20 text-[#EC1C72] text-[10px] rounded font-thai backdrop-blur-sm border border-[#EC1C72]/15"
             >
               {lang === "th" ? genre.nameTh : genre.nameEn}
             </span>
@@ -71,7 +73,7 @@ export function FilmCardGrid({ film }: FilmCardGridProps) {
 
       {/* Info */}
       <div className="p-3">
-        <h3 className="font-thai font-semibold text-sm text-[var(--ct-text-primary)] truncate group-hover:text-pink transition-colors">
+        <h3 className="font-thai font-semibold text-sm text-[var(--ct-text-primary)] truncate group-hover:text-[#EC1C72] transition-colors">
           {title}
         </h3>
         <p className="text-[var(--ct-text-muted)] text-xs mt-0.5 font-body truncate">

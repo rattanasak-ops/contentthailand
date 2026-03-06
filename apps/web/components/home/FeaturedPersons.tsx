@@ -13,7 +13,7 @@ export function FeaturedPersons() {
   const { lang } = useLanguage();
 
   return (
-    <section className="py-16 bg-[#0E0D2A] relative overflow-hidden">
+    <section className="py-16 relative overflow-hidden" style={{ backgroundColor: "var(--ct-bg-page)" }}>
       {/* Ambient glow */}
       <div className="absolute top-0 left-1/3 w-[400px] h-[300px] pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(246,165,27,0.03) 0%, transparent 70%)" }} />
 
@@ -21,10 +21,10 @@ export function FeaturedPersons() {
         {/* Header */}
         <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white font-thai">
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--ct-text-primary)] font-thai">
               {lang === "th" ? "บุคลากรเด่น" : "Featured Personnel"}
             </h2>
-            <p className="text-white/40 text-sm mt-1 font-thai">
+            <p className="text-[var(--ct-text-faint)] text-sm mt-1 font-thai">
               {lang === "th" ? "ผู้กำกับและนักแสดงชั้นนำของวงการภาพยนตร์ไทย" : "Leading directors and actors in Thai cinema"}
             </p>
           </div>
@@ -45,7 +45,7 @@ export function FeaturedPersons() {
               transition={{ delay: i * 0.05, duration: 0.4 }}
             >
               <Link href={`/persons/${person.slug}`} className="group block text-center">
-                <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-white/10 group-hover:ring-[#F6A51B]/50 transition-all duration-300">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-[var(--ct-border)] group-hover:ring-[#F6A51B]/50 transition-all duration-300">
                   <Image
                     src={person.photoUrl || "/images/placeholder-person.jpg"}
                     alt={person.nameEn}
@@ -55,10 +55,10 @@ export function FeaturedPersons() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <h3 className="text-white text-xs md:text-sm font-thai font-medium leading-tight group-hover:text-[#F6A51B] transition-colors line-clamp-1">
+                <h3 className="text-[var(--ct-text-primary)] text-xs md:text-sm font-thai font-medium leading-tight group-hover:text-[#F6A51B] transition-colors line-clamp-1">
                   {lang === "th" ? person.nameTh : person.nameEn}
                 </h3>
-                <p className="text-white/40 text-[10px] md:text-xs mt-0.5 font-thai capitalize">
+                <p className="text-[var(--ct-text-faint)] text-[10px] md:text-xs mt-0.5 font-thai capitalize">
                   {person.roles[0] === "director" ? (lang === "th" ? "ผู้กำกับ" : "Director") : (lang === "th" ? "นักแสดง" : "Actor")}
                 </p>
               </Link>

@@ -11,8 +11,8 @@ const colorMap = {
   pink: "text-pink",
   orange: "text-orange",
   purple: "text-purple-light",
-  white: "text-white",
-  muted: "text-white/30",
+  white: "text-[var(--ct-text-primary)]",
+  muted: "text-[var(--ct-text-faint)]",
 };
 
 const sizeMap = {

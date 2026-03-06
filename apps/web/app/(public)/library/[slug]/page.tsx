@@ -2,7 +2,8 @@
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { BookOpen, Download, FileText, BarChart3, Calendar, ArrowLeft, Share2 } from "lucide-react";
+import { BookOpen, Download, FileText, BarChart3, Calendar, ArrowLeft, Share2, Facebook, MessageCircle, Link as LinkCopy } from "lucide-react";
+import { toast } from "sonner";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -183,15 +184,21 @@ export default function LibraryDetailPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 mt-6 ml-[72px]">
-            <button className="flex items-center gap-2 px-5 py-2 bg-amber/10 text-amber text-sm font-thai rounded-xl hover:bg-amber/20 transition-colors">
+          <div className="flex flex-wrap items-center gap-3 mt-6 ml-[72px]">
+            <button
+              onClick={() => toast.success(lang === "th" ? "กำลังดาวน์โหลด..." : "Downloading...")}
+              className="flex items-center gap-2 px-5 py-2 bg-amber/10 text-amber text-sm font-thai rounded-xl hover:bg-amber/20 transition-colors"
+            >
               <Download className="w-4 h-4" />
               {lang === "th" ? "ดาวน์โหลด" : "Download"} ({resource.size})
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-[var(--ct-bg-hover)] text-[var(--ct-text-muted)] text-sm font-thai rounded-xl hover:bg-[var(--ct-bg-hover)] transition-colors">
-              <Share2 className="w-4 h-4" />
-              {lang === "th" ? "แชร์" : "Share"}
-            </button>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[var(--ct-text-faint)] text-xs font-thai mr-1">{lang === "th" ? "แชร์:" : "Share:"}</span>
+              <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#1877F2]/20 hover:text-[#1877F2] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title="Facebook"><Facebook className="w-4 h-4" /></button>
+              <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-white/15 hover:text-white rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title="X"><Share2 className="w-4 h-4" /></button>
+              <button onClick={() => window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#06C755]/20 hover:text-[#06C755] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title="LINE"><MessageCircle className="w-4 h-4" /></button>
+              <button onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(lang === "th" ? "คัดลอกลิงก์แล้ว" : "Link copied!"); }} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-amber/20 hover:text-amber rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title={lang === "th" ? "คัดลอกลิงก์" : "Copy link"}><LinkCopy className="w-4 h-4" /></button>
+            </div>
           </div>
         </div>
 

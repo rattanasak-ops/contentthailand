@@ -3,7 +3,8 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Calendar, Building2, Eye, Share2, Facebook, MessageCircle, Link as LinkCopy } from "lucide-react";
+import { Clock, Calendar, Building2, Eye, Share2, Facebook, MessageCircle, Link as LinkCopy, Sparkles, Star } from "lucide-react";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { FilmStrip } from "@/components/layout/FilmStrip";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
@@ -11,6 +12,33 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { films } from "@/lib/mock-data/films";
 import { persons } from "@/lib/mock-data/persons";
 import { FilmCardGrid } from "@/components/films/FilmCardGrid";
+
+// Fun facts for demo — Persona #4 (Youth/Gen Z)
+const funFactsMap: Record<number, { th: string; en: string }[]> = {
+  1: [
+    { th: "ฉลาดเกมส์โกง ทำรายได้ทั่วโลกกว่า 42 ล้านเหรียญสหรัฐ สูงสุดในประวัติศาสตร์หนังไทย", en: "Bad Genius grossed over $42M worldwide — the highest-grossing Thai film ever" },
+    { th: "หนังเรื่องนี้ได้รับการ remake ในจีน อินเดีย และอินโดนีเซีย", en: "The film was remade in China, India, and Indonesia" },
+    { th: "ฉากสอบ STIC ถ่ายทำจริงที่ซิดนีย์ ออสเตรเลีย", en: "The STIC exam scene was actually filmed in Sydney, Australia" },
+  ],
+  2: [
+    { th: "พี่มาก ทำรายได้ในไทยกว่า 1 พันล้านบาท เป็นหนังไทยเรื่องแรกที่ทำได้", en: "Pee Mak earned over 1 billion baht — the first Thai film to do so" },
+    { th: "มาริโอ้ เมาเร่อ เรียนภาษาถิ่นเพื่อรับบทนี้โดยเฉพาะ", en: "Mario Maurer learned a regional dialect specifically for this role" },
+  ],
+  3: [
+    { th: "จา พนม ไม่ใช้สตันท์แมนเลยตลอดทั้งเรื่อง", en: "Tony Jaa performed all stunts himself — no stunt doubles used" },
+    { th: "ฉากไล่ล่าในตลาดกรุงเทพฯ ถ่ายจริงแบบ long take ไม่มีตัด", en: "The Bangkok market chase scene was shot as a real long take with no cuts" },
+    { th: "องค์บาก ทำให้มวยไทยเป็นที่รู้จักในระดับโลก", en: "Ong-Bak put Muay Thai on the global cinema map" },
+  ],
+  4: [
+    { th: "คว้ารางวัลปาล์มทองคำ เทศกาลภาพยนตร์เมืองคานส์ 2010 — หนังไทยเรื่องแรกที่ทำได้", en: "Won the Palme d'Or at Cannes 2010 — the first and only Thai film to achieve this" },
+    { th: "อภิชาติพงศ์ วีระเศรษฐกุล ใช้เวลาพัฒนาบทนานกว่า 3 ปี", en: "Apichatpong Weerasethakul spent over 3 years developing the screenplay" },
+  ],
+  5: [
+    { th: "หลานม่า ทำรายได้ทั่วโลกกว่า 2 พันล้านบาท กลายเป็นหนังไทยที่ทำเงินสูงสุดตลอดกาล", en: "How to Make Millions grossed over 2 billion baht worldwide — becoming the highest-grossing Thai film of all time" },
+    { th: "ภาพยนตร์เข้าฉายในกว่า 40 ประเทศ รวมถึงจีนและเกาหลีใต้", en: "The film was released in over 40 countries including China and South Korea" },
+    { th: "พุทธิพงษ์ ทองเนื้อแปด คว้า 9 รางวัลนักแสดงนำชาย", en: "Billkin won 9 Best Actor awards for this role" },
+  ],
+};
 
 // Map films to mock crew for demo purposes
 const mockCrewMap: Record<number, { personId: number; role: string }[]> = {
@@ -90,8 +118,8 @@ export default function FilmDetailPage() {
 
   return (
     <div className="min-h-screen bg-[var(--ct-bg-page)]">
-      {/* Cinematic Hero Backdrop */}
-      <div className="relative h-[35vh] md:h-[45vh] overflow-hidden">
+      {/* Cinematic Hero Backdrop — Netflix-style */}
+      <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         {film.posterUrl ? (
           <>
             <div className="absolute inset-0 scale-110">
@@ -99,15 +127,18 @@ export default function FilmDetailPage() {
                 src={film.posterUrl}
                 alt={title}
                 fill
-                className="object-cover opacity-30"
-                style={{ filter: "blur(40px) saturate(1.3)" }}
+                className="object-cover opacity-40"
+                style={{ filter: "blur(30px) saturate(1.5)" }}
                 priority
               />
             </div>
-            {/* Ambient glow overlay */}
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(236, 28, 114, 0.08) 0%, transparent 70%)" }} />
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 50% at 70% 60%, rgba(112, 40, 116, 0.06) 0%, transparent 70%)" }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)] via-[var(--ct-bg-page)] to-[var(--ct-bg-page)]" />
+            {/* Ambient glow overlays */}
+            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(236, 28, 114, 0.12) 0%, transparent 70%)" }} />
+            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 50% at 70% 60%, rgba(112, 40, 116, 0.08) 0%, transparent 70%)" }} />
+            {/* Bottom fade to page bg */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)]/60 via-transparent to-[var(--ct-bg-page)]" />
+            {/* Side vignette */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ct-bg-page)]/80 via-transparent to-[var(--ct-bg-page)]/80" />
           </>
         ) : (
           <>
@@ -127,9 +158,14 @@ export default function FilmDetailPage() {
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Poster */}
-          <div className="flex-shrink-0 w-[200px] md:w-[280px] mx-auto md:mx-0">
-            <div className="aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-purple/40 to-[var(--ct-bg-elevated)] border-2 border-[var(--ct-border)] shadow-2xl relative">
+          {/* Poster — animated entrance */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex-shrink-0 w-[200px] md:w-[280px] mx-auto md:mx-0"
+          >
+            <div className="aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-purple/40 to-[var(--ct-bg-elevated)] border-2 border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative group">
               {film.posterUrl ? (
                 <Image
                   src={film.posterUrl}
@@ -147,12 +183,26 @@ export default function FilmDetailPage() {
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Info */}
-          <div className="flex-1 min-w-0">
+          {/* Info — animated entrance */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex-1 min-w-0"
+          >
+            {/* Rating badge */}
+            {film.viewCount > 50000 && (
+              <div className="flex items-center gap-2 mb-3">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber/15 text-amber rounded-full text-xs font-thai font-semibold">
+                  <Star className="w-3 h-3 fill-amber" />
+                  {lang === "th" ? "ยอดนิยม" : "Popular"}
+                </span>
+              </div>
+            )}
             {/* Title */}
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-[var(--ct-text-primary)] font-bold mb-2">
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white font-bold mb-2">
               {title}
             </h1>
             <p className="text-[var(--ct-text-muted)] font-body text-lg mb-6">{subtitle}</p>
@@ -248,8 +298,33 @@ export default function FilmDetailPage() {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Fun Facts — Netflix-style "Did you know?" */}
+        {funFactsMap[film.id] && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-12"
+          >
+            <div className="bg-gradient-to-r from-amber/5 via-orange/5 to-pink/5 rounded-2xl border border-amber/10 p-6">
+              <h3 className="flex items-center gap-2 font-thai font-bold text-amber text-sm mb-4">
+                <Sparkles className="w-4 h-4" />
+                {lang === "th" ? "รู้หรือไม่?" : "Did you know?"}
+              </h3>
+              <ul className="space-y-3">
+                {funFactsMap[film.id].map((fact, i) => (
+                  <li key={i} className="flex items-start gap-3 text-white/70 text-sm font-body">
+                    <span className="text-amber/60 mt-0.5">&#9679;</span>
+                    {lang === "th" ? fact.th : fact.en}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.section>
+        )}
 
         {/* Cast & Crew */}
         {crew.length > 0 && (
