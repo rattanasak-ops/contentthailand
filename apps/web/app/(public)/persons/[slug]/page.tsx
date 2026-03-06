@@ -11,6 +11,38 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { persons } from "@/lib/mock-data/persons";
 import { films } from "@/lib/mock-data/films";
 
+// Map person -> films (reverse of mockCrewMap in film detail)
+const personFilmMap: Record<number, { filmId: number; role: string }[]> = {
+  5: [{ filmId: 1, role: "director" }],        // Nattawut - Bad Genius
+  10: [{ filmId: 1, role: "actor" }],           // Chutimon - Bad Genius
+  7: [{ filmId: 2, role: "director" }],         // Banjong - Pee Mak
+  9: [{ filmId: 2, role: "actor" }],            // Mario - Pee Mak
+  13: [{ filmId: 2, role: "actor" }],           // Davika - Pee Mak
+  4: [{ filmId: 3, role: "director" }],         // Prachya - Ong Bak
+  8: [{ filmId: 3, role: "actor" }],            // Tony Jaa - Ong Bak
+  3: [{ filmId: 4, role: "director" }],         // Apichatpong - Uncle Boonmee
+  25: [{ filmId: 5, role: "director" }],        // Pat - How to Make Millions
+  26: [{ filmId: 5, role: "actor" }],           // Billkin - How to Make Millions
+  1: [{ filmId: 15, role: "actor" }],           // Ananda - Phra Ruang
+  2: [{ filmId: 24, role: "actor" }],           // Sunny - Paradise of Thorns
+  6: [{ filmId: 23, role: "actor" }],           // Nadech - Uranus2324
+  11: [{ filmId: 6, role: "actor" }],           // Baifern - Food Truck
+  12: [{ filmId: 22, role: "actor" }],          // Bright - Why We Love
+  14: [{ filmId: 10, role: "actor" }],          // Bella - Nak Loves Mak
+  15: [{ filmId: 17, role: "actor" }],          // Chicha - Jenny I Love You
+  16: [{ filmId: 14, role: "actor" }],          // Yaya - Love or Lie
+  17: [{ filmId: 20, role: "actor" }],          // Mew - Halabala
+  18: [{ filmId: 7, role: "actor" }],           // Gulf - A Useful Ghost
+  19: [{ filmId: 28, role: "actor" }],          // Aokbab - My Ex's Wedding
+  20: [{ filmId: 25, role: "actor" }],          // Jannine - My Boo
+  21: [{ filmId: 16, role: "actor" }],          // Win - Home Sweet Home
+  22: [{ filmId: 9, role: "director" }],        // Wisit - ThaRae
+  23: [{ filmId: 29, role: "director" }],       // Kongdej - Operation Undead
+  24: [{ filmId: 12, role: "director" }],       // Parkpoom - Attack 13
+  27: [{ filmId: 11, role: "director" }],       // Nontawat - Bangkok Joyride 5
+  28: [{ filmId: 8, role: "director" }],        // Anucha - Sokaphiwat
+};
+
 export default function PersonDetailPage() {
   const params = useParams();
   const { lang } = useLanguage();
@@ -45,15 +77,16 @@ export default function PersonDetailPage() {
       <div className="relative h-[25vh] md:h-[35vh] overflow-hidden">
         {person.photoUrl ? (
           <>
-            <div className="absolute inset-0 scale-110">
-              <Image src={person.photoUrl} alt={name} fill className="object-cover opacity-25" style={{ filter: "blur(40px) saturate(1.2)" }} />
+            <div className="absolute inset-0 scale-105">
+              <Image src={person.photoUrl} alt={name} fill className="object-cover object-top" />
             </div>
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(246, 165, 27, 0.1) 0%, transparent 70%)" }} />
+            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--ct-bg-page)]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ct-bg-page)]/90 via-[var(--ct-bg-page)]/40 to-transparent" />
           </>
         ) : (
           <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(246, 165, 27, 0.06) 0%, transparent 70%)" }} />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)]/60 via-transparent to-[var(--ct-bg-page)]" />
         <div className="absolute inset-0 film-grain" />
       </div>
 
@@ -67,7 +100,7 @@ export default function PersonDetailPage() {
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex-shrink-0 w-[200px] mx-auto md:mx-0"
           >
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-amber/20 to-[var(--ct-bg-elevated)] border-2 border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex items-center justify-center overflow-hidden relative ring-2 ring-amber/10">
+            <div className="aspect-square rounded-2xl bg-gradient-to-br from-amber/20 to-[var(--ct-bg-elevated)] border-2 border-[var(--ct-border)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex items-center justify-center overflow-hidden relative ring-2 ring-amber/10">
               {person.photoUrl ? (
                 <Image src={person.photoUrl} alt={name} fill className="object-cover" sizes="200px" />
               ) : (
@@ -82,7 +115,7 @@ export default function PersonDetailPage() {
             transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex-1 min-w-0"
           >
-            <h1 className="font-display text-3xl md:text-4xl text-white font-bold mb-1">{name}</h1>
+            <h1 className="font-display text-3xl md:text-4xl text-[var(--ct-text-primary)] font-bold mb-1">{name}</h1>
             <p className="text-[var(--ct-text-muted)] font-body text-lg mb-4">{altName}</p>
 
             <div className="flex flex-wrap gap-2 mb-6">
@@ -114,7 +147,7 @@ export default function PersonDetailPage() {
             <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-[var(--ct-border)]">
               <span className="text-[var(--ct-text-faint)] text-xs font-thai mr-1">{lang === "th" ? "แชร์:" : "Share:"}</span>
               <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#1877F2]/20 hover:text-[#1877F2] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><Facebook className="w-4 h-4" /></button>
-              <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(name)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-white rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><Share2 className="w-4 h-4" /></button>
+              <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(name)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-[var(--ct-text-primary)] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><Share2 className="w-4 h-4" /></button>
               <button onClick={() => window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#06C755]/20 hover:text-[#06C755] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><MessageCircle className="w-4 h-4" /></button>
               <button onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(lang === "th" ? "คัดลอกลิงก์แล้ว" : "Link copied!"); }} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-amber/20 hover:text-amber rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><LinkCopy className="w-4 h-4" /></button>
               <div className="flex-1" />
@@ -131,10 +164,8 @@ export default function PersonDetailPage() {
 
         {/* Filmography Section */}
         {(() => {
-          const personFilms = films.filter((f) =>
-            f.crew?.some((c) => c.personId === person.id) ||
-            (person.roles.includes("director") && f.company)
-          ).slice(0, 6);
+          const mappedFilmIds = (personFilmMap[person.id] || []).map((e) => e.filmId);
+          const personFilms = films.filter((f) => mappedFilmIds.includes(f.id)).slice(0, 6);
 
           if (personFilms.length === 0) return null;
 

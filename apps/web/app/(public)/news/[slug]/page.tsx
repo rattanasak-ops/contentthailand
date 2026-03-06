@@ -47,7 +47,7 @@ export default function NewsDetailPage() {
             {item.tags.map((tag) => <span key={tag} className="px-2 py-0.5 bg-purple/20 text-purple-light text-xs rounded font-thai">{tag}</span>)}
           </div>
 
-          <h1 className="font-thai font-bold text-2xl md:text-3xl text-white mb-4 leading-tight">{title}</h1>
+          <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)] mb-4 leading-tight">{title}</h1>
 
           <div className="flex items-center gap-4 text-[var(--ct-text-muted)] text-sm font-thai mb-8">
             <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" />{formatThaiDate(item.publishedAt)}</span>
@@ -75,7 +75,7 @@ export default function NewsDetailPage() {
               <div className="flex items-center gap-2">
                 <span className="text-[var(--ct-text-faint)] text-sm font-thai">{lang === "th" ? "แชร์:" : "Share:"}</span>
                 <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#1877F2]/20 hover:text-[#1877F2] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title="Facebook"><Facebook className="w-4 h-4" /></button>
-                <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-white rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title="X"><Share2 className="w-4 h-4" /></button>
+                <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-[var(--ct-text-primary)] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title="X"><Share2 className="w-4 h-4" /></button>
                 <button onClick={() => window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#06C755]/20 hover:text-[#06C755] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title="LINE"><MessageCircle className="w-4 h-4" /></button>
                 <button onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(lang === "th" ? "คัดลอกลิงก์แล้ว" : "Link copied!"); }} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-amber/20 hover:text-amber rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110" title={lang === "th" ? "คัดลอกลิงก์" : "Copy link"}><LinkCopy className="w-4 h-4" /></button>
               </div>

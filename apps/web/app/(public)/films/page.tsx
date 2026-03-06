@@ -62,11 +62,11 @@ export default function FilmsPage() {
           <div className="mb-8 flex items-start justify-between gap-4">
             <div>
               <FilmStrip color="pink" size="lg">
-                <h1 className="font-thai font-bold text-2xl md:text-3xl text-white">
+                <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
                   {lang === "th" ? "ฐานข้อมูลภาพยนตร์" : "Film Database"}
                 </h1>
               </FilmStrip>
-              <p className="text-white/50 text-sm font-thai mt-3 ml-1">
+              <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
                 {lang === "th"
                   ? `แสดง ${(page - 1) * ITEMS_PER_PAGE + 1}-${Math.min(page * ITEMS_PER_PAGE, filtered.length)} จาก ${filtered.length} เรื่อง`
                   : `Showing ${(page - 1) * ITEMS_PER_PAGE + 1}-${Math.min(page * ITEMS_PER_PAGE, filtered.length)} of ${filtered.length} films`}
@@ -82,7 +82,7 @@ export default function FilmsPage() {
             <select
               value={selectedGenre}
               onChange={(e) => { setSelectedGenre(e.target.value); setPage(1); }}
-              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-white/70 text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
+              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
             >
               <option value="all">{lang === "th" ? "ทุกประเภท" : "All Genres"}</option>
               {genres.map((g) => (<option key={g.slug} value={g.slug}>{lang === "th" ? g.nameTh : g.nameEn}</option>))}
@@ -90,7 +90,7 @@ export default function FilmsPage() {
             <select
               value={selectedYear}
               onChange={(e) => { setSelectedYear(e.target.value); setPage(1); }}
-              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-white/70 text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
+              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
             >
               <option value="all">{lang === "th" ? "ทุกปี" : "All Years"}</option>
               {yearOptions.map((y) => (<option key={y} value={y}>{y}</option>))}
@@ -98,7 +98,7 @@ export default function FilmsPage() {
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as SortOption)}
-              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-white/70 text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
+              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
             >
               <option value="newest">{lang === "th" ? "ใหม่สุด" : "Newest"}</option>
               <option value="oldest">{lang === "th" ? "เก่าสุด" : "Oldest"}</option>
@@ -139,7 +139,7 @@ export default function FilmsPage() {
                         </div>
                       )}
                       <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-[var(--ct-bg-page)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                        <p className="text-white text-[10px] font-thai font-semibold truncate">{lang === "th" ? film.titleTh : film.titleEn}</p>
+                        <p className="text-[var(--ct-text-primary)] text-[10px] font-thai font-semibold truncate">{lang === "th" ? film.titleTh : film.titleEn}</p>
                         <p className="text-[#F6A51B] text-[9px] font-bold">{film.year}</p>
                       </div>
                     </a>
@@ -158,7 +158,7 @@ export default function FilmsPage() {
 
         {filtered.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-white/50 font-thai text-lg">
+            <p className="text-[var(--ct-text-muted)] font-thai text-lg">
               {lang === "th" ? "ไม่พบภาพยนตร์ตามเงื่อนไขที่เลือก" : "No films found matching your criteria"}
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function FilmsPage() {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-white/50 text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-white transition-all font-thai"
+              className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)] transition-all font-thai"
             >
               {lang === "th" ? "ก่อนหน้า" : "Previous"}
             </button>
@@ -181,7 +181,7 @@ export default function FilmsPage() {
                 className={`w-10 h-10 text-sm rounded-xl transition-all font-thai ${
                   p === page
                     ? "bg-[#EC1C72] text-white font-bold shadow-[0_0_20px_rgba(236,28,114,0.4)]"
-                    : "bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-white/50 hover:border-[#EC1C72]/40 hover:text-white"
+                    : "bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)]"
                 }`}
               >
                 {p}
@@ -190,7 +190,7 @@ export default function FilmsPage() {
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-white/50 text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-white transition-all font-thai"
+              className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)] transition-all font-thai"
             >
               {lang === "th" ? "ถัดไป" : "Next"}
             </button>
@@ -212,9 +212,9 @@ function FilmListItem({ film, lang, index }: { film: (typeof films)[0]; lang: st
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.03, duration: 0.3 }}
-      className="group flex gap-4 p-4 md:p-5 hover:bg-white/[0.03] border-b border-white/[0.06] last:border-0 transition-colors"
+      className="group flex gap-4 p-4 md:p-5 hover:bg-[var(--ct-bg-hover)] border-b border-[var(--ct-border)] last:border-0 transition-colors"
     >
-      <div className="w-16 md:w-20 h-24 md:h-[120px] flex-shrink-0 rounded-lg bg-gradient-to-br from-[#EC1C72]/10 to-[#1C1B4E] overflow-hidden relative group-hover:shadow-[0_0_20px_rgba(236,28,114,0.15)] transition-shadow border border-white/[0.06]">
+      <div className="w-16 md:w-20 h-24 md:h-[120px] flex-shrink-0 rounded-lg bg-gradient-to-br from-[#EC1C72]/10 to-[var(--ct-bg-elevated)] overflow-hidden relative group-hover:shadow-[0_0_20px_rgba(236,28,114,0.15)] transition-shadow border border-[var(--ct-border)]">
         {film.posterUrl ? (
           <Image src={film.posterUrl} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="80px" />
         ) : (
@@ -224,19 +224,19 @@ function FilmListItem({ film, lang, index }: { film: (typeof films)[0]; lang: st
         )}
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
-        <h3 className="font-thai font-bold text-base md:text-lg text-white group-hover:text-[#EC1C72] transition-colors">{title}</h3>
-        <p className="text-white/50 text-sm font-body mt-0.5">{subtitle}</p>
+        <h3 className="font-thai font-bold text-base md:text-lg text-[var(--ct-text-primary)] group-hover:text-[#EC1C72] transition-colors">{title}</h3>
+        <p className="text-[var(--ct-text-secondary)] text-sm font-body mt-0.5">{subtitle}</p>
         <div className="flex flex-wrap items-center gap-2 mt-2">
           <span className="px-2 py-0.5 bg-[#F6A51B]/20 text-[#F6A51B] text-xs rounded-md font-bold font-mono">{film.year}</span>
-          {film.duration && <span className="text-white/50 text-xs font-thai">{film.duration} {lang === "th" ? "นาที" : "min"}</span>}
+          {film.duration && <span className="text-[var(--ct-text-muted)] text-xs font-thai">{film.duration} {lang === "th" ? "นาที" : "min"}</span>}
           {film.genres.slice(0, 3).map((g) => (
             <span key={g.slug} className="px-2 py-0.5 bg-[#EC1C72]/20 text-[#EC1C72] text-xs rounded-md font-thai border border-[#EC1C72]/15">{lang === "th" ? g.nameTh : g.nameEn}</span>
           ))}
         </div>
-        {synopsis && <p className="text-white/40 text-xs font-body line-clamp-2 mt-2 leading-relaxed">{synopsis}</p>}
+        {synopsis && <p className="text-[var(--ct-text-faint)] text-xs font-body line-clamp-2 mt-2 leading-relaxed">{synopsis}</p>}
       </div>
       <div className="hidden md:flex flex-col items-end justify-center gap-1 flex-shrink-0">
-        <div className="flex items-center gap-1.5 text-white/40 text-xs">
+        <div className="flex items-center gap-1.5 text-[var(--ct-text-muted)] text-xs">
           <Eye className="w-3.5 h-3.5" />
           <span className="font-mono">{film.viewCount?.toLocaleString()}</span>
         </div>

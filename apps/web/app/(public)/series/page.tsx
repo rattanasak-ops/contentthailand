@@ -51,7 +51,7 @@ export default function SeriesPage() {
           <div className="mb-8 flex items-start justify-between gap-4">
             <div>
               <FilmStrip color="orange" size="lg">
-                <h1 className="font-thai font-bold text-2xl md:text-3xl text-white">
+                <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
                   {lang === "th" ? "ฐานข้อมูลละครโทรทัศน์" : "TV Series Database"}
                 </h1>
               </FilmStrip>
@@ -170,9 +170,9 @@ function SeriesCardGrid({ s, lang }: { s: (typeof series)[0]; lang: string }) {
       />
 
       {/* Top edge light */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-[#F76532]/40 transition-all duration-300 z-10" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--ct-border)] to-transparent group-hover:via-[#F76532]/40 transition-all duration-300 z-10" />
 
-      <div className="aspect-video bg-gradient-to-br from-[#F76532]/10 to-[#1C1B4E] relative overflow-hidden">
+      <div className="aspect-video bg-gradient-to-br from-[#F76532]/10 to-[var(--ct-bg-elevated)] relative overflow-hidden">
         {s.coverUrl ? (
           <Image src={s.coverUrl} alt={title} fill className="object-cover transition-transform duration-500 group-hover:scale-108" sizes="(max-width: 768px) 100vw, 33vw" />
         ) : (
@@ -189,13 +189,13 @@ function SeriesCardGrid({ s, lang }: { s: (typeof series)[0]; lang: string }) {
         {s.channel && <div className="absolute top-2 left-2 px-2 py-0.5 bg-[var(--ct-bg-elevated)] text-[var(--ct-text-secondary)] text-[10px] rounded-md font-thai backdrop-blur-sm z-10 border border-[var(--ct-border)]">{s.channel}</div>}
         <div className="absolute top-2 right-2 px-2 py-0.5 bg-[#F6A51B] text-[#0E0D2A] text-xs font-bold rounded-md z-10">{s.year}</div>
         {/* Bottom gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1C1B4E] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[var(--ct-bg-elevated)] to-transparent" />
       </div>
 
       <div className="p-4 relative z-10">
-        <h3 className="font-thai font-semibold text-sm text-white truncate group-hover:text-[#F76532] transition-colors">{title}</h3>
+        <h3 className="font-thai font-semibold text-sm text-[var(--ct-text-primary)] truncate group-hover:text-[#F76532] transition-colors">{title}</h3>
         <p className="text-[var(--ct-text-muted)] text-xs font-body mt-0.5">{lang === "th" ? s.titleEn : s.titleTh}</p>
-        {synopsis && <p className="text-white/40 text-xs font-body line-clamp-2 mt-2 leading-relaxed">{synopsis}</p>}
+        {synopsis && <p className="text-[var(--ct-text-faint)] text-xs font-body line-clamp-2 mt-2 leading-relaxed">{synopsis}</p>}
         <div className="flex items-center gap-2 mt-3">
           {s.episodes && (
             <span className="px-2 py-0.5 bg-[#F76532]/20 text-[#F76532] text-[10px] rounded-md font-bold font-thai border border-[#F76532]/15">
@@ -231,8 +231,8 @@ function SeriesCardPoster({ s, lang }: { s: (typeof series)[0]; lang: string }) 
       {s.channel && (
         <div className="absolute top-2 left-2 px-1.5 py-0.5 bg-[var(--ct-bg-elevated)] text-[var(--ct-text-secondary)] text-[9px] rounded font-thai backdrop-blur-sm border border-[var(--ct-border)]">{s.channel}</div>
       )}
-      <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#14133D] via-[#14133D]/90 to-transparent">
-        <p className="text-white text-xs font-thai font-semibold truncate">{title}</p>
+      <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[var(--ct-bg-page)] via-[var(--ct-bg-page)]/90 to-transparent">
+        <p className="text-[var(--ct-text-primary)] text-xs font-thai font-semibold truncate">{title}</p>
         <div className="flex items-center gap-2 mt-1">
           <span className="text-[#F6A51B] text-[10px] font-bold">{s.year}</span>
           {s.episodes && <span className="text-[var(--ct-text-muted)] text-[9px]">{s.episodes} {lang === "th" ? "ตอน" : "ep"}</span>}
@@ -253,9 +253,9 @@ function SeriesListItem({ s, lang, index }: { s: (typeof series)[0]; lang: strin
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.03, duration: 0.3 }}
-      className="group flex gap-4 p-4 md:p-5 hover:bg-white/[0.03] border-b border-white/[0.06] last:border-0 transition-colors"
+      className="group flex gap-4 p-4 md:p-5 hover:bg-[var(--ct-bg-hover)] border-b border-[var(--ct-border)] last:border-0 transition-colors"
     >
-      <div className="w-28 md:w-36 h-20 md:h-24 flex-shrink-0 rounded-lg bg-gradient-to-br from-[#F76532]/10 to-[#1C1B4E] overflow-hidden relative group-hover:shadow-[0_0_20px_rgba(247,101,50,0.15)] transition-shadow border border-white/[0.06]">
+      <div className="w-28 md:w-36 h-20 md:h-24 flex-shrink-0 rounded-lg bg-gradient-to-br from-[#F76532]/10 to-[var(--ct-bg-elevated)] overflow-hidden relative group-hover:shadow-[0_0_20px_rgba(247,101,50,0.15)] transition-shadow border border-[var(--ct-border)]">
         {s.coverUrl ? (
           <Image src={s.coverUrl} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="144px" />
         ) : (
@@ -265,7 +265,7 @@ function SeriesListItem({ s, lang, index }: { s: (typeof series)[0]; lang: strin
         )}
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
-        <h3 className="font-thai font-bold text-base md:text-lg text-white group-hover:text-[#F76532] transition-colors">{title}</h3>
+        <h3 className="font-thai font-bold text-base md:text-lg text-[var(--ct-text-primary)] group-hover:text-[#F76532] transition-colors">{title}</h3>
         <p className="text-[var(--ct-text-muted)] text-sm font-body mt-0.5">{subtitle}</p>
         <div className="flex flex-wrap items-center gap-2 mt-2">
           <span className="px-2 py-0.5 bg-[#F6A51B]/20 text-[#F6A51B] text-xs rounded-md font-bold font-mono">{s.year}</span>
@@ -275,10 +275,10 @@ function SeriesListItem({ s, lang, index }: { s: (typeof series)[0]; lang: strin
             <span key={g.slug} className="px-2 py-0.5 bg-[#F76532]/15 text-[#F76532]/80 text-xs rounded-md font-thai border border-[#F76532]/10">{lang === "th" ? g.nameTh : g.nameEn}</span>
           ))}
         </div>
-        {synopsis && <p className="text-white/40 text-xs font-body line-clamp-2 mt-2 leading-relaxed">{synopsis}</p>}
+        {synopsis && <p className="text-[var(--ct-text-faint)] text-xs font-body line-clamp-2 mt-2 leading-relaxed">{synopsis}</p>}
       </div>
       <div className="hidden md:flex flex-col items-end justify-center gap-1 flex-shrink-0">
-        <div className="flex items-center gap-1.5 text-white/40 text-xs">
+        <div className="flex items-center gap-1.5 text-[var(--ct-text-muted)] text-xs">
           <Eye className="w-3.5 h-3.5" />
           <span className="font-mono">{s.viewCount?.toLocaleString()}</span>
         </div>

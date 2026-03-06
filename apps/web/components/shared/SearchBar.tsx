@@ -43,9 +43,15 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [focused, setFocused] = useState(false);
   const [placeholderIdx, setPlaceholderIdx] = useState(0);
+  const [isMac, setIsMac] = useState(false);
   const debouncedQuery = useDebounce(query, 300);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Detect Mac on client only (avoids hydration mismatch)
+  useEffect(() => {
+    setIsMac(/Mac/.test(navigator.userAgent));
+  }, []);
 
   // Cycle placeholder text
   useEffect(() => {
@@ -177,7 +183,7 @@ export function SearchBar({ variant = "navbar", onClose }: SearchBarProps) {
           !query && !focused && isHero && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex items-center gap-1">
               <kbd className="px-1.5 py-0.5 rounded bg-[var(--ct-bg-surface)] border border-[var(--ct-border)] text-[var(--ct-text-faint)] text-[10px] font-mono">
-                {typeof navigator !== "undefined" && /Mac/.test(navigator.userAgent) ? "\u2318" : "Ctrl"}
+                {isMac ? "\u2318" : "Ctrl"}
               </kbd>
               <kbd className="px-1.5 py-0.5 rounded bg-[var(--ct-bg-surface)] border border-[var(--ct-border)] text-[var(--ct-text-faint)] text-[10px] font-mono">
                 K

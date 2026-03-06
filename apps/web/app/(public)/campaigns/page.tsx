@@ -59,7 +59,7 @@ function CampaignDNA() {
             <p className="text-[var(--ct-text-primary)] text-lg font-thai mb-4">คุณชอบบรรยากาศแบบไหน?</p>
             <div className="grid grid-cols-2 gap-3">
               {["ชีวิตชนบท", "เมือง", "ความลึกลับ", "ตลกขำขัน"].map((opt, i) => (
-                <button key={i} className="p-3 rounded-xl text-left text-[var(--ct-text-secondary)] font-thai text-sm transition-all hover:bg-[#EC1C72]/20 hover:text-white border border-[var(--ct-border)] hover:border-[#EC1C72]/40">
+                <button key={i} className="p-3 rounded-xl text-left text-[var(--ct-text-secondary)] font-thai text-sm transition-all hover:bg-[#EC1C72]/20 hover:text-[var(--ct-text-primary)] border border-[var(--ct-border)] hover:border-[#EC1C72]/40">
                   {opt}
                 </button>
               ))}
@@ -583,7 +583,7 @@ export default function CampaignsPage() {
 
       {/* Back to home */}
       <div className="text-center pb-16">
-        <Link href="/" className="inline-flex items-center gap-2 text-[var(--ct-text-muted)] hover:text-white text-sm font-thai transition-colors">
+        <Link href="/" className="inline-flex items-center gap-2 text-[var(--ct-text-muted)] hover:text-[var(--ct-text-primary)] text-sm font-thai transition-colors">
           <ChevronRight className="w-4 h-4 rotate-180" />
           {lang === "th" ? "กลับหน้าหลัก" : "Back to Home"}
         </Link>

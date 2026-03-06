@@ -122,23 +122,21 @@ export default function FilmDetailPage() {
       <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         {film.posterUrl ? (
           <>
-            <div className="absolute inset-0 scale-110">
+            <div className="absolute inset-0 scale-105">
               <Image
                 src={film.posterUrl}
                 alt={title}
                 fill
-                className="object-cover opacity-40"
-                style={{ filter: "blur(30px) saturate(1.5)" }}
+                className="object-cover object-top"
                 priority
               />
             </div>
-            {/* Ambient glow overlays */}
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(236, 28, 114, 0.12) 0%, transparent 70%)" }} />
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 50% at 70% 60%, rgba(112, 40, 116, 0.08) 0%, transparent 70%)" }} />
+            {/* Dark overlay for readability */}
+            <div className="absolute inset-0 bg-black/40" />
             {/* Bottom fade to page bg */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)]/60 via-transparent to-[var(--ct-bg-page)]" />
-            {/* Side vignette */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ct-bg-page)]/80 via-transparent to-[var(--ct-bg-page)]/80" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--ct-bg-page)]" />
+            {/* Left fade for text area */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ct-bg-page)]/90 via-[var(--ct-bg-page)]/40 to-transparent" />
           </>
         ) : (
           <>
@@ -165,7 +163,7 @@ export default function FilmDetailPage() {
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex-shrink-0 w-[200px] md:w-[280px] mx-auto md:mx-0"
           >
-            <div className="aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-purple/40 to-[var(--ct-bg-elevated)] border-2 border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative group">
+            <div className="aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-purple/40 to-[var(--ct-bg-elevated)] border-2 border-[var(--ct-border)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative group">
               {film.posterUrl ? (
                 <Image
                   src={film.posterUrl}
@@ -202,7 +200,7 @@ export default function FilmDetailPage() {
               </div>
             )}
             {/* Title */}
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white font-bold mb-2">
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-[var(--ct-text-primary)] font-bold mb-2">
               {title}
             </h1>
             <p className="text-[var(--ct-text-muted)] font-body text-lg mb-6">{subtitle}</p>
@@ -277,7 +275,7 @@ export default function FilmDetailPage() {
                 </button>
                 <button
                   onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")}
-                  className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-white rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"
+                  className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-[var(--ct-text-primary)] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"
                   title="X / Twitter"
                 >
                   <Share2 className="w-4 h-4" />
@@ -316,7 +314,7 @@ export default function FilmDetailPage() {
               </h3>
               <ul className="space-y-3">
                 {funFactsMap[film.id].map((fact, i) => (
-                  <li key={i} className="flex items-start gap-3 text-white/70 text-sm font-body">
+                  <li key={i} className="flex items-start gap-3 text-[var(--ct-text-secondary)] text-sm font-body">
                     <span className="text-amber/60 mt-0.5">&#9679;</span>
                     {lang === "th" ? fact.th : fact.en}
                   </li>

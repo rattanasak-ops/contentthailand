@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { persons } from "@/lib/mock-data/persons";
 import { ChevronRight } from "lucide-react";
+import { StaggerChildren, StaggerItem } from "@/components/motion";
 
 const featured = persons.slice(0, 8);
 
@@ -35,24 +35,24 @@ export function FeaturedPersons() {
         </div>
 
         {/* Person Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-5">
-          {featured.map((person, i) => (
-            <motion.div
-              key={person.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-            >
+        <StaggerChildren staggerDelay={0.06} className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-5">
+          {featured.map((person) => (
+            <StaggerItem key={person.id}>
               <Link href={`/persons/${person.slug}`} className="group block text-center">
                 <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-[var(--ct-border)] group-hover:ring-[#F6A51B]/50 transition-all duration-300">
-                  <Image
-                    src={person.photoUrl || "/images/placeholder-person.jpg"}
-                    alt={person.nameEn}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    sizes="96px"
-                  />
+                  {person.photoUrl ? (
+                    <Image
+                      src={person.photoUrl}
+                      alt={person.nameEn}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      sizes="96px"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-[#F6A51B]/20 to-[#702874]/20 flex items-center justify-center">
+                      <span className="text-[var(--ct-text-faint)] font-display text-2xl font-bold">{person.nameEn.charAt(0)}</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
                 <h3 className="text-[var(--ct-text-primary)] text-xs md:text-sm font-thai font-medium leading-tight group-hover:text-[#F6A51B] transition-colors line-clamp-1">
@@ -62,9 +62,9 @@ export function FeaturedPersons() {
                   {person.roles[0] === "director" ? (lang === "th" ? "ผู้กำกับ" : "Director") : (lang === "th" ? "นักแสดง" : "Actor")}
                 </p>
               </Link>
-            </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );

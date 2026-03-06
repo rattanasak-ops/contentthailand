@@ -224,7 +224,7 @@ function LibraryCardGrid({ r, lang, onDownload }: { r: Resource; lang: string; o
         <Icon className="w-5 h-5" style={{ color: accent }} />
       </div>
 
-      <h3 className="font-thai font-bold text-sm text-[var(--ct-text-primary)] group-hover:text-white transition-colors line-clamp-2 mb-3 relative z-10">{title}</h3>
+      <h3 className="font-thai font-bold text-sm text-[var(--ct-text-primary)] group-hover:text-[var(--ct-text-primary)] transition-colors line-clamp-2 mb-3 relative z-10">{title}</h3>
 
       <div className="flex flex-wrap items-center gap-2 mb-3 relative z-10">
         <span className="px-2 py-0.5 text-[10px] rounded-md font-thai border" style={{ background: `${accent}15`, color: accent, borderColor: `${accent}20` }}>
@@ -318,7 +318,7 @@ function LibraryListItem({ r, lang, onDownload }: { r: Resource; lang: string; o
 
       <button
         onClick={(e) => onDownload(e, r)}
-        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-xs font-thai flex-shrink-0 hover:border-[var(--ct-border)] hover:text-white hover:shadow-lg transition-all duration-300 group-hover:scale-105"
+        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-xs font-thai flex-shrink-0 hover:border-[var(--ct-border)] hover:text-[var(--ct-text-primary)] hover:shadow-lg transition-all duration-300 group-hover:scale-105"
         style={{ background: `linear-gradient(135deg, ${accent}15, ${accent}08)` }}
       >
         <Download className="w-4 h-4" />

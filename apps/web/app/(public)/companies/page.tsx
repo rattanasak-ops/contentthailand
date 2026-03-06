@@ -2,7 +2,6 @@
 
 import { useCallback, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Globe } from "lucide-react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { FilmStrip } from "@/components/layout/FilmStrip";
@@ -49,9 +48,9 @@ function CompanyCard({ c, lang, viewMode }: { c: typeof companies[0]; lang: stri
         href={`/companies/${c.slug}`}
         className="group flex items-center gap-4 p-4 bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] hover:border-[#702874]/30 hover:-translate-y-0.5 transition-all duration-300"
       >
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#702874]/20 to-[var(--ct-bg-page)] border border-[var(--ct-border)] flex items-center justify-center overflow-hidden relative flex-shrink-0">
+        <div className="w-12 h-12 rounded-xl bg-white border border-[var(--ct-border)] flex items-center justify-center overflow-hidden flex-shrink-0">
           {c.logoUrl ? (
-            <Image src={c.logoUrl} alt={name} fill className="object-contain p-1.5" sizes="48px" />
+            <img src={c.logoUrl} alt={name} className="w-full h-full object-cover" />
           ) : (
             <span className="text-[#702874] font-bold text-sm">{name.charAt(0)}</span>
           )}
@@ -78,9 +77,9 @@ function CompanyCard({ c, lang, viewMode }: { c: typeof companies[0]; lang: stri
         href={`/companies/${c.slug}`}
         className="group relative aspect-square rounded-2xl overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] hover:border-[#702874]/30 transition-all duration-300 hover:-translate-y-1"
       >
-        <div className="absolute inset-0 flex items-center justify-center p-8">
+        <div className="absolute inset-0 flex items-center justify-center p-4">
           {c.logoUrl ? (
-            <Image src={c.logoUrl} alt={name} fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-110" sizes="200px" />
+            <img src={c.logoUrl} alt={name} className="w-full h-full object-cover rounded-lg transition-transform duration-500 group-hover:scale-110" />
           ) : (
             <span className="text-[var(--ct-text-faint)] font-display text-6xl font-bold group-hover:text-[#702874]/20 transition-colors">{name.charAt(0)}</span>
           )}
@@ -114,9 +113,9 @@ function CompanyCard({ c, lang, viewMode }: { c: typeof companies[0]; lang: stri
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--ct-border)] to-transparent group-hover:via-[#702874]/30 transition-all duration-300" />
 
       {/* Logo */}
-      <div className="relative w-16 h-16 rounded-xl bg-gradient-to-br from-[#702874]/15 to-[var(--ct-bg-page)] border border-[var(--ct-border)] flex items-center justify-center mb-5 overflow-hidden group-hover:scale-105 group-hover:border-[#702874]/20 transition-all duration-300">
+      <div className="w-16 h-16 rounded-xl bg-white border border-[var(--ct-border)] flex items-center justify-center mb-5 overflow-hidden group-hover:scale-105 group-hover:border-[#702874]/20 transition-all duration-300">
         {c.logoUrl ? (
-          <Image src={c.logoUrl} alt={name} fill className="object-contain p-2 transition-transform duration-500 group-hover:scale-110" sizes="64px" />
+          <img src={c.logoUrl} alt={name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
         ) : (
           <span className="text-[#702874]/40 font-bold text-xl">{name.charAt(0)}</span>
         )}

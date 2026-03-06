@@ -381,7 +381,7 @@ export default function BenchmarkPage() {
 
       {/* Back */}
       <div className="text-center pb-16">
-        <Link href="/about" className="inline-flex items-center gap-2 text-[var(--ct-text-muted)] hover:text-white text-sm font-thai transition-colors">
+        <Link href="/about" className="inline-flex items-center gap-2 text-[var(--ct-text-muted)] hover:text-[var(--ct-text-primary)] text-sm font-thai transition-colors">
           <ChevronRight className="w-4 h-4 rotate-180" />
           {lang === "th" ? "กลับหน้าเกี่ยวกับเรา" : "Back to About"}
         </Link>

@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { companies } from "@/lib/mock-data/companies";
 import { films } from "@/lib/mock-data/films";
-import { ChevronRight, Building2, Film } from "lucide-react";
+import { ChevronRight, Film, ArrowRight } from "lucide-react";
+import { StaggerChildren, StaggerItem } from "@/components/motion";
 
 const featured = companies.slice(0, 6);
 
@@ -39,56 +38,63 @@ export function FeaturedCompanies() {
         </div>
 
         {/* Companies Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {featured.map((company, i) => (
-            <motion.div
-              key={company.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-            >
-              <Link
-                href={`/companies/${company.slug}`}
-                className="group block rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-2px]"
-                style={{
-                  backgroundColor: "var(--ct-bg-elevated)",
-                  border: "1px solid var(--ct-border)",
-                }}
-              >
-                <div className="p-5 text-center">
-                  {/* Logo */}
-                  <div className="w-16 h-16 mx-auto mb-3 rounded-xl bg-[var(--ct-bg-hover)] flex items-center justify-center overflow-hidden group-hover:bg-[var(--ct-bg-surface)] transition-colors">
-                    {company.logoUrl ? (
-                      <Image
-                        src={company.logoUrl}
-                        alt={company.nameEn}
-                        width={48}
-                        height={48}
-                        className="object-contain"
-                      />
-                    ) : (
-                      <Building2 className="w-8 h-8 text-[var(--ct-text-faint)]" />
-                    )}
-                  </div>
+        <StaggerChildren staggerDelay={0.07} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {featured.map((company) => {
+            const filmCount = getFilmCount(company.id);
+            return (
+              <StaggerItem key={company.id}>
+                <Link
+                  href={`/companies/${company.slug}`}
+                  className="group block rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg"
+                  style={{
+                    backgroundColor: "var(--ct-bg-elevated)",
+                    border: "1px solid var(--ct-border)",
+                  }}
+                >
+                  <div className="p-5 text-center">
+                    {/* Logo */}
+                    <div className="w-20 h-20 mx-auto mb-3 rounded-2xl overflow-hidden shadow-sm group-hover:shadow-md transition-shadow bg-white">
+                      {company.logoUrl ? (
+                        <img
+                          src={company.logoUrl}
+                          alt={company.nameEn}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-[var(--ct-bg-hover)] flex items-center justify-center">
+                          <span className="text-2xl font-bold text-[var(--ct-text-faint)]">
+                            {company.nameEn.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                    </div>
 
-                  {/* Name */}
-                  <h3 className="text-[var(--ct-text-primary)] text-sm font-thai font-medium leading-tight group-hover:text-[#702874] transition-colors line-clamp-2 min-h-[2.5rem]">
-                    {lang === "th" ? company.nameTh : company.nameEn}
-                  </h3>
+                    {/* Name */}
+                    <h3 className="text-[var(--ct-text-primary)] text-sm font-thai font-semibold leading-tight group-hover:text-[#702874] transition-colors line-clamp-2 min-h-[2.5rem]">
+                      {lang === "th" ? company.nameTh : company.nameEn}
+                    </h3>
 
-                  {/* Meta */}
-                  <div className="flex items-center justify-center gap-2 mt-2">
-                    <span className="inline-flex items-center gap-1 text-[var(--ct-text-faint)] text-xs">
-                      <Film className="w-3 h-3" />
-                      {getFilmCount(company.id)} {lang === "th" ? "เรื่อง" : "films"}
-                    </span>
+                    {/* Meta */}
+                    <div className="flex items-center justify-center gap-2 mt-2">
+                      <span className="inline-flex items-center gap-1 text-[var(--ct-text-faint)] text-xs">
+                        <Film className="w-3 h-3" />
+                        {filmCount} {lang === "th" ? "เรื่อง" : "films"}
+                      </span>
+                    </div>
+
+                    {/* Hover arrow */}
+                    <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="inline-flex items-center gap-1 text-[#702874] text-xs font-thai">
+                        {lang === "th" ? "ดูรายละเอียด" : "View Details"}
+                        <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+                </Link>
+              </StaggerItem>
+            );
+          })}
+        </StaggerChildren>
       </div>
     </section>
   );

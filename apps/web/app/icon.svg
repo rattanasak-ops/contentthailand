@@ -1,11 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Simplified flame icon for favicon -->
+  <style>
+    @keyframes flicker {
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      25% { opacity: 0.85; transform: translateY(0.3px); }
+      50% { opacity: 0.95; transform: translateY(-0.3px); }
+      75% { opacity: 0.9; transform: translateY(0.2px); }
+    }
+    @keyframes glow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.3); }
+    }
+    .flame { animation: flicker 2s ease-in-out infinite; transform-origin: center bottom; }
+    .flame-pink { animation-delay: 0.15s; }
+    .flame-orange { animation-delay: 0.3s; }
+    .flame-yellow { animation: glow 2.5s ease-in-out infinite; }
+  </style>
   <!-- Outer purple curve -->
-  <path d="M13 30C4 26 0 18 2 10C4 3 10 0 18 2C13 5 10 10 9 15C8 21 10 26 13 30Z" fill="#702874"/>
+  <path class="flame" d="M13 30C4 26 0 18 2 10C4 3 10 0 18 2C13 5 10 10 9 15C8 21 10 26 13 30Z" fill="#702874"/>
   <!-- Pink middle flame -->
-  <path d="M18 2C20 0 24 0 26 3C24 8 22 12 23 17C24 22 19 27 13 30C17 24 18 18 17 12C16 7 17 4 18 2Z" fill="#EC1C72"/>
+  <path class="flame flame-pink" d="M18 2C20 0 24 0 26 3C24 8 22 12 23 17C24 22 19 27 13 30C17 24 18 18 17 12C16 7 17 4 18 2Z" fill="#EC1C72"/>
   <!-- Orange flame -->
-  <path d="M23 17C22 12 24 8 26 3C29 6 30 10 29 15C28 20 24 25 19 29C23 25 24 21 23 17Z" fill="#F76532"/>
+  <path class="flame flame-orange" d="M23 17C22 12 24 8 26 3C29 6 30 10 29 15C28 20 24 25 19 29C23 25 24 21 23 17Z" fill="#F76532"/>
   <!-- Yellow inner flame -->
-  <path d="M29 15C30 10 29 6 27 4C30 8 31 12 30 16C29 21 26 25 21 29C26 24 28 20 29 15Z" fill="#F6A51B"/>
+  <path class="flame-yellow" d="M29 15C30 10 29 6 27 4C30 8 31 12 30 16C29 21 26 25 21 29C26 24 28 20 29 15Z" fill="#F6A51B"/>
 </svg>

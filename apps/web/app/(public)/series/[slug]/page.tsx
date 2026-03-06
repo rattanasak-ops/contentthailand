@@ -47,12 +47,12 @@ export default function SeriesDetailPage() {
       <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         {show.coverUrl ? (
           <>
-            <div className="absolute inset-0 scale-110">
-              <Image src={show.coverUrl} alt={title} fill className="object-cover opacity-40" style={{ filter: "blur(30px) saturate(1.5)" }} priority />
+            <div className="absolute inset-0 scale-105">
+              <Image src={show.coverUrl} alt={title} fill className="object-cover object-top" priority />
             </div>
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(247, 101, 50, 0.12) 0%, transparent 70%)" }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--ct-bg-page)]/60 via-transparent to-[var(--ct-bg-page)]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ct-bg-page)]/80 via-transparent to-[var(--ct-bg-page)]/80" />
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--ct-bg-page)]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ct-bg-page)]/90 via-[var(--ct-bg-page)]/40 to-transparent" />
           </>
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-orange/20 via-[var(--ct-bg-page)] to-[var(--ct-bg-page)]" />
@@ -70,7 +70,7 @@ export default function SeriesDetailPage() {
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex-shrink-0 w-[240px] md:w-[320px] mx-auto md:mx-0"
           >
-            <div className="aspect-video rounded-xl bg-gradient-to-br from-orange/20 to-[var(--ct-bg-elevated)] border-2 border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
+            <div className="aspect-video rounded-xl bg-gradient-to-br from-orange/20 to-[var(--ct-bg-elevated)] border-2 border-[var(--ct-border)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
               {show.coverUrl ? (
                 <Image src={show.coverUrl} alt={title} fill className="object-cover" sizes="(max-width: 768px) 240px, 320px" priority />
               ) : (
@@ -87,7 +87,7 @@ export default function SeriesDetailPage() {
             transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex-1 min-w-0"
           >
-            <h1 className="font-display text-3xl md:text-4xl text-white font-bold mb-2">{title}</h1>
+            <h1 className="font-display text-3xl md:text-4xl text-[var(--ct-text-primary)] font-bold mb-2">{title}</h1>
             <p className="text-[var(--ct-text-muted)] font-body text-lg mb-6">{subtitle}</p>
 
             <div className="flex flex-wrap gap-2 mb-6">
@@ -119,7 +119,7 @@ export default function SeriesDetailPage() {
               <div className="flex items-center gap-1.5 ml-auto">
                 <span className="text-[var(--ct-text-faint)] text-xs font-thai mr-1">{lang === "th" ? "แชร์:" : "Share:"}</span>
                 <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#1877F2]/20 hover:text-[#1877F2] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><Facebook className="w-4 h-4" /></button>
-                <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-white rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><Share2 className="w-4 h-4" /></button>
+                <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[var(--ct-bg-hover)] hover:text-[var(--ct-text-primary)] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><Share2 className="w-4 h-4" /></button>
                 <button onClick={() => window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(window.location.href)}`, "_blank", "width=600,height=400")} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-[#06C755]/20 hover:text-[#06C755] rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><MessageCircle className="w-4 h-4" /></button>
                 <button onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(lang === "th" ? "คัดลอกลิงก์แล้ว" : "Link copied!"); }} className="p-2 bg-[var(--ct-bg-hover)] hover:bg-amber/20 hover:text-amber rounded-lg text-[var(--ct-text-muted)] transition-all duration-200 hover:scale-110"><LinkCopy className="w-4 h-4" /></button>
               </div>

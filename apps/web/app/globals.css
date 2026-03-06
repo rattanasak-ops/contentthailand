@@ -85,7 +85,7 @@
     --ct-text-primary: #1B1B3A;
     --ct-text-secondary: #3D3D5C;
     --ct-text-muted: #6B6B8A;
-    --ct-text-faint: #9B9BB0;
+    --ct-text-faint: #7A7A96;
     --ct-border: rgba(0, 0, 0, 0.08);
     --ct-border-hover: rgba(0, 0, 0, 0.15);
     --ct-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -123,6 +123,11 @@
     z-index: 1;
   }
 
+  /* Hero cinematic glow text */
+  .hero-text-glow {
+    text-shadow: 0 0 40px rgba(236, 28, 114, 0.15), 0 0 80px rgba(236, 28, 114, 0.05);
+  }
+
   /* Gradient text utility */
   .text-gradient-primary {
     @apply bg-clip-text text-transparent;
@@ -132,6 +137,14 @@
   .text-gradient-secondary {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, #F76532, #F6A51B);
+  }
+
+  /* Light mode gradient overrides — darker for readability */
+  html.light .text-gradient-primary {
+    background-image: linear-gradient(135deg, #5A2060, #BA1561);
+  }
+  html.light .text-gradient-secondary {
+    background-image: linear-gradient(135deg, #C84E1A, #C98516);
   }
 
   /* Logo sparkle particles */
