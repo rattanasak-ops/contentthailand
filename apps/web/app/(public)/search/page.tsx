@@ -205,7 +205,7 @@ function SearchContent() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool pt-8 pb-20 relative overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-pink/[0.03] rounded-full blur-3xl" />

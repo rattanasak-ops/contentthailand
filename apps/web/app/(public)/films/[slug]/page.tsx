@@ -117,7 +117,7 @@ export default function FilmDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool">
       {/* Cinematic Hero Backdrop — Netflix-style */}
       <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         {film.posterUrl ? (
@@ -326,7 +326,7 @@ export default function FilmDetailPage() {
 
         {/* Cast & Crew */}
         {crew.length > 0 && (
-          <section className="mt-16">
+          <section className="mt-16 ct-section-b rounded-2xl px-4 py-6 -mx-4">
             <FilmStrip color="pink" size="md">
               <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)]">
                 {lang === "th" ? "ทีมงานและนักแสดง" : "Cast & Crew"}
@@ -368,7 +368,7 @@ export default function FilmDetailPage() {
 
         {/* Related Films */}
         {relatedFilms.length > 0 && (
-          <section className="mt-16 pb-20">
+          <section className="mt-16 pb-20 ct-section-c rounded-2xl px-4 py-6 -mx-4">
             <FilmStrip color="orange" size="md">
               <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)]">
                 {lang === "th" ? "ภาพยนตร์ที่เกี่ยวข้อง" : "Related Films"}

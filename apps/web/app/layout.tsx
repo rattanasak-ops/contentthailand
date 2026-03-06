@@ -3,6 +3,7 @@ import Script from "next/script";
 import { playfair, sarabun, notoSansThai, jetbrainsMono } from "@/lib/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SplashScreen } from "@/components/layout/SplashScreen";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -22,6 +23,9 @@ export const metadata: Metadata = {
     "ContentThailand",
     "ฐานข้อมูลภาพยนตร์",
   ],
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -55,15 +59,17 @@ export default function RootLayout({
         className={`${playfair.variable} ${sarabun.variable} ${notoSansThai.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <ThemeProvider>
-          {/* Accessibility: skip to content */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-amber focus:text-midnight focus:rounded-lg focus:font-thai focus:font-semibold"
-          >
-            ข้ามไปเนื้อหาหลัก
-          </a>
-          {children}
-          <Toaster richColors position="top-right" />
+          <SplashScreen>
+            {/* Accessibility: skip to content */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-amber focus:text-midnight focus:rounded-lg focus:font-thai focus:font-semibold"
+            >
+              ข้ามไปเนื้อหาหลัก
+            </a>
+            {children}
+            <Toaster richColors position="top-right" />
+          </SplashScreen>
         </ThemeProvider>
       </body>
     </html>

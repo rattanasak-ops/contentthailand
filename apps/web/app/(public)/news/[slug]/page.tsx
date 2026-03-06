@@ -38,7 +38,7 @@ export default function NewsDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool pt-8 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
@@ -70,7 +70,7 @@ export default function NewsDetailPage() {
           </div>
 
           {/* Share Section */}
-          <div className="mt-10 pt-6 border-t border-[var(--ct-border)]">
+          <div className="mt-10 pt-6 border-t border-[var(--ct-border)] ct-section-b rounded-2xl px-4 py-6 -mx-4">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-[var(--ct-text-faint)] text-sm font-thai">{lang === "th" ? "แชร์:" : "Share:"}</span>

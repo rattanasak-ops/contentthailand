@@ -43,7 +43,7 @@ export default function DigitalContentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool pt-8 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
@@ -111,7 +111,7 @@ export default function DigitalContentPage() {
           </div>
 
           {/* Section 2: Project Info */}
-          <div className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6">
+          <div className="bg-[var(--ct-bg-elevated)] ct-section-b rounded-xl border border-[var(--ct-border)] p-6">
             <h2 className="font-thai font-bold text-[var(--ct-text-primary)] mb-4 flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-orange/20 text-orange text-xs flex items-center justify-center font-bold">2</span>
               {lang === "th" ? "ข้อมูลโครงการ" : "Project Information"}

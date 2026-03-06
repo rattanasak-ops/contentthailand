@@ -57,7 +57,7 @@ export default function CompanyDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool">
       {/* === CINEMATIC HERO === */}
       <div className="relative h-[40vh] md:h-[45vh] overflow-hidden">
         {/* Background: film poster or gradient */}
@@ -232,7 +232,7 @@ export default function CompanyDetailPage() {
         {/* === FILMS SECTION === */}
         {companyFilms.length > 0 && (
           <ScrollReveal>
-            <section className="mb-16">
+            <section className="mb-16 ct-section-b rounded-2xl px-4 py-6 -mx-4">
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex items-center justify-center w-10 h-10 rounded-xl" style={{ backgroundColor: `${typeInfo.color}15` }}>
                   <Film className="w-5 h-5" style={{ color: typeInfo.color }} />
@@ -260,7 +260,7 @@ export default function CompanyDetailPage() {
         {/* === SERIES SECTION === */}
         {companySeries.length > 0 && (
           <ScrollReveal>
-            <section className="mb-16">
+            <section className="mb-16 ct-section-c rounded-2xl px-4 py-6 -mx-4">
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-orange/10">
                   <Tv className="w-5 h-5 text-orange" />

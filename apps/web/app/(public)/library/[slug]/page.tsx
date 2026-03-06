@@ -127,7 +127,7 @@ export default function LibraryDetailPage() {
 
   if (!resource) {
     return (
-      <div className="min-h-screen bg-[var(--ct-bg-page)] flex items-center justify-center">
+      <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-[var(--ct-text-primary)] font-display text-4xl mb-4">404</h1>
           <p className="text-[var(--ct-text-muted)] font-thai">
@@ -158,7 +158,7 @@ export default function LibraryDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool pt-8 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 

@@ -164,7 +164,7 @@ export default function FilmIncentivePage() {
   const currentSteps = lang === "th" ? steps.th : steps.en;
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool pt-8 pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
@@ -210,7 +210,7 @@ export default function FilmIncentivePage() {
         <IncentiveCalculator lang={lang} />
 
         {/* Application Steps */}
-        <div className="mb-10">
+        <div className="mb-10 ct-section-c rounded-2xl p-6 -mx-2">
           <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)] mb-6 flex items-center gap-2">
             <FileText className="w-5 h-5 text-orange" />
             {lang === "th" ? "ขั้นตอนการยื่นขอ" : "Application Process"}

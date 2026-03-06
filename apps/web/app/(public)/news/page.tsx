@@ -31,7 +31,7 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="ct-section-b max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
         <ScrollReveal direction="up">
@@ -51,7 +51,9 @@ export default function NewsPage() {
         </ScrollReveal>
 
         <GradientDivider variant="purple" className="mb-8" />
+      </div>
 
+      <div className="ct-section-c ct-tint-cool max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={viewMode}

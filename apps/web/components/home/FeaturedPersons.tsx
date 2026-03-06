@@ -13,7 +13,7 @@ export function FeaturedPersons() {
   const { lang } = useLanguage();
 
   return (
-    <section className="py-16 relative overflow-hidden" style={{ backgroundColor: "var(--ct-bg-page)" }}>
+    <section className="py-16 relative overflow-hidden ct-section-purple ct-tint-gold">
       {/* Ambient glow */}
       <div className="absolute top-0 left-1/3 w-[400px] h-[300px] pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(246,165,27,0.03) 0%, transparent 70%)" }} />
 

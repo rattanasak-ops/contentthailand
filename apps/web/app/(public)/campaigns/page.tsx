@@ -498,7 +498,7 @@ export default function CampaignsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool">
       {/* Hero */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(236,28,114,0.08) 0%, transparent 60%)" }} />
@@ -564,7 +564,7 @@ export default function CampaignsPage() {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ct-section-b">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

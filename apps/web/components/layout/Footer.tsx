@@ -703,6 +703,78 @@ function StorySection({ theme, t: translate }: { theme: FooterTheme; t: (th: str
 }
 
 // ──────────────────────────────────────────────
+// CI Decorative Flame Swirl Band
+// ──────────────────────────────────────────────
+
+function CIFlameSwirl() {
+  return (
+    <div className="relative h-20 sm:h-24 overflow-hidden">
+      {/* Multi-layer gradient swirl mimicking CI flame logo */}
+      <svg
+        viewBox="0 0 1440 96"
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="ci-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#F6A51B" stopOpacity="0.7" />
+            <stop offset="25%" stopColor="#F76532" stopOpacity="0.6" />
+            <stop offset="50%" stopColor="#EC1C72" stopOpacity="0.5" />
+            <stop offset="75%" stopColor="#702874" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#14133D" stopOpacity="0.4" />
+          </linearGradient>
+          <linearGradient id="ci-grad-2" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stopColor="#F6A51B" stopOpacity="0.3" />
+            <stop offset="30%" stopColor="#F76532" stopOpacity="0.4" />
+            <stop offset="60%" stopColor="#EC1C72" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#702874" stopOpacity="0.2" />
+          </linearGradient>
+          <linearGradient id="ci-grad-3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#702874" stopOpacity="0.15" />
+            <stop offset="40%" stopColor="#EC1C72" stopOpacity="0.2" />
+            <stop offset="70%" stopColor="#F76532" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#F6A51B" stopOpacity="0.25" />
+          </linearGradient>
+        </defs>
+
+        {/* Primary swooping arc — the main CI swirl */}
+        <path
+          d="M0,96 C200,96 300,20 500,30 C700,40 800,80 1000,50 C1200,20 1350,60 1440,40 L1440,96 Z"
+          fill="url(#ci-grad-1)"
+        />
+        {/* Secondary arc — creates depth */}
+        <path
+          d="M0,96 C180,60 350,40 550,55 C750,70 900,30 1100,45 C1300,60 1400,80 1440,70 L1440,96 Z"
+          fill="url(#ci-grad-2)"
+        />
+        {/* Tertiary subtle accent */}
+        <path
+          d="M0,96 C100,80 300,50 500,65 C700,80 900,45 1100,55 C1300,65 1400,90 1440,85 L1440,96 Z"
+          fill="url(#ci-grad-3)"
+        />
+      </svg>
+
+      {/* Thin gold accent line following the main curve */}
+      <svg
+        viewBox="0 0 1440 96"
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M0,80 C200,80 300,15 500,25 C700,35 800,75 1000,45 C1200,15 1350,55 1440,35"
+          fill="none"
+          stroke="url(#ci-grad-1)"
+          strokeWidth="1.5"
+          strokeOpacity="0.4"
+        />
+      </svg>
+    </div>
+  );
+}
+
+// ──────────────────────────────────────────────
 // Main Footer Component
 // ──────────────────────────────────────────────
 
@@ -719,19 +791,20 @@ export function Footer() {
       className="relative overflow-hidden"
       style={{ backgroundColor: "color-mix(in srgb, var(--ct-bg-page), black 15%)" }}
     >
-      {/* Top gradient divider */}
-      <div
-        className="h-px"
-        style={{
-          background: `linear-gradient(90deg, transparent 0%, ${theme.accent}30 30%, ${theme.accent}60 50%, ${theme.accent}30 70%, transparent 100%)`,
-        }}
-      />
+      {/* CI Flame Swirl decorative band at top */}
+      <CIFlameSwirl />
+
+      {/* CI swirl pattern background — multi-color ambient glow */}
+      <div className="absolute inset-0 ci-swirl-pattern pointer-events-none" />
 
       {/* Interactive spotlight background */}
       <SpotlightBg accent={theme.accent} />
 
       {/* Film grain texture */}
       <div className="absolute inset-0 film-grain pointer-events-none" />
+
+      {/* CI flame arc at bottom */}
+      <div className="absolute inset-0 ci-flame-arc pointer-events-none" />
 
       {/* ═══════ UNIQUE VISUAL per page ═══════ */}
       <motion.div
@@ -910,10 +983,10 @@ export function Footer() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          {/* Gradient line */}
+          {/* CI gradient divider — full palette sweep */}
           <div
-            className="h-px mb-6"
-            style={{ background: `linear-gradient(90deg, transparent, ${theme.accent}20, transparent)` }}
+            className="h-[2px] mb-6 rounded-full"
+            style={{ background: "linear-gradient(90deg, transparent 0%, #F6A51B40 15%, #F7653260 30%, #EC1C7280 50%, #70287460 70%, #14133D40 85%, transparent 100%)" }}
           />
 
           {/* Policy links */}

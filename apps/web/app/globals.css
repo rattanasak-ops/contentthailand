@@ -48,6 +48,14 @@
     --ct-dropdown-bg: rgba(14, 13, 42, 0.95);
     --ct-glass-bg: rgba(28, 27, 78, 0.6);
     --ct-glass-bg-hover: rgba(28, 27, 78, 0.8);
+
+    /* Section alternation — breaks monotony in dark mode */
+    --ct-section-a: #14133D;              /* base midnight */
+    --ct-section-b: #181548;              /* purple-tinted midnight */
+    --ct-section-c: #120F35;              /* deeper midnight */
+    --ct-section-d: #1A1245;              /* warm midnight (slight purple) */
+    --ct-section-accent-purple: #1C1450;  /* purple-wash section */
+    --ct-section-accent-warm: #1D1540;    /* warm-wash section */
   }
 
   /* ContentThailand Light Theme — WCAG AA compliant */
@@ -83,16 +91,24 @@
     --ct-bg-hover: rgba(0, 0, 0, 0.04);
     --ct-bg-card: rgba(255, 255, 255, 0.8);
     --ct-text-primary: #1B1B3A;
-    --ct-text-secondary: #3D3D5C;
-    --ct-text-muted: #6B6B8A;
-    --ct-text-faint: #7A7A96;
-    --ct-border: rgba(0, 0, 0, 0.08);
-    --ct-border-hover: rgba(0, 0, 0, 0.15);
+    --ct-text-secondary: #2E2E50;        /* darker — was #3D3D5C */
+    --ct-text-muted: #4A4A6A;            /* darker — was #6B6B8A, now 7.2:1 on white */
+    --ct-text-faint: #5C5C7A;            /* darker — was #7A7A96, now 5.5:1 on white */
+    --ct-border: rgba(0, 0, 0, 0.10);    /* slightly more visible */
+    --ct-border-hover: rgba(0, 0, 0, 0.18);
     --ct-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --ct-nav-bg: rgba(255, 255, 255, 0.85);
+    --ct-nav-bg: rgba(255, 255, 255, 0.88);
     --ct-dropdown-bg: rgba(255, 255, 255, 0.98);
     --ct-glass-bg: rgba(255, 255, 255, 0.7);
     --ct-glass-bg-hover: rgba(255, 255, 255, 0.9);
+
+    /* Section alternation — subtle warmth/cool variations in light mode */
+    --ct-section-a: #F8F7F4;             /* warm white base */
+    --ct-section-b: #FFFFFF;             /* pure white */
+    --ct-section-c: #F5F2ED;             /* warmer cream */
+    --ct-section-d: #F3F5F8;             /* cool blue-white */
+    --ct-section-accent-purple: #F6F3F8; /* faint purple tint */
+    --ct-section-accent-warm: #FBF7F0;   /* faint gold tint */
   }
 }
 
@@ -329,6 +345,85 @@
   }
   html.light .glow-pink-box {
     box-shadow: 0 4px 20px rgba(186, 21, 97, 0.1), 0 1px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  /* === Section Alternation (dark mode: colorful breaks) === */
+  .ct-section-a { background-color: var(--ct-section-a); }
+  .ct-section-b { background-color: var(--ct-section-b); }
+  .ct-section-c { background-color: var(--ct-section-c); }
+  .ct-section-d { background-color: var(--ct-section-d); }
+  .ct-section-purple { background-color: var(--ct-section-accent-purple); }
+  .ct-section-warm { background-color: var(--ct-section-accent-warm); }
+
+  /* Subtle gradient tint overlays for section variation */
+  .ct-tint-purple {
+    background-image: linear-gradient(135deg, rgba(112,40,116,0.06) 0%, transparent 60%);
+  }
+  .ct-tint-pink {
+    background-image: linear-gradient(135deg, rgba(236,28,114,0.04) 0%, transparent 50%);
+  }
+  .ct-tint-orange {
+    background-image: linear-gradient(135deg, transparent 40%, rgba(247,101,50,0.04) 100%);
+  }
+  .ct-tint-gold {
+    background-image: linear-gradient(135deg, transparent 30%, rgba(246,165,27,0.05) 100%);
+  }
+  .ct-tint-cool {
+    background-image: linear-gradient(180deg, rgba(112,40,116,0.03) 0%, rgba(20,19,61,0.0) 40%, rgba(247,101,50,0.02) 100%);
+  }
+
+  /* CI Swirl decorative pattern — used in Footer */
+  .ci-swirl-pattern {
+    background-image:
+      radial-gradient(ellipse 600px 400px at 10% 80%, rgba(246,165,27,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at 30% 60%, rgba(247,101,50,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 600px at 60% 90%, rgba(236,28,114,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 500px 400px at 85% 70%, rgba(112,40,116,0.12) 0%, transparent 70%);
+  }
+  html.light .ci-swirl-pattern {
+    background-image:
+      radial-gradient(ellipse 600px 400px at 10% 80%, rgba(246,165,27,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at 30% 60%, rgba(247,101,50,0.05) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 600px at 60% 90%, rgba(236,28,114,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 500px 400px at 85% 70%, rgba(112,40,116,0.08) 0%, transparent 70%);
+  }
+
+  /* CI Flame arc — decorative SVG-like arc for footer */
+  .ci-flame-arc::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background:
+      radial-gradient(ellipse 120% 100px at 50% 100%, rgba(246,165,27,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 80px at 40% 100%, rgba(247,101,50,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 60px at 60% 100%, rgba(236,28,114,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  html.light .ci-flame-arc::before {
+    background:
+      radial-gradient(ellipse 120% 100px at 50% 100%, rgba(246,165,27,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 80px at 40% 100%, rgba(247,101,50,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 60px at 60% 100%, rgba(236,28,114,0.03) 0%, transparent 50%);
+  }
+
+  /* Light mode section tint overrides — subtle and warm */
+  html.light .ct-tint-purple {
+    background-image: linear-gradient(135deg, rgba(112,40,116,0.03) 0%, transparent 60%);
+  }
+  html.light .ct-tint-pink {
+    background-image: linear-gradient(135deg, rgba(186,21,97,0.02) 0%, transparent 50%);
+  }
+  html.light .ct-tint-orange {
+    background-image: linear-gradient(135deg, transparent 40%, rgba(217,78,31,0.03) 100%);
+  }
+  html.light .ct-tint-gold {
+    background-image: linear-gradient(135deg, transparent 30%, rgba(201,133,22,0.04) 100%);
+  }
+  html.light .ct-tint-cool {
+    background-image: linear-gradient(180deg, rgba(112,40,116,0.015) 0%, transparent 40%, rgba(217,78,31,0.015) 100%);
   }
 
   /* === Light mode ambient overrides === */

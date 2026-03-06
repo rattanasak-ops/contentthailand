@@ -165,32 +165,37 @@ export default function StatisticsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
+    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+      {/* Header */}
+      <div className="pt-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
-        {/* Header */}
-        <motion.div
-          className="mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)] flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#EC1C72]/10 flex items-center justify-center">
-              <BarChart3 className="w-6 h-6 text-[#EC1C72]" />
-            </div>
-            {lang === "th" ? "Dashboard สถิติอุตสาหกรรม" : "Industry Statistics Dashboard"}
-          </h1>
-          <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-[52px]">
-            {lang === "th"
-              ? "ภาพรวมข้อมูลอุตสาหกรรมภาพยนตร์และวีดิทัศน์ของประเทศไทย อัปเดตล่าสุด: มีนาคม 2568"
-              : "Overview of Thailand's film and video industry data. Last updated: March 2025"}
-          </p>
-        </motion.div>
+          <motion.div
+            className="mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)] flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#EC1C72]/10 flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 text-[#EC1C72]" />
+              </div>
+              {lang === "th" ? "Dashboard สถิติอุตสาหกรรม" : "Industry Statistics Dashboard"}
+            </h1>
+            <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-[52px]">
+              {lang === "th"
+                ? "ภาพรวมข้อมูลอุตสาหกรรมภาพยนตร์และวีดิทัศน์ของประเทศไทย อัปเดตล่าสุด: มีนาคม 2568"
+                : "Overview of Thailand's film and video industry data. Last updated: March 2025"}
+            </p>
+          </motion.div>
+        </div>
+      </div>
 
-        {/* ──── Summary Cards ──── */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+      {/* ──── Summary Cards ──── */}
+      <div className="ct-section-b ct-tint-purple py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {summaryCards.map((card, i) => {
             const Icon = card.icon;
             return (
@@ -218,9 +223,13 @@ export default function StatisticsPage() {
             );
           })}
         </div>
+        </div>
+      </div>
 
-        {/* ──── Charts Row 1: Yearly Trend + Genre ──── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      {/* ──── Charts Row 1: Yearly Trend + Genre ──── */}
+      <div className="ct-section-c ct-tint-cool py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Yearly Production Chart */}
           <motion.div
             className="lg:col-span-2 bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6"
@@ -334,9 +343,13 @@ export default function StatisticsPage() {
             </div>
           </motion.div>
         </div>
+        </div>
+      </div>
 
-        {/* ──── Charts Row 2: Personnel + Visitors ──── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      {/* ──── Charts Row 2: Personnel + Visitors ──── */}
+      <div className="ct-section-b ct-tint-purple py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Personnel by Role */}
           <motion.div
             className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6"
@@ -430,9 +443,13 @@ export default function StatisticsPage() {
             </div>
           </motion.div>
         </div>
+        </div>
+      </div>
 
-        {/* ──── Top Rankings ──── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      {/* ──── Top Rankings ──── */}
+      <div className="ct-section-c ct-tint-cool py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Top Films */}
           <motion.div
             className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] p-6"
@@ -524,10 +541,14 @@ export default function StatisticsPage() {
             </div>
           </motion.div>
         </div>
+        </div>
+      </div>
 
-        {/* ──── Yearly Data Table ──── */}
+      {/* ──── Yearly Data Table ──── */}
+      <div className="ct-section-d ct-tint-gold py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] overflow-hidden mb-8"
+          className="bg-[var(--ct-bg-elevated)] rounded-xl border border-[var(--ct-border)] overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -574,10 +595,14 @@ export default function StatisticsPage() {
             </table>
           </div>
         </motion.div>
+        </div>
+      </div>
 
-        {/* ──── Export & Citation ──── */}
+      {/* ──── Export & Citation ──── */}
+      <div className="ct-section-b ct-tint-purple py-8 pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -645,6 +670,7 @@ export default function StatisticsPage() {
             </button>
           </div>
         </motion.div>
+        </div>
       </div>
     </div>
   );

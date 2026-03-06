@@ -86,7 +86,7 @@ export default function LibraryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool pt-8 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
@@ -108,7 +108,7 @@ export default function LibraryPage() {
 
         {/* Filters */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row gap-3 mb-6 ct-section-b rounded-2xl p-4 -mx-2">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--ct-text-faint)]" />
               <Input

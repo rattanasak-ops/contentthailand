@@ -177,7 +177,7 @@ function StatCard({
 
 export function StatsCounter() {
   return (
-    <section className="relative py-20 bg-[var(--ct-bg-page)] overflow-hidden">
+    <section className="relative py-20 ct-section-a ct-tint-purple overflow-hidden">
       {/* Subtle ambient */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[300px]" style={{ background: "radial-gradient(ellipse, rgba(236,28,114,0.02) 0%, transparent 70%)" }} />

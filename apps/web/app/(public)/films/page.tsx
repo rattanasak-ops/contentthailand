@@ -54,149 +54,165 @@ export default function FilmsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
+    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+      {/* Hero / Header section */}
+      <div className="ct-section-a pt-8 pb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
-        <ScrollReveal direction="up">
-          <div className="mb-8 flex items-start justify-between gap-4">
-            <div>
-              <FilmStrip color="pink" size="lg">
-                <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
-                  {lang === "th" ? "ฐานข้อมูลภาพยนตร์" : "Film Database"}
-                </h1>
-              </FilmStrip>
-              <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
-                {lang === "th"
-                  ? `แสดง ${(page - 1) * ITEMS_PER_PAGE + 1}-${Math.min(page * ITEMS_PER_PAGE, filtered.length)} จาก ${filtered.length} เรื่อง`
-                  : `Showing ${(page - 1) * ITEMS_PER_PAGE + 1}-${Math.min(page * ITEMS_PER_PAGE, filtered.length)} of ${filtered.length} films`}
+          <ScrollReveal direction="up">
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <div>
+                <FilmStrip color="pink" size="lg">
+                  <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
+                    {lang === "th" ? "ฐานข้อมูลภาพยนตร์" : "Film Database"}
+                  </h1>
+                </FilmStrip>
+                <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
+                  {lang === "th"
+                    ? `แสดง ${(page - 1) * ITEMS_PER_PAGE + 1}-${Math.min(page * ITEMS_PER_PAGE, filtered.length)} จาก ${filtered.length} เรื่อง`
+                    : `Showing ${(page - 1) * ITEMS_PER_PAGE + 1}-${Math.min(page * ITEMS_PER_PAGE, filtered.length)} of ${filtered.length} films`}
+                </p>
+              </div>
+              <ViewModeToggle value={viewMode} onChange={setViewMode} />
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+
+      {/* Filter bar section */}
+      <div className="ct-section-b ct-tint-purple py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="flex flex-wrap items-center gap-3">
+              <select
+                value={selectedGenre}
+                onChange={(e) => { setSelectedGenre(e.target.value); setPage(1); }}
+                className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
+              >
+                <option value="all">{lang === "th" ? "ทุกประเภท" : "All Genres"}</option>
+                {genres.map((g) => (<option key={g.slug} value={g.slug}>{lang === "th" ? g.nameTh : g.nameEn}</option>))}
+              </select>
+              <select
+                value={selectedYear}
+                onChange={(e) => { setSelectedYear(e.target.value); setPage(1); }}
+                className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
+              >
+                <option value="all">{lang === "th" ? "ทุกปี" : "All Years"}</option>
+                {yearOptions.map((y) => (<option key={y} value={y}>{y}</option>))}
+              </select>
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as SortOption)}
+                className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
+              >
+                <option value="newest">{lang === "th" ? "ใหม่สุด" : "Newest"}</option>
+                <option value="oldest">{lang === "th" ? "เก่าสุด" : "Oldest"}</option>
+                <option value="title-az">{lang === "th" ? "ชื่อ ก-ฮ" : "Title A-Z"}</option>
+                <option value="title-za">{lang === "th" ? "ชื่อ ฮ-ก" : "Title Z-A"}</option>
+                <option value="popular">{lang === "th" ? "ยอดนิยม" : "Popular"}</option>
+              </select>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+
+      {/* Content grid section */}
+      <div className="ct-section-c ct-tint-pink py-8 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <GradientDivider variant="pink" className="mb-8" />
+
+          {/* Content grid with animation */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${viewMode}-${page}-${selectedGenre}-${selectedYear}-${sort}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              {viewMode === "grid" ? (
+                <StaggerChildren staggerDelay={0.03} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+                  {paginated.map((film) => (
+                    <StaggerItem key={film.id}><FilmCardGrid film={film} /></StaggerItem>
+                  ))}
+                </StaggerChildren>
+              ) : viewMode === "poster" ? (
+                <StaggerChildren staggerDelay={0.03} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3">
+                  {paginated.map((film) => (
+                    <StaggerItem key={film.id}>
+                      <a href={`/films/${film.slug}`} className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] hover:-translate-y-1 hover:border-[#EC1C72]/40 hover:shadow-[0_10px_40px_rgba(236,28,114,0.15)] transition-all duration-300">
+                        {film.posterUrl ? (
+                          <Image src={film.posterUrl} alt={lang === "th" ? film.titleTh : film.titleEn} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="200px" />
+                        ) : (
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#EC1C72]/10 to-[#702874]/10 flex items-center justify-center">
+                            <span className="text-[var(--ct-text-faint)] font-display text-3xl">{(lang === "th" ? film.titleTh : film.titleEn).charAt(0)}</span>
+                          </div>
+                        )}
+                        <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-[var(--ct-bg-page)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                          <p className="text-[var(--ct-text-primary)] text-[10px] font-thai font-semibold truncate">{lang === "th" ? film.titleTh : film.titleEn}</p>
+                          <p className="text-[#F6A51B] text-[9px] font-bold">{film.year}</p>
+                        </div>
+                      </a>
+                    </StaggerItem>
+                  ))}
+                </StaggerChildren>
+              ) : (
+                <div className="rounded-xl overflow-hidden border border-[var(--ct-border)] bg-[var(--ct-bg-surface)]">
+                  {paginated.map((film, i) => (
+                    <FilmListItem key={film.id} film={film} lang={lang} index={i} />
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-[var(--ct-text-muted)] font-thai text-lg">
+                {lang === "th" ? "ไม่พบภาพยนตร์ตามเงื่อนไขที่เลือก" : "No films found matching your criteria"}
               </p>
             </div>
-            <ViewModeToggle value={viewMode} onChange={setViewMode} />
-          </div>
-        </ScrollReveal>
-
-        {/* Filter bar */}
-        <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <select
-              value={selectedGenre}
-              onChange={(e) => { setSelectedGenre(e.target.value); setPage(1); }}
-              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
-            >
-              <option value="all">{lang === "th" ? "ทุกประเภท" : "All Genres"}</option>
-              {genres.map((g) => (<option key={g.slug} value={g.slug}>{lang === "th" ? g.nameTh : g.nameEn}</option>))}
-            </select>
-            <select
-              value={selectedYear}
-              onChange={(e) => { setSelectedYear(e.target.value); setPage(1); }}
-              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
-            >
-              <option value="all">{lang === "th" ? "ทุกปี" : "All Years"}</option>
-              {yearOptions.map((y) => (<option key={y} value={y}>{y}</option>))}
-            </select>
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortOption)}
-              className="bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-secondary)] text-sm rounded-xl px-4 py-2.5 font-thai focus:border-[#EC1C72]/40 focus:outline-none transition-colors"
-            >
-              <option value="newest">{lang === "th" ? "ใหม่สุด" : "Newest"}</option>
-              <option value="oldest">{lang === "th" ? "เก่าสุด" : "Oldest"}</option>
-              <option value="title-az">{lang === "th" ? "ชื่อ ก-ฮ" : "Title A-Z"}</option>
-              <option value="title-za">{lang === "th" ? "ชื่อ ฮ-ก" : "Title Z-A"}</option>
-              <option value="popular">{lang === "th" ? "ยอดนิยม" : "Popular"}</option>
-            </select>
-          </div>
-        </ScrollReveal>
-
-        <GradientDivider variant="pink" className="mb-8" />
-
-        {/* Content grid with animation */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${viewMode}-${page}-${selectedGenre}-${selectedYear}-${sort}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            {viewMode === "grid" ? (
-              <StaggerChildren staggerDelay={0.03} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-                {paginated.map((film) => (
-                  <StaggerItem key={film.id}><FilmCardGrid film={film} /></StaggerItem>
-                ))}
-              </StaggerChildren>
-            ) : viewMode === "poster" ? (
-              <StaggerChildren staggerDelay={0.03} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3">
-                {paginated.map((film) => (
-                  <StaggerItem key={film.id}>
-                    <a href={`/films/${film.slug}`} className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] hover:-translate-y-1 hover:border-[#EC1C72]/40 hover:shadow-[0_10px_40px_rgba(236,28,114,0.15)] transition-all duration-300">
-                      {film.posterUrl ? (
-                        <Image src={film.posterUrl} alt={lang === "th" ? film.titleTh : film.titleEn} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="200px" />
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#EC1C72]/10 to-[#702874]/10 flex items-center justify-center">
-                          <span className="text-[var(--ct-text-faint)] font-display text-3xl">{(lang === "th" ? film.titleTh : film.titleEn).charAt(0)}</span>
-                        </div>
-                      )}
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-[var(--ct-bg-page)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                        <p className="text-[var(--ct-text-primary)] text-[10px] font-thai font-semibold truncate">{lang === "th" ? film.titleTh : film.titleEn}</p>
-                        <p className="text-[#F6A51B] text-[9px] font-bold">{film.year}</p>
-                      </div>
-                    </a>
-                  </StaggerItem>
-                ))}
-              </StaggerChildren>
-            ) : (
-              <div className="rounded-xl overflow-hidden border border-[var(--ct-border)] bg-[var(--ct-bg-surface)]">
-                {paginated.map((film, i) => (
-                  <FilmListItem key={film.id} film={film} lang={lang} index={i} />
-                ))}
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        {filtered.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-[var(--ct-text-muted)] font-thai text-lg">
-              {lang === "th" ? "ไม่พบภาพยนตร์ตามเงื่อนไขที่เลือก" : "No films found matching your criteria"}
-            </p>
-          </div>
-        )}
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 mt-12">
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-              className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)] transition-all font-thai"
-            >
-              {lang === "th" ? "ก่อนหน้า" : "Previous"}
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-              <button
-                key={p}
-                onClick={() => setPage(p)}
-                className={`w-10 h-10 text-sm rounded-xl transition-all font-thai ${
-                  p === page
-                    ? "bg-[#EC1C72] text-white font-bold shadow-[0_0_20px_rgba(236,28,114,0.4)]"
-                    : "bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)]"
-                }`}
-              >
-                {p}
-              </button>
-            ))}
-            <button
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-              className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)] transition-all font-thai"
-            >
-              {lang === "th" ? "ถัดไป" : "Next"}
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
+
+      {/* Pagination section */}
+      {totalPages > 1 && (
+        <div className="ct-section-d ct-tint-gold py-10 pb-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-center gap-2">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)] transition-all font-thai"
+              >
+                {lang === "th" ? "ก่อนหน้า" : "Previous"}
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                <button
+                  key={p}
+                  onClick={() => setPage(p)}
+                  className={`w-10 h-10 text-sm rounded-xl transition-all font-thai ${
+                    p === page
+                      ? "bg-[#EC1C72] text-white font-bold shadow-[0_0_20px_rgba(236,28,114,0.4)]"
+                      : "bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)]"
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="px-4 py-2 bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] text-[var(--ct-text-muted)] text-sm rounded-xl disabled:opacity-30 hover:border-[#EC1C72]/40 hover:text-[var(--ct-text-primary)] transition-all font-thai"
+              >
+                {lang === "th" ? "ถัดไป" : "Next"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

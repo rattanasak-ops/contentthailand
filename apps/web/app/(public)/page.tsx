@@ -45,10 +45,10 @@ export default function HomePage() {
 
       <GradientDivider variant="pink" />
 
-      {/* Latest Films Carousel */}
+      {/* Latest Films Carousel — pink tint */}
       <div id="latest-films">
         <ScrollReveal direction="up" delay={0.1}>
-          <section className="py-16 bg-[var(--ct-bg-elevated)]">
+          <section className="py-16 ct-section-b ct-tint-pink">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ContentCarousel
                 titleTh="ภาพยนตร์ล่าสุด"
@@ -68,10 +68,10 @@ export default function HomePage() {
 
       <GradientDivider variant="orange" />
 
-      {/* Popular Films Carousel */}
+      {/* Popular Films Carousel — warm orange tint */}
       <div id="popular-films">
         <ScrollReveal direction="up" delay={0.1}>
-          <section className="py-16 bg-[var(--ct-bg-page)]">
+          <section className="py-16 ct-section-c ct-tint-orange">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ContentCarousel
                 titleTh="ภาพยนตร์ยอดนิยม"
@@ -91,10 +91,10 @@ export default function HomePage() {
 
       <GradientDivider variant="amber" />
 
-      {/* Series Carousel */}
+      {/* Series Carousel — gold tint */}
       <div id="series">
         <ScrollReveal direction="up" delay={0.1}>
-          <section className="py-16 bg-[var(--ct-bg-elevated)]">
+          <section className="py-16 ct-section-d ct-tint-gold">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ContentCarousel
                 titleTh="ละครโทรทัศน์ล่าสุด"

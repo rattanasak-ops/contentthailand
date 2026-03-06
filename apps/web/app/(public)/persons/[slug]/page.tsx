@@ -72,7 +72,7 @@ export default function PersonDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool">
       {/* Cinematic hero backdrop */}
       <div className="relative h-[25vh] md:h-[35vh] overflow-hidden">
         {person.photoUrl ? (
@@ -170,7 +170,7 @@ export default function PersonDetailPage() {
           if (personFilms.length === 0) return null;
 
           return (
-            <div className="mt-12">
+            <div className="mt-12 ct-section-b rounded-2xl px-4 py-6 -mx-4">
               <h2 className="font-thai font-bold text-[var(--ct-text-primary)] text-xl mb-6 flex items-center gap-2">
                 <Film className="w-5 h-5 text-pink" />
                 {lang === "th" ? "ผลงาน" : "Filmography"}

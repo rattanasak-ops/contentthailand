@@ -33,7 +33,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ct-tint-gold">
         <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
         <div className="mb-10">

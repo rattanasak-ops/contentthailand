@@ -71,7 +71,7 @@ export function NewsSection({ items }: NewsSectionProps) {
   const { lang } = useLanguage();
 
   return (
-    <section className="py-20 bg-[var(--ct-bg-page)]">
+    <section className="py-20 ct-section-c ct-tint-cool">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <FilmStrip color="pink" size="md">

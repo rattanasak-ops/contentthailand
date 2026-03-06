@@ -157,44 +157,52 @@ export default function CompaniesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
+    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+      {/* Header / Filter area */}
+      <div className="ct-section-b pt-8 pb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
-        <ScrollReveal direction="up">
-          <div className="mb-8 flex items-start justify-between gap-4">
-            <div>
-              <FilmStrip color="orange" size="lg">
-                <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
-                  {lang === "th" ? "บริษัทในวงการ" : "Industry Companies"}
-                </h1>
-              </FilmStrip>
-              <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
-                {companies.length} {lang === "th" ? "บริษัท" : "companies"}
-              </p>
+          <ScrollReveal direction="up">
+            <div className="mb-8 flex items-start justify-between gap-4">
+              <div>
+                <FilmStrip color="orange" size="lg">
+                  <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
+                    {lang === "th" ? "บริษัทในวงการ" : "Industry Companies"}
+                  </h1>
+                </FilmStrip>
+                <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
+                  {companies.length} {lang === "th" ? "บริษัท" : "companies"}
+                </p>
+              </div>
+              <ViewModeToggle value={viewMode} onChange={setViewMode} />
             </div>
-            <ViewModeToggle value={viewMode} onChange={setViewMode} />
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
 
-        <GradientDivider variant="purple" className="mb-8" />
+          <GradientDivider variant="purple" />
+        </div>
+      </div>
 
-        <StaggerChildren
-          staggerDelay={0.05}
-          className={
-            viewMode === "list"
-              ? "flex flex-col gap-3"
-              : viewMode === "poster"
-              ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
-              : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          }
-        >
-          {companies.map((c) => (
-            <StaggerItem key={c.id}>
-              <CompanyCard c={c} lang={lang} viewMode={viewMode} />
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
+      {/* Main grid content */}
+      <div className="ct-section-purple ct-tint-purple pt-8 pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <StaggerChildren
+            staggerDelay={0.05}
+            className={
+              viewMode === "list"
+                ? "flex flex-col gap-3"
+                : viewMode === "poster"
+                ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+                : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            }
+          >
+            {companies.map((c) => (
+              <StaggerItem key={c.id}>
+                <CompanyCard c={c} lang={lang} viewMode={viewMode} />
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
+        </div>
       </div>
     </div>
   );

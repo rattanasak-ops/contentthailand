@@ -37,47 +37,54 @@ export default function PersonsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)] pt-8 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
+    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+      {/* Header & Filter Section */}
+      <div className="ct-section-b pt-8 pb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6"><Breadcrumb items={breadcrumbs} /></div>
 
-        <ScrollReveal direction="up">
-          <div className="mb-8 flex items-start justify-between gap-4">
-            <div>
-              <FilmStrip color="pink" size="lg">
-                <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
-                  {lang === "th" ? "บุคลากรในวงการภาพยนตร์" : "Film Industry Personnel"}
-                </h1>
-              </FilmStrip>
-              <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
-                {filtered.length} {lang === "th" ? "คน" : "people"}
-              </p>
+          <ScrollReveal direction="up">
+            <div className="mb-8 flex items-start justify-between gap-4">
+              <div>
+                <FilmStrip color="pink" size="lg">
+                  <h1 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)]">
+                    {lang === "th" ? "บุคลากรในวงการภาพยนตร์" : "Film Industry Personnel"}
+                  </h1>
+                </FilmStrip>
+                <p className="text-[var(--ct-text-muted)] text-sm font-thai mt-3 ml-1">
+                  {filtered.length} {lang === "th" ? "คน" : "people"}
+                </p>
+              </div>
+              <ViewModeToggle value={viewMode} onChange={setViewMode} />
             </div>
-            <ViewModeToggle value={viewMode} onChange={setViewMode} />
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
 
-        {/* Role filter */}
-        <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-wrap items-center gap-2 mb-6">
-            {([["all", "ทั้งหมด", "All"], ["director", "ผู้กำกับ", "Directors"], ["actor", "นักแสดง", "Actors"], ["producer", "โปรดิวเซอร์", "Producers"]] as const).map(([key, th, en]) => (
-              <button
-                key={key}
-                onClick={() => setRoleFilter(key)}
-                className={`relative px-4 py-2 rounded-xl text-sm font-thai transition-all duration-300 ${
-                  roleFilter === key
-                    ? "bg-[#F6A51B]/15 text-[#F6A51B] border border-[#F6A51B]/20 shadow-[0_0_15px_rgba(246,165,27,0.1)]"
-                    : "text-[var(--ct-text-muted)] hover:text-[var(--ct-text-secondary)] hover:bg-[var(--ct-bg-hover)] border border-transparent"
-                }`}
-              >
-                {lang === "th" ? th : en}
-              </button>
-            ))}
-          </div>
-        </ScrollReveal>
+          {/* Role filter */}
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              {([["all", "ทั้งหมด", "All"], ["director", "ผู้กำกับ", "Directors"], ["actor", "นักแสดง", "Actors"], ["producer", "โปรดิวเซอร์", "Producers"]] as const).map(([key, th, en]) => (
+                <button
+                  key={key}
+                  onClick={() => setRoleFilter(key)}
+                  className={`relative px-4 py-2 rounded-xl text-sm font-thai transition-all duration-300 ${
+                    roleFilter === key
+                      ? "bg-[#F6A51B]/15 text-[#F6A51B] border border-[#F6A51B]/20 shadow-[0_0_15px_rgba(246,165,27,0.1)]"
+                      : "text-[var(--ct-text-muted)] hover:text-[var(--ct-text-secondary)] hover:bg-[var(--ct-bg-hover)] border border-transparent"
+                  }`}
+                >
+                  {lang === "th" ? th : en}
+                </button>
+              ))}
+            </div>
+          </ScrollReveal>
 
-        <GradientDivider variant="amber" className="mb-8" />
+          <GradientDivider variant="amber" />
+        </div>
+      </div>
 
+      {/* Main Content Section */}
+      <div className="ct-section-c ct-tint-gold py-10 pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Content */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -108,6 +115,7 @@ export default function PersonsPage() {
             )}
           </motion.div>
         </AnimatePresence>
+        </div>
       </div>
     </div>
   );

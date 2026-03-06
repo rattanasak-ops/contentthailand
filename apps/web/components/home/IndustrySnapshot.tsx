@@ -126,7 +126,7 @@ export function IndustrySnapshot() {
   const isInView = useInView(chartRef, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-16 relative overflow-hidden" style={{ backgroundColor: "color-mix(in srgb, var(--ct-bg-page), black 8%)" }}>
+    <section className="py-16 relative overflow-hidden ct-section-d ct-tint-purple">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Chart Area - 3 cols */}

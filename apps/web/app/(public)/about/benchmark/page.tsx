@@ -146,7 +146,7 @@ export default function BenchmarkPage() {
   const { lang } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool">
       {/* Hero */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(112,40,116,0.08) 0%, transparent 60%)" }} />

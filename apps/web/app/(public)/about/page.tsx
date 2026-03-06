@@ -378,7 +378,7 @@ export default function AboutPage() {
       </section>
 
       {/* ═══ ABOUT — Full-bleed visual + text ═══ */}
-      <section className="relative py-16 md:py-20">
+      <section className="relative py-16 md:py-20 ct-section-b ct-tint-purple">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
             {/* Visual — LARGE 3-column span */}
@@ -556,7 +556,7 @@ export default function AboutPage() {
       </section>
 
       {/* ═══ VALUES — 4 compact cards with big icons ═══ */}
-      <section className="relative py-14">
+      <section className="relative py-14 ct-section-c ct-tint-cool">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealSection>
             <h2 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)] text-center mb-8">
@@ -667,7 +667,7 @@ export default function AboutPage() {
       </section>
 
       {/* ═══ ORGANIZATIONS — Full-width gradient cards ═══ */}
-      <section className="relative py-14">
+      <section className="relative py-14 ct-section-d ct-tint-gold">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealSection>
             <h2 className="font-thai font-bold text-2xl md:text-3xl text-[var(--ct-text-primary)] text-center mb-8">

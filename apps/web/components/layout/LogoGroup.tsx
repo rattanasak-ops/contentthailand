@@ -31,22 +31,24 @@ export function LogoGroup({ variant = "navbar" }: LogoGroupProps) {
           />
         </div>
 
-        {/* Brand text */}
-        <div className="flex flex-col">
+        {/* Brand text — stacked: CONTENT on top, THAILAND below */}
+        <div className="flex flex-col leading-none">
           <span
-            className={`font-display tracking-wider leading-tight transition-all duration-500 group-hover/ct:tracking-widest ${
-              isHero ? "text-xl" : "text-base"
+            className={`font-display font-bold tracking-[0.15em] text-[var(--ct-text-primary)] transition-all duration-500 group-hover/ct:text-orange ${
+              isHero ? "text-lg" : "text-sm"
             }`}
           >
-            <span className="text-[var(--ct-text-primary)] transition-colors duration-300 group-hover/ct:text-orange">
-              CONTENT
-            </span>{" "}
-            <span className="text-pink transition-colors duration-300 group-hover/ct:text-pink-light">
-              THAILAND
-            </span>
+            CONTENT
+          </span>
+          <span
+            className={`font-display font-bold tracking-[0.15em] text-[#702874] transition-all duration-500 group-hover/ct:text-pink ${
+              isHero ? "text-lg" : "text-sm"
+            }`}
+          >
+            THAILAND
           </span>
           {/* Underline sweep */}
-          <div className="h-[1.5px] w-0 bg-gradient-to-r from-orange via-pink to-purple transition-all duration-700 ease-out group-hover/ct:w-full" />
+          <div className="h-[1.5px] w-0 bg-gradient-to-r from-orange via-pink to-purple transition-all duration-700 ease-out group-hover/ct:w-full mt-0.5" />
           {(isFooter || isHero) && (
             <span className="text-[var(--ct-text-muted)] text-[10px] mt-0.5 transition-colors duration-500 group-hover/ct:text-[var(--ct-text-secondary)]">
               {t(

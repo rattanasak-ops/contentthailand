@@ -17,7 +17,7 @@ export function FeaturedCompanies() {
   const { lang } = useLanguage();
 
   return (
-    <section className="py-16 relative overflow-hidden" style={{ backgroundColor: "color-mix(in srgb, var(--ct-bg-page), var(--ct-bg-surface) 30%)" }}>
+    <section className="py-16 relative overflow-hidden ct-section-b ct-tint-purple">
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(112,40,116,0.03) 0%, transparent 70%)" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

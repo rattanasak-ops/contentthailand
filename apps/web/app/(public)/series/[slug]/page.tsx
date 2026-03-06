@@ -43,7 +43,7 @@ export default function SeriesDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--ct-bg-page)]">
+    <div className="min-h-screen bg-[var(--ct-bg-page)] ct-tint-cool">
       <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         {show.coverUrl ? (
           <>
@@ -128,7 +128,7 @@ export default function SeriesDetailPage() {
         </div>
 
         {related.length > 0 && (
-          <section className="mt-16 pb-20">
+          <section className="mt-16 pb-20 ct-section-b rounded-2xl px-4 py-6 -mx-4">
             <FilmStrip color="orange" size="md">
               <h2 className="font-thai font-bold text-xl text-[var(--ct-text-primary)]">{lang === "th" ? "ละครที่เกี่ยวข้อง" : "Related Series"}</h2>
             </FilmStrip>

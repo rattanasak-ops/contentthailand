@@ -54,7 +54,7 @@ const navItems: NavItem[] = [
     children: [
       { href: "/companies", labelTh: "บริษัททั้งหมด", labelEn: "All Companies" },
       { href: "/companies?type=production", labelTh: "บริษัทผลิต", labelEn: "Production" },
-      { href: "/companies?type=broadcaster", labelTh: "สถานีโทรทัศน์", labelEn: "Broadcasters" },
+      { href: "/companies?type=post-production", labelTh: "Post Production", labelEn: "Post Production" },
       { href: "/companies?type=distribution", labelTh: "จัดจำหน่าย", labelEn: "Distribution" },
     ],
   },
