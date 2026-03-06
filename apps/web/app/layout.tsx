@@ -3,7 +3,7 @@ import Script from "next/script";
 import { playfair, sarabun, notoSansThai, jetbrainsMono } from "@/lib/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { SplashScreen } from "@/components/layout/SplashScreen";
+
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "ฐานข้อมูลภาพยนตร์",
   ],
   icons: {
-    icon: "/icon.svg",
+    icon: "/icon.png",
   },
   openGraph: {
     type: "website",
@@ -59,7 +59,6 @@ export default function RootLayout({
         className={`${playfair.variable} ${sarabun.variable} ${notoSansThai.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <SplashScreen>
             {/* Accessibility: skip to content */}
             <a
               href="#main-content"
@@ -69,7 +68,6 @@ export default function RootLayout({
             </a>
             {children}
             <Toaster richColors position="top-right" />
-          </SplashScreen>
         </ThemeProvider>
       </body>
     </html>

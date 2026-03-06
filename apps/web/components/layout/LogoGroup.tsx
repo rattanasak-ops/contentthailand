@@ -22,8 +22,9 @@ export function LogoGroup({ variant = "navbar" }: LogoGroupProps) {
         {/* Flame icon */}
         <div className="relative">
           <div className="absolute inset-0 rounded-full bg-pink/0 blur-lg transition-all duration-700 group-hover/ct:bg-pink/25 group-hover/ct:scale-[1.8]" />
-          <Image
-            src="/logos/content-thailand-icon.svg"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logos/content-thailand-icon.png"
             alt="Content Thailand"
             width={isHero ? 56 : 40}
             height={isHero ? 56 : 40}

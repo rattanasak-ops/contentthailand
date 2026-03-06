@@ -1,30 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Content Thailand Official Logo - Stylized Phoenix/Bird -->
-  <defs>
-    <linearGradient id="grad-orange" x1="0.5" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#F7941D"/>
-      <stop offset="100%" stop-color="#F15A29"/>
-    </linearGradient>
-    <linearGradient id="grad-pink" x1="0.5" y1="0" x2="0.5" y2="1">
-      <stop offset="0%" stop-color="#EC1C72"/>
-      <stop offset="60%" stop-color="#C2185B"/>
-      <stop offset="100%" stop-color="#9C27B0"/>
-    </linearGradient>
-    <linearGradient id="grad-purple" x1="0.5" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#9C27B0"/>
-      <stop offset="100%" stop-color="#6A1B9A"/>
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" fill="none">
+  <!-- Content Thailand Logo: Solid flame C shape -->
 
-  <!-- Main body curve (purple) - the C/tail shape -->
-  <path d="M42 105C18 92 6 68 12 42C18 18 38 4 62 10C48 18 38 32 35 50C32 68 38 86 50 100C47 102 44 104 42 105Z" fill="url(#grad-purple)"/>
+  <!-- 1. Pink/Magenta - THICK solid left crescent (single solid shape) -->
+  <path d="M110 0 C55 12, 0 65, 0 125 C0 185, 30 230, 55 235 C35 215, 22 185, 22 150 C22 100, 55 50, 110 10 Z" fill="#E91E8C"/>
 
-  <!-- Middle wing (pink/magenta) -->
-  <path d="M62 10C70 5 80 4 88 12C80 28 74 42 76 58C78 72 66 88 50 100C60 82 62 62 58 44C55 28 58 16 62 10Z" fill="url(#grad-pink)"/>
+  <!-- 2. Deep pink inner fill -->
+  <path d="M110 10 C65 40, 35 85, 35 135 C35 175, 48 205, 55 235 C42 210, 32 180, 32 148 C32 108, 55 60, 110 10Z" fill="#D6246E"/>
 
-  <!-- Upper wing (orange) -->
-  <path d="M76 58C74 42 80 28 88 12C96 20 100 34 96 50C93 64 82 80 66 92C78 78 80 66 76 58Z" fill="url(#grad-orange)"/>
+  <!-- 3. Orange-Red - THICK right flame -->
+  <path d="M110 0 C145 -2, 175 25, 188 65 C200 105, 192 152, 170 185 C150 212, 125 225, 105 228 C140 215, 168 185, 180 148 C190 112, 185 72, 168 42 C155 20, 135 5, 110 0Z" fill="#EE3D24"/>
 
-  <!-- Top accent (yellow-orange) -->
-  <path d="M96 50C100 34 96 22 92 14C102 24 106 38 102 54C98 68 88 80 74 90C86 78 94 64 96 50Z" fill="#F7941D"/>
+  <!-- 4. Orange overlap -->
+  <path d="M168 42 C182 72, 188 108, 180 142 C172 112, 155 88, 132 72 C112 60, 88 62, 72 72 C92 58, 118 52, 142 55 C155 58, 164 48, 168 42Z" fill="#F26522"/>
+
+  <!-- 5. Yellow/Gold band -->
+  <path d="M180 142 C175 168, 160 190, 138 205 C118 218, 95 222, 78 215 C102 225, 130 215, 152 195 C168 178, 178 158, 180 142Z" fill="#F9A01B"/>
+
+  <!-- 6. Gold glow -->
+  <path d="M188 108 C186 132, 178 155, 165 174 C148 195, 128 208, 105 212 C130 205, 155 190, 170 168 C182 148, 188 125, 188 108Z" fill="#FBB040"/>
+
+  <!-- 7. Dark crimson bottom curl (THICK) -->
+  <path d="M55 235 C78 252, 108 258, 138 252 C168 242, 190 222, 198 195 C202 182, 200 168, 195 158 C192 178, 180 200, 160 215 C138 228, 112 235, 88 232 C70 228, 58 222, 55 235Z" fill="#9B2335"/>
+
+  <!-- 8. Red inner curl -->
+  <path d="M195 158 C194 175, 186 195, 172 208 C155 222, 132 228, 112 225 C135 228, 156 220, 170 205 C182 192, 190 175, 194 158Z" fill="#BE1E2D"/>
+
+  <!-- 9. Purple center spiral -->
+  <path d="M112 225 C94 220, 80 208, 74 192 C68 176, 72 158, 84 148 C74 162, 72 180, 80 198 C88 212, 100 222, 115 225Z" fill="#7B2D8E"/>
+
+  <!-- 10. Deep purple knot -->
+  <path d="M84 148 C92 138, 105 134, 116 138 C106 136, 96 142, 88 154 C82 164, 78 176, 80 188 C76 172, 76 156, 84 148Z" fill="#5C2078"/>
 </svg>

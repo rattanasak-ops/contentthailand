@@ -1,26 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" fill="none">
-  <!-- Content Thailand Official Logo - Icon + Text -->
-  <defs>
-    <linearGradient id="grad-orange" x1="0.5" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#F7941D"/>
-      <stop offset="100%" stop-color="#F15A29"/>
-    </linearGradient>
-    <linearGradient id="grad-pink" x1="0.5" y1="0" x2="0.5" y2="1">
-      <stop offset="0%" stop-color="#EC1C72"/>
-      <stop offset="60%" stop-color="#C2185B"/>
-      <stop offset="100%" stop-color="#9C27B0"/>
-    </linearGradient>
-    <linearGradient id="grad-purple" x1="0.5" y1="0" x2="0.3" y2="1">
-      <stop offset="0%" stop-color="#9C27B0"/>
-      <stop offset="100%" stop-color="#6A1B9A"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Phoenix Icon -->
-  <g transform="translate(0, 5)">
-    <path d="M42 100C18 88 6 65 12 40C18 16 38 2 62 8C48 16 38 30 35 48C32 65 38 82 50 95C47 97 44 99 42 100Z" fill="url(#grad-purple)"/>
-    <path d="M62 8C70 3 80 2 88 10C80 25 74 40 76 55C78 68 66 84 50 95C60 78 62 58 58 42C55 26 58 14 62 8Z" fill="url(#grad-pink)"/>
-    <path d="M76 55C74 40 80 25 88 10C96 18 100 32 96 48C93 62 82 76 66 88C78 74 80 62 76 55Z" fill="url(#grad-orange)"/>
-    <path d="M96 48C100 32 96 20 92 12C102 22 106 36 102 50C98 64 88 76 74 86C86 74 94 62 96 48Z" fill="#F7941D"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 140" fill="none">
+  <!-- Content Thailand Logo: Swirling flame/phoenix forming a C shape -->
+  <path d="M 52 135 C 22 118, 2 88, 6 55 C 9 28, 25 8, 45 0 C 35 12, 26 30, 24 50 C 22 72, 30 98, 52 135Z" fill="#7B2D8E"/>
+  <path d="M 45 0 C 56 -3, 70 3, 80 18 C 72 34, 66 52, 68 66 C 70 82, 60 105, 52 135 C 48 108, 46 80, 48 60 C 50 40, 48 18, 45 0Z" fill="#D6246E"/>
+  <path d="M 80 18 C 88 30, 94 46, 90 62 C 86 78, 76 94, 62 108 C 72 92, 74 78, 68 66 C 66 52, 72 34, 80 18Z" fill="#EE3D24"/>
+  <path d="M 90 62 C 94 46, 90 32, 85 22 C 95 34, 100 48, 96 64 C 93 78, 84 90, 72 100 C 82 86, 88 74, 90 62Z" fill="#F9A01B"/>
 </svg>
