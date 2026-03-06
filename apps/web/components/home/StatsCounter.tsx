@@ -84,7 +84,7 @@ function StatIcon({ type, color }: { type: string; color: string }) {
   return <>{icons[type]}</>;
 }
 
-function AnimatedBorder({ color, gradient }: { color: string; gradient: string }) {
+function AnimatedBorder({ color }: { color: string; gradient: string }) {
   return (
     <>
       {/* Animated rotating gradient border */}
