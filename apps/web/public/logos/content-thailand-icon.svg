@@ -1,13 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110" fill="none">
-  <!-- Flame/Bird Icon Only -->
-  <g transform="translate(5, 5)">
-    <!-- Outer purple-pink curve (the C shape) -->
-    <path d="M40 95C15 85 0 60 5 35C10 12 30 0 55 5C40 12 30 28 28 45C26 65 32 80 40 95Z" fill="#702874"/>
-    <!-- Pink middle flame -->
-    <path d="M55 5C63 0 73 0 80 8C73 22 68 36 70 52C72 66 58 82 40 95C52 75 55 55 52 38C50 22 52 12 55 5Z" fill="#EC1C72"/>
-    <!-- Orange flame -->
-    <path d="M70 52C68 36 73 22 80 8C88 16 92 30 88 46C85 60 75 76 58 90C70 78 74 65 70 52Z" fill="#F76532"/>
-    <!-- Yellow/amber inner flame -->
-    <path d="M88 46C92 30 88 18 84 12C93 22 96 36 93 50C90 64 80 78 65 88C80 72 86 60 88 46Z" fill="#F6A51B"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Content Thailand Official Logo - Stylized Phoenix/Bird -->
+  <defs>
+    <linearGradient id="grad-orange" x1="0.5" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#F7941D"/>
+      <stop offset="100%" stop-color="#F15A29"/>
+    </linearGradient>
+    <linearGradient id="grad-pink" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#EC1C72"/>
+      <stop offset="60%" stop-color="#C2185B"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
+    <linearGradient id="grad-purple" x1="0.5" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#9C27B0"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main body curve (purple) - the C/tail shape -->
+  <path d="M42 105C18 92 6 68 12 42C18 18 38 4 62 10C48 18 38 32 35 50C32 68 38 86 50 100C47 102 44 104 42 105Z" fill="url(#grad-purple)"/>
+
+  <!-- Middle wing (pink/magenta) -->
+  <path d="M62 10C70 5 80 4 88 12C80 28 74 42 76 58C78 72 66 88 50 100C60 82 62 62 58 44C55 28 58 16 62 10Z" fill="url(#grad-pink)"/>
+
+  <!-- Upper wing (orange) -->
+  <path d="M76 58C74 42 80 28 88 12C96 20 100 34 96 50C93 64 82 80 66 92C78 78 80 66 76 58Z" fill="url(#grad-orange)"/>
+
+  <!-- Top accent (yellow-orange) -->
+  <path d="M96 50C100 34 96 22 92 14C102 24 106 38 102 54C98 68 88 80 74 90C86 78 94 64 96 50Z" fill="#F7941D"/>
 </svg>
