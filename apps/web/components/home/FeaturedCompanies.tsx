@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef, useCallback } from "react";
 import Link from "next/link";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { companies } from "@/lib/mock-data/companies";
 import { films } from "@/lib/mock-data/films";
@@ -13,6 +15,139 @@ function getFilmCount(companyId: number) {
   return films.filter((f) => f.companyId === companyId).length;
 }
 
+
+/* ── CompanyCard ── */
+interface CompanyCardProps {
+  company: (typeof companies)[number];
+  filmCount: number;
+  lang: string;
+}
+
+function CompanyCard({ company, filmCount, lang }: CompanyCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+
+  // 3D tilt — perspective 800px, ±6 degrees
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [6, -6]), { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-6, 6]), { stiffness: 150, damping: 20 });
+
+  // Mouse-follow glow
+  const glowBackground = useTransform(
+    [mouseX, mouseY],
+    ([x, y]) =>
+      `radial-gradient(200px circle at ${(x as number) * 100}% ${(y as number) * 100}%, rgba(112,40,116,0.2), transparent 70%)`
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      mouseX.set((e.clientX - rect.left) / rect.width);
+      mouseY.set((e.clientY - rect.top) / rect.height);
+    },
+    [mouseX, mouseY]
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0.5);
+    mouseY.set(0.5);
+  }, [mouseX, mouseY]);
+
+  return (
+    <motion.div style={{ perspective: 800 }}>
+      <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}>
+        <div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className="group relative rounded-xl p-[2px] will-change-transform transition-all duration-500 ease-out
+            hover:-translate-y-3
+            hover:shadow-[0_12px_40px_rgba(112,40,116,0.2),0_0_60px_rgba(112,40,116,0.1),0_20px_50px_rgba(0,0,0,0.25)]"
+          style={{
+            background: "var(--ct-border)",
+          }}
+        >
+          {/* Animated gradient border — visible on hover (uses transform rotate for cross-browser support) */}
+          <div
+            className="absolute inset-[-1px] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden"
+          >
+            <div
+              className="absolute inset-[-50%] animate-[spin_3s_linear_infinite]"
+              style={{
+                background: "conic-gradient(from 0deg, #702874, #EC1C72, #F76532, #EC1C72, #702874)",
+              }}
+            />
+          </div>
+
+          {/* Inner card body */}
+          <Link
+            href={`/companies/${company.slug}`}
+            className="relative block rounded-[10px] overflow-hidden z-10"
+            style={{ backgroundColor: "var(--ct-bg-elevated)" }}
+          >
+            {/* Mouse-follow glow */}
+            <motion.div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20 rounded-[10px]"
+              style={{ background: glowBackground }}
+            />
+
+            {/* Glassmorphism overlay on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10 rounded-[10px] backdrop-blur-[2px]"
+              style={{ background: "rgba(255,255,255,0.03)" }}
+            />
+
+            <div className="relative p-5 text-center z-20">
+              {/* Logo */}
+              <div className="w-20 h-20 mx-auto mb-3 rounded-2xl overflow-hidden shadow-sm group-hover:shadow-md transition-shadow bg-white">
+                {company.logoUrl ? (
+                  <img
+                    src={company.logoUrl}
+                    alt={company.nameEn}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-[var(--ct-bg-hover)] flex items-center justify-center">
+                    <span className="text-2xl font-bold text-[var(--ct-text-faint)]">
+                      {company.nameEn.charAt(0)}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Name */}
+              <h3 className="text-[var(--ct-text-primary)] text-sm font-thai font-semibold leading-tight group-hover:text-[#702874] transition-colors duration-300 line-clamp-2 min-h-[2.5rem]">
+                {lang === "th" ? company.nameTh : company.nameEn}
+              </h3>
+
+              {/* Film count badge with glow */}
+              <div className="flex items-center justify-center gap-2 mt-2">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs text-[var(--ct-text-faint)] border border-transparent transition-all duration-500
+                  group-hover:border-[rgba(112,40,116,0.3)] group-hover:text-[#702874]
+                  group-hover:shadow-[0_0_12px_rgba(112,40,116,0.3),0_0_4px_rgba(236,28,114,0.2)]
+                  group-hover:animate-pulse">
+                  <Film className="w-3 h-3" />
+                  {filmCount} {lang === "th" ? "เรื่อง" : "films"}
+                </span>
+              </div>
+
+              {/* Hover arrow */}
+              <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="inline-flex items-center gap-1 text-[#702874] text-xs font-thai group-hover:gap-2 transition-[gap] duration-300">
+                  {lang === "th" ? "ดูรายละเอียด" : "View Details"}
+                  <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ── Main Section ── */
 export function FeaturedCompanies() {
   const { lang } = useLanguage();
 
@@ -43,54 +178,7 @@ export function FeaturedCompanies() {
             const filmCount = getFilmCount(company.id);
             return (
               <StaggerItem key={company.id}>
-                <Link
-                  href={`/companies/${company.slug}`}
-                  className="group block rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg"
-                  style={{
-                    backgroundColor: "var(--ct-bg-elevated)",
-                    border: "1px solid var(--ct-border)",
-                  }}
-                >
-                  <div className="p-5 text-center">
-                    {/* Logo */}
-                    <div className="w-20 h-20 mx-auto mb-3 rounded-2xl overflow-hidden shadow-sm group-hover:shadow-md transition-shadow bg-white">
-                      {company.logoUrl ? (
-                        <img
-                          src={company.logoUrl}
-                          alt={company.nameEn}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-[var(--ct-bg-hover)] flex items-center justify-center">
-                          <span className="text-2xl font-bold text-[var(--ct-text-faint)]">
-                            {company.nameEn.charAt(0)}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Name */}
-                    <h3 className="text-[var(--ct-text-primary)] text-sm font-thai font-semibold leading-tight group-hover:text-[#702874] transition-colors line-clamp-2 min-h-[2.5rem]">
-                      {lang === "th" ? company.nameTh : company.nameEn}
-                    </h3>
-
-                    {/* Meta */}
-                    <div className="flex items-center justify-center gap-2 mt-2">
-                      <span className="inline-flex items-center gap-1 text-[var(--ct-text-faint)] text-xs">
-                        <Film className="w-3 h-3" />
-                        {filmCount} {lang === "th" ? "เรื่อง" : "films"}
-                      </span>
-                    </div>
-
-                    {/* Hover arrow */}
-                    <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="inline-flex items-center gap-1 text-[#702874] text-xs font-thai">
-                        {lang === "th" ? "ดูรายละเอียด" : "View Details"}
-                        <ArrowRight className="w-3 h-3" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                <CompanyCard company={company} filmCount={filmCount} lang={lang} />
               </StaggerItem>
             );
           })}

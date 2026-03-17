@@ -227,11 +227,11 @@ function StatCard({
         />
 
         {/* Glass content layer */}
-        <div className="relative z-10 p-7 md:p-8">
+        <div className="relative z-10 p-4 md:p-5">
           {/* Icon + Label row */}
-          <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center gap-2.5 mb-3">
             <motion.div
-              className="w-12 h-12 rounded-xl flex items-center justify-center relative overflow-hidden"
+              className="w-10 h-10 rounded-lg flex items-center justify-center relative overflow-hidden"
               whileHover={{ scale: 1.15, rotate: 5 }}
               transition={{ type: "spring", stiffness: 400 }}
               style={{
@@ -247,9 +247,9 @@ function StatCard({
           </div>
 
           {/* Big number with gradient */}
-          <div className="mb-4">
+          <div className="mb-2">
             <motion.span
-              className="font-display text-5xl md:text-6xl font-black tracking-tight inline-block"
+              className="font-number text-4xl md:text-5xl font-bold tracking-tight inline-block tabular-nums"
               style={{
                 background: gradient,
                 WebkitBackgroundClip: "text",
@@ -302,7 +302,7 @@ function StatCard({
 
 export function StatsCounter() {
   return (
-    <section className="relative py-24 md:py-32 ct-section-a ct-tint-purple overflow-hidden">
+    <section className="relative py-12 md:py-16 ct-section-a ct-tint-purple overflow-hidden">
       {/* Premium ambient background effects */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -334,7 +334,7 @@ export function StatsCounter() {
       {/* Section title */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          className="text-center mb-14 md:mb-16"
+          className="text-center mb-8 md:mb-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -358,7 +358,7 @@ export function StatsCounter() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-7">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {stats.map((stat, i) => (
             <StatCard key={stat.labelEn} {...stat} index={i} />
           ))}

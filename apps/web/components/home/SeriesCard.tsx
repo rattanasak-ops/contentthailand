@@ -20,9 +20,16 @@ export function SeriesCard({ series }: SeriesCardProps) {
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
-  // 3D tilt — smooth, no jitter
-  const rotateX = useSpring(useTransform(mouseY, [0, 1], [4, -4]), { stiffness: 150, damping: 25 });
-  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-4, 4]), { stiffness: 150, damping: 25 });
+  // 3D tilt — gentle enough to feel premium, not nauseating
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [6, -6]), { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-6, 6]), { stiffness: 150, damping: 20 });
+
+  // Single radial glow that follows cursor — defined once, not in JSX
+  const glowBackground = useTransform(
+    [mouseX, mouseY],
+    ([x, y]) =>
+      `radial-gradient(300px circle at ${(x as number) * 100}% ${(y as number) * 100}%, rgba(247,101,50,0.15), transparent 70%)`
+  );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
@@ -41,32 +48,28 @@ export function SeriesCard({ series }: SeriesCardProps) {
 
   return (
     <motion.div
-      style={{ perspective: 800, transformStyle: "preserve-3d" }}
+      style={{ perspective: 800 }}
       className="flex-shrink-0 snap-start"
     >
-      <motion.div style={{ rotateX, rotateY }}>
+      <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}>
         <Link
           ref={cardRef}
           href={`/series/${series.slug}`}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="group relative block w-[280px] md:w-[320px] rounded-xl overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)]
-            transition-all duration-[400ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
-            hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(247,101,50,0.15),0_0_0_1px_rgba(247,101,50,0.2)]"
+          className="group relative block w-[280px] md:w-[320px] rounded-xl overflow-hidden bg-[var(--ct-bg-elevated)] border border-[var(--ct-border)] will-change-transform
+            transition-[transform,box-shadow,border-color] duration-500 ease-out
+            hover:-translate-y-3
+            hover:border-[rgba(247,101,50,0.4)]
+            hover:shadow-[0_8px_30px_rgba(247,101,50,0.2),0_0_60px_rgba(112,40,116,0.1),0_20px_50px_rgba(0,0,0,0.3)]"
         >
-          {/* Radial glow follows mouse */}
+          {/* Radial glow follows mouse — single layer, GPU-friendly */}
           <motion.div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20 rounded-xl"
-            style={{
-              background: useTransform(
-                [mouseX, mouseY],
-                ([x, y]) =>
-                  `radial-gradient(320px circle at ${(x as number) * 100}% ${(y as number) * 100}%, rgba(247,101,50,0.1), transparent 70%)`
-              ),
-            }}
+            style={{ background: glowBackground }}
           />
 
-          {/* Static top edge glow — orange CI */}
+          {/* Top edge accent line */}
           <div className="absolute top-0 left-0 right-0 h-[2px] z-30 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-transparent via-[#F76532] to-transparent" />
 
           {/* Cover - 16:9 */}
@@ -76,7 +79,7 @@ export function SeriesCard({ series }: SeriesCardProps) {
                 src={series.coverUrl}
                 alt={title}
                 fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                className="object-cover transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.06] group-hover:brightness-110"
                 sizes="(max-width: 768px) 280px, 320px"
               />
             ) : (
@@ -85,24 +88,34 @@ export function SeriesCard({ series }: SeriesCardProps) {
               </div>
             )}
 
+            {/* Shine sweep effect on hover */}
+            <div
+              className="absolute inset-0 z-20 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:animate-shine-sweep"
+              style={{
+                background: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%)",
+                transform: "translateX(-100%)",
+              }}
+            />
+
             {/* Channel badge */}
             {series.channel && (
-              <div className="absolute top-3 left-3 px-2.5 py-1 text-[var(--ct-text-secondary)] text-[10px] rounded-md font-thai backdrop-blur-md border border-[var(--ct-border)] z-10" style={{ backgroundColor: "color-mix(in srgb, var(--ct-bg-page), transparent 30%)" }}>
+              <div className="absolute top-3 left-3 px-2.5 py-1 text-[var(--ct-text-secondary)] text-[10px] rounded-md font-thai backdrop-blur-md border border-[var(--ct-border)] group-hover:border-[rgba(247,101,50,0.3)] transition-[border-color] duration-300 z-10" style={{ backgroundColor: "color-mix(in srgb, var(--ct-bg-page), transparent 30%)" }}>
                 {series.channel}
               </div>
             )}
 
             {/* Year badge */}
-            <div className="absolute top-3 right-3 px-2.5 py-1 bg-[#F6A51B] text-[#0E0D2A] text-[11px] font-bold rounded-lg z-10 shadow-lg">
+            <div className="absolute top-3 right-3 px-2.5 py-1 bg-[#F6A51B] text-[#0E0D2A] text-[11px] font-bold rounded-lg z-10
+              transition-shadow duration-500 shadow-lg group-hover:shadow-[0_0_16px_rgba(246,165,27,0.5)]">
               {series.year}
             </div>
 
             {/* Hover overlay */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-[400ms] flex flex-col justify-end p-4 z-10" style={{ background: "linear-gradient(to top, var(--ct-bg-page), color-mix(in srgb, var(--ct-bg-page), transparent 40%), transparent)" }}>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex flex-col justify-end p-4 z-10" style={{ background: "linear-gradient(to top, var(--ct-bg-page) 5%, color-mix(in srgb, var(--ct-bg-page), transparent 20%) 40%, transparent 80%)" }}>
               {synopsis && (
                 <p className="text-[var(--ct-text-secondary)] text-xs font-body line-clamp-2 mb-2 leading-relaxed">{synopsis}</p>
               )}
-              <span className="inline-flex items-center gap-1 text-[#F76532] text-xs font-thai font-semibold group-hover:gap-2 transition-all">
+              <span className="inline-flex items-center gap-1 text-[#F76532] text-xs font-thai font-semibold group-hover:gap-2 transition-[gap] duration-300">
                 {lang === "th" ? "ดูรายละเอียด" : "View details"}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </span>

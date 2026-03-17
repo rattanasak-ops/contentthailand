@@ -1,5 +1,6 @@
 import {
   Playfair_Display,
+  Space_Grotesk,
   Sarabun,
   Noto_Sans_Thai,
   JetBrains_Mono,
@@ -9,6 +10,13 @@ export const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
+});
+
+export const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-number",
+  display: "swap",
+  weight: ["700"],
 });
 
 export const sarabun = Sarabun({

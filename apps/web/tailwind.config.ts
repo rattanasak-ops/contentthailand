@@ -87,6 +87,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-display)", "serif"],
+        number: ["var(--font-number)", "sans-serif"],
         thai: ["var(--font-thai)", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
@@ -100,6 +101,10 @@ const config: Config = {
         "film-scroll": "filmScroll 20s linear infinite",
         "count-up": "countUp 2s ease-out forwards",
         shimmer: "shimmer 1.8s ease-in-out infinite",
+        "shine-sweep": "shineSweep 0.8s ease-in-out",
+        "aurora-rotate": "auroraRotate 3s linear infinite",
+        "glow-pulse": "glowPulse 2s ease-in-out infinite",
+        "text-shimmer": "textShimmer 2s linear infinite",
       },
       keyframes: {
         filmScroll: {
@@ -109,6 +114,22 @@ const config: Config = {
         shimmer: {
           "0%": { backgroundPosition: "-1000px 0" },
           "100%": { backgroundPosition: "1000px 0" },
+        },
+        shineSweep: {
+          "0%": { transform: "translateX(-100%) rotate(-45deg)" },
+          "100%": { transform: "translateX(200%) rotate(-45deg)" },
+        },
+        auroraRotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        glowPulse: {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.8" },
+        },
+        textShimmer: {
+          "0%": { backgroundPosition: "-200% center" },
+          "100%": { backgroundPosition: "200% center" },
         },
       },
     },

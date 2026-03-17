@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { playfair, sarabun, notoSansThai, jetbrainsMono } from "@/lib/fonts";
+import { playfair, spaceGrotesk, sarabun, notoSansThai, jetbrainsMono } from "@/lib/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -56,7 +56,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${playfair.variable} ${sarabun.variable} ${notoSansThai.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${playfair.variable} ${spaceGrotesk.variable} ${sarabun.variable} ${notoSansThai.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <ThemeProvider>
             {/* Accessibility: skip to content */}
