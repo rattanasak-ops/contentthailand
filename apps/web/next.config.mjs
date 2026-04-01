@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
-  basePath: "/demo/contentthailand",
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
